@@ -31,3 +31,7 @@ When you really think about it, the internet is one of the most amazing things t
 Thought 3
 As a web developer I have spent the last 15 years making my living on the internet.  It is, in my opinion, the greatest invention of human-kind so far and its power to connect and unite people is the future of our civilitaztion.  That being said, however, the internet is broken.  Like really broken.
 
+Thought 4
+
+Let's bring back RSS.  Remember RSS?  You know, Really Simple Syndication.  It was a simple technology that allowed us to follow what our friends were posting on the internet before we all got sucked into "Social Media".  I have a website, I post stuff there and anyone can subscribe to it using any reader they choose.  
+
