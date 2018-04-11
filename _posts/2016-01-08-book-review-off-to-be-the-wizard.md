@@ -3,6 +3,7 @@ layout: post
 title: "Book Review: Off To Be The Wizard"
 date: 2016-01-08 13:16:31
 tags: books
+comments: true
 category: Book Reviews
 ---
 

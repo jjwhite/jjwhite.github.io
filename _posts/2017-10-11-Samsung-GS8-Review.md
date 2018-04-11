@@ -2,6 +2,7 @@
 layout: post
 title: "Samsung Galaxy S8+: A Review"
 date: 2017-10-11
+comments: true
 tags: 
  - reviews
  - gadgets

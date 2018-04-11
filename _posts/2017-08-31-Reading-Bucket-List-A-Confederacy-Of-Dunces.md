@@ -3,6 +3,7 @@ layout: post
 title: "Reading Bucket List: A Confederacy of Dunces"
 date: 2017-08-31 13:16:31
 tags: books
+comments: true
 category: Book Reviews
 ---
 

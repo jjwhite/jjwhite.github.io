@@ -3,6 +3,7 @@ layout: post
 title: "Reading Bucket List: The Swiss Family Robinson"
 date: 2017-08-07 13:16:31
 tags: books
+comments: true
 category: Book Reviews
 ---
 
