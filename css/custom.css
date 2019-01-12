@@ -2,3 +2,11 @@ h1.project-name a {text-decoration:none !important; color:#fff !important;}
 h3.post-title { margin-bottom: 0px !important;}
 h3 a.post-link {font-size:1.5em;}
 .post-date {font-family: consolas; font-size:0.9em;}
+
+/*books page*/
+div.books {display: grid;  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));}
+div.books h4 {margin-top:0rem; margin-bottom:0.5rem;}
+div.books p {font-size:0.8em; margin:0px;}
+div.book img {height:250px;}
+a.cover {position:relative;}
+.cover .icon {position: absolute; left: 0.5em; bottom: 0.5em; color: #000;background-color: #eee; padding: 0px 5px 0px 5px;}
