@@ -4,7 +4,7 @@ h3 a.post-link {font-size:1.5em;}
 .post-date {font-family: consolas; font-size:0.9em;}
 
 /*books page*/
-div.books {display: grid;  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));}
+div.books {display: grid; grid-row-gap:2em;  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));}
 div.books h4 {margin-top:0rem; margin-bottom:0.5rem;}
 div.books p {font-size:0.8em; margin:0px;}
 div.book img {height:250px;}
