@@ -7,17 +7,24 @@ permalink: /books/
 ## 2019
 <div class="books">
 	<div class="book">
-		<a class="cover" href="https://www.amazon.com/Believe-Journey-Success-Failure-Overcoming/dp/1496436490"><img src="https://images-na.ssl-images-amazon.com/images/I/51eft7hWamL._SX329_BO1,204,203,200_.jpg"/></a>
-		<h4>Believe It</h4>
-		<p>Nick Foles</p>
-		<p>(In Progress)</p>
+		<a class="cover" href="https://www.amazon.com/All-Joy-No-Fun-Parenthood-ebook/dp/B00DB2WQAQ"><img src="https://images-na.ssl-images-amazon.com/images/I/51iz%2BrkJQgL.jpg"/></a>
+		<h4>All Joy and No Fun</h4>
+		<p>Jennifer Senior</p>
 	</div>
+	
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Jungle-Upton-Sinclair/dp/1503331865"><img src="https://images-na.ssl-images-amazon.com/images/I/51i13OyQ1EL._SX346_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
 		<h4>The Jungle</h4>
 		<p>Upton Sinclair</p>
 		<p>(In Progress)</p>
 	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Believe-Journey-Success-Failure-Overcoming/dp/1496436490"><img src="https://images-na.ssl-images-amazon.com/images/I/51eft7hWamL._SX329_BO1,204,203,200_.jpg"/></a>
+		<h4>Believe It</h4>
+		<p>Nick Foles</p>
+	</div>
+	
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Born-Run-Christopher-McDougall-ebook/dp/B0028MBKVG"><img src="https://images-na.ssl-images-amazon.com/images/I/51hCmG0PnyL.jpg"/></a>
 		<h4>Born To Run</h4>
