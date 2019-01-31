@@ -7,8 +7,6 @@ comments: true
 category: Book Reviews
 ---
 
-# What I Read - January 2019
-
 **The Great Gatsby - _F. Scott Fitzgerald_** (Format: audio) -  Part of my _Reading Bucket List_.  I found the writing to be superb (it was a pleasure to listen to on my daily commute) while the story itself I found to be just so-so.  That being said, Fitzgerald makes a strong case for not living in the past and takes quite the stab at the frivolity of the upper class at the time.  Clearly the elegance with which Fitzgerald uses the written word is the reason why this one is a classic though.  - Recommended 
 
 Favorite Quote:
