@@ -7,19 +7,16 @@ permalink: /books/
 ## 2019
 <div class="books">
 	<div class="book">
-		<a class="cover" href="https://www.amazon.com/dp/B000W4RFHK"><img src="https://images-na.ssl-images-amazon.com/images/I/41CUvoSyN1L._SX333_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
-		<h4>The Dharma Bums</h4>
-		<p>Jack Kerouac</p>
-		<p>(In Progress)</p>
-	</div>
-	
-	<div class="book">
 		<a class="cover" href="https://www.amazon.com/All-Joy-No-Fun-Parenthood-ebook/dp/B00DB2WQAQ"><img src="https://images-na.ssl-images-amazon.com/images/I/51iz%2BrkJQgL.jpg"/></a>
 		<h4>All Joy and No Fun</h4>
 		<p>Jennifer Senior</p>
 		<p>(In Progress)</p>
 	</div>
-	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B000W4RFHK"><img src="https://images-na.ssl-images-amazon.com/images/I/41CUvoSyN1L._SX333_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
+		<h4>The Dharma Bums</h4>
+		<p>Jack Kerouac</p>
+	</div>
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Jungle-Upton-Sinclair/dp/1503331865"><img src="https://images-na.ssl-images-amazon.com/images/I/51i13OyQ1EL._SX346_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
 		<h4>The Jungle</h4>
