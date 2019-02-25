@@ -18,4 +18,9 @@ permalink: /bookmarks/
 
 ### Blogs
 
+#### Creative Arts
 - [Austin Kleon](https://austinkleon.com){:target="_blank"}
+
+#### Programming and the like
+- [Julia Evans](https://jvns.ca/){:target="_blank"}
+- [Will Larson](https://lethain.com/){:target="_blank"}
