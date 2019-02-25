@@ -24,3 +24,4 @@ permalink: /bookmarks/
 #### Programming and the like
 - [Julia Evans](https://jvns.ca/){:target="_blank"}
 - [Will Larson](https://lethain.com/){:target="_blank"}
+- [Scott Hanselman](https://www.hanselman.com/){:target="_blank"}
