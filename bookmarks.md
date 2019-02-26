@@ -15,6 +15,7 @@ permalink: /bookmarks/
 ### Lifestyle
 
 - [AOM](https://artofmanliness.com){:target="_blank"}
+- [Ryan Holiday](https://ryanholiday.net/){:target="_blank"}
 
 ### Blogs
 
