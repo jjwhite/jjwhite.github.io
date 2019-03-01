@@ -16,6 +16,7 @@ permalink: /bookmarks/
 
 - [AOM](https://artofmanliness.com){:target="_blank"}
 - [Ryan Holiday](https://ryanholiday.net/){:target="_blank"}
+- [The Minimalists](https://www.theminimalists.com/){:target="_blank"}
 
 ### Blogs
 
