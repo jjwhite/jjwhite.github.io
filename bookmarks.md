@@ -7,6 +7,7 @@ permalink: /bookmarks/
 ### Aggregators
 
 - [Reddit](https://reddit.com){:target="_blank"}
+- [Hacker News](https://news.ycombinator.com/){:target="_blank"}
 
 ### Tech
 
