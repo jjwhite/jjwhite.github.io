@@ -12,6 +12,12 @@ permalink: /books/
 		<p>Jennifer Senior</p>
 		<p>(In Progress)</p>
 	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308"><img src="https://images-na.ssl-images-amazon.com/images/I/41F9o66qNTL._SX352_BO1,204,203,200_.jpg"/></a>
+		<h4>The Life Changing Magic of Tidying Up</h4>
+		<p>Marie Kondo</p>
+	</div>
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B000W4RFHK"><img src="https://images-na.ssl-images-amazon.com/images/I/41CUvoSyN1L._SX333_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
 		<h4>The Dharma Bums</h4>
