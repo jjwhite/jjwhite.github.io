@@ -7,6 +7,20 @@ permalink: /books/
 ## 2019
 <div class="books">
 	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X"><img src="https://images-na.ssl-images-amazon.com/images/I/41jNJ1FrUlL._SX307_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
+		<h4>Man's Search for Meaning</h4>
+		<p>Victor E. Frankl</p>
+		<p>(In Progress)</p>
+	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/gp/product/0812968255"><img src="https://images-na.ssl-images-amazon.com/images/I/41iW9a%2BnyZL._SX319_BO1,204,203,200_.jpg"/></a>
+		<h4>Meditations</h4>
+		<p>Marcus Aurelius</p>
+		<p>(In Progress)</p>
+	</div>
+	
+	<div class="book">
 		<a class="cover" href="https://www.amazon.com/All-Joy-No-Fun-Parenthood-ebook/dp/B00DB2WQAQ"><img src="https://images-na.ssl-images-amazon.com/images/I/51iz%2BrkJQgL.jpg"/></a>
 		<h4>All Joy and No Fun</h4>
 		<p>Jennifer Senior</p>
