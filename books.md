@@ -6,6 +6,13 @@ permalink: /books/
 
 ## 2019
 <div class="books">
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Paddle-Your-Own-Canoe-Fundamentals-ebook/dp/B00C1N5WRU"><img src="https://images-na.ssl-images-amazon.com/images/I/51QM77-5lVL.jpg"/></a>
+		<h4>Paddle Your Own Canoe</h4>
+		<p>Nick Offerman</p>
+		<p>(In Progress)</p>
+	</div>
+	
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X"><img src="https://images-na.ssl-images-amazon.com/images/I/41jNJ1FrUlL._SX307_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
 		<h4>Man's Search for Meaning</h4>
