@@ -4,6 +4,9 @@ title: Books
 permalink: /books/
 ---
 
+> "The man who does not read good books has no advantage over the man who can't read them"
+-- Mark Twain
+
 ## 2019
 <div class="books">
 <div class="book">
