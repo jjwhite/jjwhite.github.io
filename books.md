@@ -9,6 +9,20 @@ permalink: /books/
 
 ## 2019
 <div class="books">
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Ghostopolis-Doug-TenNapel-ebook/dp/B00B9FX2VY"><img src="https://images-na.ssl-images-amazon.com/images/I/61A%2BrWDjThL.jpg"/></a>
+		<h4>Ghostopolis</h4>
+		<p>Doug TenNapel</p>
+		<p>(In Progress)</p>
+	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Eloquent-JavaScript-3rd-Introduction-Programming-ebook/dp/B07C96Q217"><img src="https://images-na.ssl-images-amazon.com/images/I/51jvMXBl5EL.jpg"/></a>
+		<h4>Eloquent Javascript</h4>
+		<p>Marijn Haverbeke</p>
+		<p>(In Progress)</p>
+	</div>
+	
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Paddle-Your-Own-Canoe-Fundamentals-ebook/dp/B00C1N5WRU"><img src="https://images-na.ssl-images-amazon.com/images/I/51QM77-5lVL.jpg"/></a>
 		<h4>Paddle Your Own Canoe</h4>
