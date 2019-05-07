@@ -8,6 +8,8 @@ permalink: /books/
 -- Mark Twain
 
 ## 2019
+<div class="books">
+	
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Babbitt-introduction-Walpole-Sinclair-Lewis/dp/1420958135"><img src="https://images-na.ssl-images-amazon.com/images/I/51H2BrBoFgL._SX322_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
 		<h4>Babbitt</h4>
@@ -22,7 +24,7 @@ permalink: /books/
 		<p>(In Progress)</p>
 	</div>
 	
-<div class="books">
+
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Ghostopolis-Doug-TenNapel-ebook/dp/B00B9FX2VY"><img src="https://images-na.ssl-images-amazon.com/images/I/61A%2BrWDjThL.jpg"/></a>
 		<h4>Ghostopolis</h4>
