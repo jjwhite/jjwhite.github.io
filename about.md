@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-<img src="/images/headshot_blog.jpg" style="float:left; margin:0px 15px 15px 0px;"/> Generally speaking, I am a father, a husband, a programmer, a photographer, an entrepreneur, and, most importantly, a human being trying my best to enjoy my brief time on this cosmic spacecraft we call Earth.
+<img src="/images/headshot_blog.jpg" style="float:left; margin:0px 15px 15px 0px;"/> Welcome to my little corner of the internet.  As you probably deduced from the URL my name is Jon White.  I'm a developer by trade, specializing in web and mobile applications at <a href="https://mathway.com" target="_blank">Mathway</a>.  In addition, I do some moonlighting as co-owner of <a href="https://solarsail.io" target="_blank">Solar Sail Tech</a>. 
 
-More specifically, I am an application developer at <a href="http://mathway.com" target="_blank">Mathway</a>, part owner of <a href="http://solarsailtech.com" target="_blank">Solar Sail</a>, and I also run the macro photography blog <a href="http://thecloseupproject.com" target="_blank">The Close-Up Project</a> with professional photographer Dave Evans.  I'm also a big fan of beer and dabble in some home-brewing from time-to-time.
+In my spare time  you might find me taking some <a href="https://500px.com/jjwhite01" target="_blank">photographs</a>, going out for <a href="https://www.strava.com/athletes/32848045" target="_blank">a run</a>, writing some <a href="https://github.com/jjwhite" target="_blank">code for fun</a>, or <a href="/books">reading a good book</a>.  If you can't find me doing any of those things I'm probably out spending time with my beautiful wife and 3 kids. 
 
-This site is simply a place where i'll post about things I'm up to or that I find interesting.
+I'm always looking for ways to improve and squeeze more out of life. This site is a place where I post about what I'm doing, what I've learned, or anything else that comes to mind. 
