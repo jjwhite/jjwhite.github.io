@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "How I Ran a Half Marathon and  Learned to Embrace the Process"
-date:   2019-05-07 14:13:00
-categories: thoughts running
+title:  "I Went from the Couch to a Half Marathon and Learned to Embrace the Process"
+date:   2019-05-14 14:13:00
+categories: running
 ---
 
 On Sunday April 28, 2019 I completed my first half-marathon.  Before that day I had only run in a 5k “fun run” once before and other than that, I had not really run at all since middle school.  Looking back at where I started 7 months earlier I’m sometimes amazed that I was able to achieve this goal.  You see, when I first started I couldn’t even run 1.5 miles without feeling like a 300 lb. lineman who just ran back a fumble 80 yards.
