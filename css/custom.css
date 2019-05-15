@@ -2,6 +2,7 @@ h1.project-name a {text-decoration:none !important; color:#fff !important;}
 h3.post-title { margin-bottom: 0px !important;}
 h3 a.post-link {font-size:1.5em;}
 .post-date {font-family: consolas; font-size:0.9em;}
+figcaption {font-size:0.8em; text-decoration:italic; text-align:center;}
 
 /*books page*/
 div.books {display: grid; grid-row-gap:2em;  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));}
