@@ -9,6 +9,13 @@ permalink: /books/
 
 ## 2019
 <div class="books">
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B019MMUA8S"><img src="https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY346_.jpg"/></a>
+		<h4>The Subtle Art of Not Giving a F*ck</h4>
+		<p>Mark Manson</p>
+	<p>(In Progress)</p>
+	</div>
 	
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Babbitt-introduction-Walpole-Sinclair-Lewis/dp/1420958135"><img src="https://images-na.ssl-images-amazon.com/images/I/51H2BrBoFgL._SX322_BO1,204,203,200_.jpg"/><span class="icon">🎧</span></a>
