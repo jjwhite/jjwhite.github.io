@@ -14,6 +14,7 @@ permalink: /books/
 		<a class="cover" href="https://www.amazon.com/Republic-Plato/dp/1503379981"><img src="https://images-na.ssl-images-amazon.com/images/I/51xRQBAi5FL._SX346_BO1,204,203,200_.jpg"/></a>
 		<h4>The Republic</h4>
 		<p>Plato</p>
+		<p>(In Progress)</p>
 	</div>
 	
 <div class="book">
