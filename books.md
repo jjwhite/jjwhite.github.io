@@ -11,10 +11,9 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/dp/B019MMUA8S"><img src="https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY346_.jpg"/></a>
-		<h4>The Subtle Art of Not Giving a F*ck</h4>
-		<p>Mark Manson</p>
-	<p>(In Progress)</p>
+		<a class="cover" href="https://www.amazon.com/Republic-Plato/dp/1503379981"><img src="https://images-na.ssl-images-amazon.com/images/I/51xRQBAi5FL._SX346_BO1,204,203,200_.jpg"/></a>
+		<h4>The Republic</h4>
+		<p>Plato</p>
 	</div>
 	
 <div class="book">
@@ -30,7 +29,11 @@ permalink: /books/
 		<p>Marijn Haverbeke</p>
 		<p>(In Progress)</p>
 	</div>
-	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B019MMUA8S"><img src="https://images-na.ssl-images-amazon.com/images/I/51mN3bY0JjL._SY346_.jpg"/></a>
+		<h4>The Subtle Art of Not Giving a F*ck</h4>
+		<p>Mark Manson</p>
+	</div>
 
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Ghostopolis-Doug-TenNapel-ebook/dp/B00B9FX2VY"><img src="https://images-na.ssl-images-amazon.com/images/I/61A%2BrWDjThL.jpg"/></a>
