@@ -9,13 +9,22 @@ permalink: /books/
 
 ## 2019
 <div class="books">
+
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/Obstacle-Way-Timeless-Turning-Triumph/dp/B00K5JUNSU"><img src="https://images-na.ssl-images-amazon.com/images/I/41LyQkMMRNL._SX342_.jpg"/></a>
-		<h4>The Obstacle is the Way</h4>
-		<p>Ryan Holiday</p>
+		<a class="cover" href="https://www.amazon.com/Nordic-Theory-Everything-Search-Better-ebook/dp/B018QLGBF2"><img src="https://images-na.ssl-images-amazon.com/images/I/51Oh93fUHEL.jpg"/></a>
+		<h4>The Nordic Theory of Everything</h4>
+		<p>Anu Partanen</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B06XZZ7BXH"><img src="https://images-na.ssl-images-amazon.com/images/I/41sPgR0y8ZL._SY346_.jpg"/></a>
+		<h4>Just Sit</h4>
+		<p>Sukey Novogratz</p>
 		<p>(In Progress)</p>
 	</div>
 	
+
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Republic-Plato/dp/1503379981"><img src="https://images-na.ssl-images-amazon.com/images/I/51xRQBAi5FL._SX346_BO1,204,203,200_.jpg"/></a>
 		<h4>The Republic</h4>
@@ -28,6 +37,12 @@ permalink: /books/
 		<h4>Eloquent Javascript</h4>
 		<p>Marijn Haverbeke</p>
 		<p>(In Progress)</p>
+	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Obstacle-Way-Timeless-Turning-Triumph/dp/B00K5JUNSU"><img src="https://images-na.ssl-images-amazon.com/images/I/41LyQkMMRNL._SX342_.jpg"/></a>
+		<h4>The Obstacle is the Way</h4>
+		<p>Ryan Holiday</p>
 	</div>
 	
 	<div class="book">
