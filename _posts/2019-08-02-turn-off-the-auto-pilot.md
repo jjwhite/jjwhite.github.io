@@ -14,7 +14,7 @@ Something shakes you out of it.  Maybe it's some sort of tragedy or loss.  A sud
 	<figcaption>It's terrifying when you realize noone is flying the plane.</figcaption>
 </figure>
 
-So, you sit down behind the controls but they're all a little foreign to you and what you do understand doesn't look good.  The weight gauge is way to high, the fitness one too low.  The finance dials are in the red.  Your co-pilot is ready to pull the eject button and the kids are running amok in the cabin.   You take a peek in the passenger section.  There are few people back there that your recognize but they seem disinterested like they'd rather be on someone else's flight.  "Shit." you exclaim.  "This is worse than I expected. Now what?"
+So, you sit down behind the controls but they're all a little foreign to you and what you do understand doesn't look good.  The weight gauge is way too high, the fitness one too low.  The finance dials are in the red.  Your co-pilot is ready to pull the eject button and the kids are running amok in the cabin.   You take a peek in the passenger section.  There are few people back there that your recognize but they seem disinterested like they'd rather be on someone else's flight.  "Shit." you exclaim.  "This is worse than I expected. Now what?"
 
 The auto-pilot light flashes at you..blinking hypnotically lulling you into a state of complacency.  Things aren't so bad, right?  The flight has been relatively smooth, why not just let it take me where it wants to go?  The problem is that what you don't see is that mountain not too far in the distance hiding behind those clouds.  That auto-pilot will guide you smoothly right into the side of it...
 
