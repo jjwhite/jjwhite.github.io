@@ -9,7 +9,10 @@ Sometimes in life we're stuck in auto-pilot and don't even realize it.  One day 
 
 Something shakes you out of it.  Maybe it's some sort of tragedy or loss.  A sudden health scare an ultimatum from your significant other.  Perhaps you just got a letter or call from a bill collector or a long-term relationship ended suddenly.  Whatever it is, it's like someone splashed water on your face while you were sleeping.  You sit bolt-upright and look around: Where am I?  How did I get here?  Who is flying the plane?  And...where are we even going?
 
-[Indiana jones temple of doom no pilots image/gif]
+<figure class="image">
+	<img src="/images/auto-pilot-1.jpg" style="text-align:center"/>
+	<figcaption>It's terrifying when you realize noone is flying the plane.</figcaption>
+</figure>
 
 So, you sit down behind the controls but they're all a little foreign to you and what you do understand doesn't look good.  The weight gauge is way to high, the fitness one too low.  The finance dials are in the red.  Your co-pilot is ready to pull the eject button and the kids are running amok in the cabin.   You take a peek in the passenger section.  There are few people back there that your recognize but they seem disinterested like they'd rather be on someone else's flight.  "Shit." you exclaim.  "This is worse than I expected. Now what?"
 
