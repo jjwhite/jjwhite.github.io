@@ -3,6 +3,7 @@ layout: post
 title:  "Turn Off The Auto-Pilot"
 date:   2019-08-02 10:55:00
 categories: life
+comments: true
 ---
 
 Sometimes in life we're stuck in auto-pilot and don't even realize it.  One day bleeds into the next which bleeds into the next week, then month, then year.  We're surviving, living each day just to make it to the next.  Wake up, go to work, come home, eat dinner, prepare for the next day, get ready for bed.  Rinse. Repeat.  During this time you may not even realize it.  You may not realize that your miserable, that you're wife is unhappy and feeling ignored.  That your career is going nowhere and your kids are growing up in front of you but you're missing it.  No ambitions, no goals, no highs or lows just stuck in auto-pilot and the worst part is that you didn't even set the destination.
