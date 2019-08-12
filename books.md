@@ -11,11 +11,12 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/dp/B015NTIXWE"><img src="https://images-na.ssl-images-amazon.com/images/I/41o0Fkf%2BvfL.jpg"/></a>
-		<h4>Ego Is the Enemy</h4>
-		<p>Ryan Holiday</p>
+		<a class="cover" href="https://www.amazon.com/Enchiridion-Dover-Thrift-Editions-Epictetus/dp/0486433595"><img src="https://images-na.ssl-images-amazon.com/images/I/515YhLgKREL._SX311_BO1,204,203,200_.jpg"/></a>
+		<h4>Enchiridion</h4>
+		<p>Epictetus</p>
 		<p>(In Progress)</p>
 	</div>
+
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B074DZ9MKS"><img src="https://images-na.ssl-images-amazon.com/images/I/61Bg21yvJvL.jpg"/><span class="icon">🎧</span></a>
 		<h4>Children of Bone and Blood</h4>
@@ -29,6 +30,19 @@ permalink: /books/
 		<p>Marijn Haverbeke</p>
 		<p>(In Progress)</p>
 	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B002MBLU9U"><img src="https://images-na.ssl-images-amazon.com/images/I/61ojqdijykL.jpg"/></a>
+		<h4>Hatchet</h4>
+		<p>Gary Paulsen</p>
+	</div>
+	
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B015NTIXWE"><img src="https://images-na.ssl-images-amazon.com/images/I/41o0Fkf%2BvfL.jpg"/></a>
+		<h4>Ego Is the Enemy</h4>
+		<p>Ryan Holiday</p>
+	</div>
+
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Nordic-Theory-Everything-Search-Better-ebook/dp/B018QLGBF2"><img src="https://images-na.ssl-images-amazon.com/images/I/51Oh93fUHEL.jpg"/></a>
 		<h4>The Nordic Theory of Everything</h4>
