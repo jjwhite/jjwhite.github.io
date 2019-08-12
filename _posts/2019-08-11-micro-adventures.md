@@ -26,3 +26,8 @@ Another example of a micro adventure that we had on our humble little trip:  The
 </figure>
 
 After finding that Nelson Dellis video I took a closer look and found [a post on his website](https://www.nelsondellis.com/blog/2019/2/20/make-life-memorable) all about how to make life memorable.  And this is the stuff he talks about.  Making small changes, doing different things frequently so that all our days don't blend together.  As I mentioned in the introduction to this post, this is precisely how I've been feeling of late.  The same routine, day-in and day-out has caused time to fly by and I find myself at 38 wondering where my 30's went. I think Nelson's advice makes a ton of sense and there is even some [neuroscience to back it up](https://www.nbcnews.com/better/health/why-our-sense-time-speeds-we-age-how-slow-it-ncna936351).  The brain creates new memories when things are different or out of the norm. If your days are all the same then there are no new memories, nothing to look back on, and time seems to move faster. After experiencing some micro adventures on our vacation this past week and diving into the concept I think this idea has some legs as a means of making time seem like it's passing more slowly.  Time to go out and find some adventures...
+
+### Additional Resources
+- [Making Life Memorable - a post by Nelson Dellis](https://www.nelsondellis.com/blog/2019/2/20/make-life-memorable)
+- [Art of Manliness 8 week microadventure challenge](https://www.artofmanliness.com/articles/my-8-week-microadventure-challenge/)
+- [Introducing the idea of microadventures](https://www.alastairhumphreys.com/introduction-microadventures-short-video/)
