@@ -6,8 +6,6 @@ categories: life
 comments: true
 ---
 
-# Get. To. Work.
-
 You screwed up?  Someone screwed you?  Now you find yourself in a situation you couldn't have imagined just moments ago?  Are you angry?  Feeling bad for yourself? Beating yourself up or blaming someone else for your problems.  
 
 You know what? Maybe it's not your fault. That happens sometimes.  But here's the thing.  You're still responsible.  Response Able. Fault has nothing to do with it now.  It's on your plate.  You are able to respond.
