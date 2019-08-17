@@ -20,11 +20,6 @@ This small adventure reminded me of an [Art of Manliness](https://www.artofmanli
 
 Another example of a micro adventure that we had on our humble little trip:  The map of our campground showed a nature trail but we could not seem to find it.  We asked around and even the campground staff didn't seem to know where it was.  Finally, my son and I decided to look one last time and we finally discovered a small entrance off of one of the park roads.  The sign had fallen over and the entrance was slightly overgrown.  But once we got on the path it was a beautiful walk through the woods and we were the only ones there as the sun was setting.  We were gone for no more than an hour but it was, again, a memorable little adventure.
 
-<figure class="image">
-	<img src="/images/micro_adventures_2.jpg" style="text-align:center">
-	<figcaption>Even something as mundane as a bus ride can be an adventure for a toddler.  My daughter holding her brothers hand as she was very nervous about the ride!</figcaption>
-</figure>
-
 After finding that Nelson Dellis video I took a closer look and found [a post on his website](https://www.nelsondellis.com/blog/2019/2/20/make-life-memorable) all about how to make life memorable.  And this is the stuff he talks about.  Making small changes, doing different things frequently so that all our days don't blend together.  As I mentioned in the introduction to this post, this is precisely how I've been feeling of late.  The same routine, day-in and day-out has caused time to fly by and I find myself at 38 wondering where my 30's went. I think Nelson's advice makes a ton of sense and there is even some [neuroscience to back it up](https://www.nbcnews.com/better/health/why-our-sense-time-speeds-we-age-how-slow-it-ncna936351).  The brain creates new memories when things are different or out of the norm. If your days are all the same then there are no new memories, nothing to look back on, and time seems to move faster. After experiencing some micro adventures on our vacation this past week and diving into the concept I think this idea has some legs as a means of making time seem like it's passing more slowly.  Time to go out and find some adventures...
 
 ### Additional Resources
