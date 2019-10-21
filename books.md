@@ -11,16 +11,17 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/Enchiridion-Dover-Thrift-Editions-Epictetus/dp/0486433595"><img src="https://images-na.ssl-images-amazon.com/images/I/515YhLgKREL._SX311_BO1,204,203,200_.jpg"/></a>
-		<h4>Enchiridion</h4>
-		<p>Epictetus</p>
+		<a class="cover" href="https://www.amazon.com/Codependent-No-More-Controlling-Yourself-ebook/dp/B00BS027FC"><img src="https://images-na.ssl-images-amazon.com/images/I/510KsT7wy3L.jpg"/></a>
+		<h4>Codependent No More</h4>
+		<p>Melody Beattie</p>
 		<p>(In Progress)</p>
 	</div>
 
-	<div class="book">
-		<a class="cover" href="https://www.amazon.com/dp/B074DZ9MKS"><img src="https://images-na.ssl-images-amazon.com/images/I/61Bg21yvJvL.jpg"/><span class="icon">🎧</span></a>
-		<h4>Children of Bone and Blood</h4>
-		<p>Tomi Adeyemi</p>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Full-Catastrophe-Living-Revised-Illness-ebook/dp/B00C4BA3UK"><img src="https://images-na.ssl-images-amazon.com/images/I/41VOfpsP1gL.jpg"/></a>
+		<h4>Full Catastrophe Living</h4>
+		<p>Jon Kabat-Zinn, PH.D.</p>
 		<p>(In Progress)</p>
 	</div>
 
@@ -30,7 +31,14 @@ permalink: /books/
 		<p>Marijn Haverbeke</p>
 		<p>(In Progress)</p>
 	</div>
-	
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B07FSLC3BZ"><img src="https://images-na.ssl-images-amazon.com/images/I/41UQURc2oHL.jpg"/></a>
+		<h4>The Prophet</h4>
+		<p>Kahlil Gibran</p>
+		<p>(In Progress)</p>
+	</div>
+
 	<div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B002MBLU9U"><img src="https://images-na.ssl-images-amazon.com/images/I/61ojqdijykL.jpg"/></a>
 		<h4>Hatchet</h4>
