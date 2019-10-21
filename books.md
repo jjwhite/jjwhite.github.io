@@ -35,8 +35,7 @@ permalink: /books/
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B07FSLC3BZ"><img src="https://images-na.ssl-images-amazon.com/images/I/41UQURc2oHL.jpg"/></a>
 		<h4>The Prophet</h4>
-		<p>Kahlil Gibran</p>
-		<p>(In Progress)</p>
+		<p>Kahlil Gibran</p>		
 	</div>
 
 	<div class="book">
