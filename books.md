@@ -11,10 +11,23 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
+		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
+		<h4>Even In Our Darkness</h4>
+		<p>Jack Deere</p>
+		<p>(In Progress)</p>
+	</div>
+	
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B07D6BBGKL"><img src="https://images-na.ssl-images-amazon.com/images/I/510m74miiaL._SY346_.jpg"/></a>
+		<h4>Brief Answers to the Big Questions</h4>
+		<p>Stephen Hawking</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
 		<a class="cover" href="https://www.amazon.com/Codependent-No-More-Controlling-Yourself-ebook/dp/B00BS027FC"><img src="https://images-na.ssl-images-amazon.com/images/I/510KsT7wy3L.jpg"/></a>
 		<h4>Codependent No More</h4>
 		<p>Melody Beattie</p>
-		<p>(In Progress)</p>
 	</div>
 
 
@@ -22,14 +35,13 @@ permalink: /books/
 		<a class="cover" href="https://www.amazon.com/Full-Catastrophe-Living-Revised-Illness-ebook/dp/B00C4BA3UK"><img src="https://images-na.ssl-images-amazon.com/images/I/41VOfpsP1gL.jpg"/></a>
 		<h4>Full Catastrophe Living</h4>
 		<p>Jon Kabat-Zinn, PH.D.</p>
-		<p>(In Progress)</p>
 	</div>
 
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Eloquent-JavaScript-3rd-Introduction-Programming-ebook/dp/B07C96Q217"><img src="https://images-na.ssl-images-amazon.com/images/I/51jvMXBl5EL.jpg"/></a>
 		<h4>Eloquent Javascript</h4>
 		<p>Marijn Haverbeke</p>
-		<p>(In Progress)</p>
+		<p>(Unfinished)</p>
 	</div>
 
 <div class="book">
