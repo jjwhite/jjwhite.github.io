@@ -11,6 +11,14 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B00A9ET54E/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/51zWM0vSNSL.jpg"/></a>
+		<h4>Going Clear</h4>
+		<p>Lawrence Wright</p>
+		<p>(In Progress)</p>
+	</div>
+	
+
+<div class="book">
 		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
 		<h4>Even In Our Darkness</h4>
 		<p>Jack Deere</p>
@@ -21,7 +29,6 @@ permalink: /books/
 		<a class="cover" href="https://www.amazon.com/dp/B07D6BBGKL"><img src="https://images-na.ssl-images-amazon.com/images/I/510m74miiaL._SY346_.jpg"/></a>
 		<h4>Brief Answers to the Big Questions</h4>
 		<p>Stephen Hawking</p>
-		<p>(In Progress)</p>
 	</div>
 
 <div class="book">
