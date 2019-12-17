@@ -16,7 +16,6 @@ permalink: /books/
 		<p>Lawrence Wright</p>
 		<p>(In Progress)</p>
 	</div>
-	
 
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
@@ -24,6 +23,12 @@ permalink: /books/
 		<p>Jack Deere</p>
 		<p>(In Progress)</p>
 	</div>
+	
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B07MJ3TDCZ/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/41dXLkAyrNL.jpg"/></a>
+		<h4>Stillness Is The Key</h4>
+		<p>Ryan Holiday</p>
+	</div>	
 	
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B07D6BBGKL"><img src="https://images-na.ssl-images-amazon.com/images/I/510m74miiaL._SY346_.jpg"/></a>
