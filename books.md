@@ -11,6 +11,13 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B013CATYHY/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/51l8R2iTjcL.jpg"/></a>
+		<h4>The Wild Robot</h4>
+		<p>Peter Brown</p>
+	</div>
+	
+
+<div class="book">
 		<a class="cover" href="https://www.amazon.com/dp/B00A9ET54E/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/51zWM0vSNSL.jpg"/></a>
 		<h4>Going Clear</h4>
 		<p>Lawrence Wright</p>
