@@ -7,6 +7,30 @@ permalink: /books/
 > "The man who does not read good books has no advantage over the man who can't read them"
 -- Mark Twain
 
+## 2020
+<div class="books">
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B000SEGHFK/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/41QGl%2BHIjVL.jpg"/></a>
+		<h4>A General Theory of Love</h4>
+		<p>Thomas Lewis, M.D.</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
+		<h4>Even In Our Darkness</h4>
+		<p>Jack Deere</p>
+		<p>(In Progress)</p>
+	</div>
+
+	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Wild-Found-Pacific-Crest-Oprahs-ebook/dp/B005IQZB14"><img src="https://images-na.ssl-images-amazon.com/images/I/51BFqxaUWmL.jpg"/></a>
+		<h4>Wild</h4>
+		<p>Cheryl Strayed</p>
+	</div>
+</div>
+
 ## 2019
 <div class="books">
 
@@ -21,14 +45,7 @@ permalink: /books/
 		<a class="cover" href="https://www.amazon.com/dp/B00A9ET54E/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/51zWM0vSNSL.jpg"/></a>
 		<h4>Going Clear</h4>
 		<p>Lawrence Wright</p>
-		<p>(In Progress)</p>
-	</div>
-
-<div class="book">
-		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
-		<h4>Even In Our Darkness</h4>
-		<p>Jack Deere</p>
-		<p>(In Progress)</p>
+		<p>(Unfinished)</p>
 	</div>
 	
 	<div class="book">
