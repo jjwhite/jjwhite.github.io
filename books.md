@@ -25,6 +25,12 @@ permalink: /books/
 	</div>
 
 	<div class="book">
+		<a class="cover" href="https://www.amazon.com/Growing-Up-Brave-Strategies-Overcome/dp/0316125601"><img src="https://images-na.ssl-images-amazon.com/images/I/51DVn8nBTCL._SX321_BO1,204,203,200_.jpg"/></a>
+		<h4>Growing Up Brave</h4>
+		<p>Donna B. Pincus, PhD</p>
+	</div>
+
+	<div class="book">
 		<a class="cover" href="https://www.amazon.com/Wild-Found-Pacific-Crest-Oprahs-ebook/dp/B005IQZB14"><img src="https://images-na.ssl-images-amazon.com/images/I/51BFqxaUWmL.jpg"/></a>
 		<h4>Wild</h4>
 		<p>Cheryl Strayed</p>
