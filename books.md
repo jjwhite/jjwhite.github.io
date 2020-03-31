@@ -11,9 +11,25 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/dp/B000SEGHFK/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"><img src="https://images-na.ssl-images-amazon.com/images/I/41QGl%2BHIjVL.jpg"/></a>
-		<h4>A General Theory of Love</h4>
-		<p>Thomas Lewis, M.D.</p>
+		<a class="cover" href="https://www.amazon.com/Bowling-Alone-Collapse-American-Community/dp/B01N94FW0P"><img src="https://images-na.ssl-images-amazon.com/images/I/41GPzFWjMgL._SX325_BO1,204,203,200_.jpg"/></a>
+		<h4>Bowling Alone</h4>
+		<p>Robert D. Putnam</p>
+		<p>(In Progress)</p>
+	</div>
+
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Dave-Ramseys-Complete-Guide-Money-ebook/dp/B00L5X8W3I"><img src="https://images-na.ssl-images-amazon.com/images/I/51cfI2mV1SL.jpg"/></a>
+		<h4>Complete Guide To Money</h4>
+		<p>Dave Ramsey</p>
+		<p>(In Progress)</p>
+	</div>
+	
+	
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Mouse-His-Child-Russell-Hoban/dp/0439098262/"><img src="https://images-na.ssl-images-amazon.com/images/I/51S76h0dvZL._SX376_BO1,204,203,200_.jpg"/></a>
+		<h4>The Mouse and His Child</h4>
+		<p>Russell Hoban</p>
 		<p>(In Progress)</p>
 	</div>
 
@@ -22,6 +38,12 @@ permalink: /books/
 		<h4>Even In Our Darkness</h4>
 		<p>Jack Deere</p>
 		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/dp/B07DT1BD63"><img src="https://images-na.ssl-images-amazon.com/images/I/41SzC-0E6hL.jpg"/></a>
+		<h4>The Second Mountain</h4>
+		<p>David Brooks</p>
 	</div>
 
 	<div class="book">
