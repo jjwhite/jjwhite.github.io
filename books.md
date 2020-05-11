@@ -11,6 +11,13 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
+		<a class="cover" href="https://www.amazon.com/Swerve-How-World-Became-Modern-ebook/dp/B005LW5J9O"><img src="https://images-na.ssl-images-amazon.com/images/I/51MWNNyRhJL._SX329_BO1,204,203,200_.jpg"/></a>
+		<h4>The Swerve</h4>
+		<p>Stephen Greenblatt</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
 		<a class="cover" href="https://www.amazon.com/Bowling-Alone-Collapse-American-Community/dp/B01N94FW0P"><img src="https://images-na.ssl-images-amazon.com/images/I/41GPzFWjMgL._SX325_BO1,204,203,200_.jpg"/></a>
 		<h4>Bowling Alone</h4>
 		<p>Robert D. Putnam</p>
@@ -30,14 +37,14 @@ permalink: /books/
 		<a class="cover" href="https://www.amazon.com/Mouse-His-Child-Russell-Hoban/dp/0439098262/"><img src="https://images-na.ssl-images-amazon.com/images/I/51S76h0dvZL._SX376_BO1,204,203,200_.jpg"/></a>
 		<h4>The Mouse and His Child</h4>
 		<p>Russell Hoban</p>
-		<p>(In Progress)</p>
+		<p></p>
 	</div>
 
 <div class="book">
 		<a class="cover" href="https://www.amazon.com/Even-Our-Darkness-Beauty-Broken-ebook/dp/B072TN6DTT"><img src="https://images-na.ssl-images-amazon.com/images/I/41tC715dkOL.jpg"/></a>
 		<h4>Even In Our Darkness</h4>
 		<p>Jack Deere</p>
-		<p>(In Progress)</p>
+		<p>(Unfinished)</p>
 	</div>
 
 <div class="book">
