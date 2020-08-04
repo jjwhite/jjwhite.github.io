@@ -11,16 +11,16 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/Swerve-How-World-Became-Modern-ebook/dp/B005LW5J9O"><img src="https://images-na.ssl-images-amazon.com/images/I/51MWNNyRhJL._SX329_BO1,204,203,200_.jpg"/></a>
-		<h4>The Swerve</h4>
-		<p>Stephen Greenblatt</p>
+		<a class="cover" href="https://www.amazon.com/Black-Kids-Sitting-Together-Cafeteria-ebook/dp/B071KSKT3K"><img src="https://m.media-amazon.com/images/I/51-QWxoaVYL.jpg"/></a>
+		<h4>Why Are All The Black Kids Sitting Together In The Cafeteria</h4>
+		<p>Beverly Daniel Tatum, PhD</p>
 		<p>(In Progress)</p>
 	</div>
 
 <div class="book">
-		<a class="cover" href="https://www.amazon.com/Bowling-Alone-Collapse-American-Community/dp/B01N94FW0P"><img src="https://images-na.ssl-images-amazon.com/images/I/41GPzFWjMgL._SX325_BO1,204,203,200_.jpg"/></a>
-		<h4>Bowling Alone</h4>
-		<p>Robert D. Putnam</p>
+		<a class="cover" href="https://www.amazon.com/Swerve-How-World-Became-Modern-ebook/dp/B005LW5J9O"><img src="https://images-na.ssl-images-amazon.com/images/I/51MWNNyRhJL._SX329_BO1,204,203,200_.jpg"/></a>
+		<h4>The Swerve</h4>
+		<p>Stephen Greenblatt</p>
 		<p>(In Progress)</p>
 	</div>
 
@@ -30,6 +30,13 @@ permalink: /books/
 		<h4>Complete Guide To Money</h4>
 		<p>Dave Ramsey</p>
 		<p>(In Progress)</p>
+	</div>
+	
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Sand-Sea-Michael-McClellan-ebook/dp/B088KNY9Z9"><img src="https://m.media-amazon.com/images/I/51bHhFWRNXL.jpg"/></a>
+		<h4>The Sand Sea</h4>
+		<p>Michael McClellan</p>
+		<p></p>
 	</div>
 	
 	
