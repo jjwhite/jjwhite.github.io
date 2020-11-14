@@ -11,10 +11,29 @@ permalink: /books/
 <div class="books">
 
 <div class="book">
+		<a class="cover" href="https://www.amazon.com/Lovecraft-Country-Novel-Matt-Ruff/dp/0062292072"><img src="https://images-na.ssl-images-amazon.com/images/I/51AkWXzjNML._SX330_BO1,204,203,200_.jpg"/></a>
+		<h4>Lovecraft Country</h4>
+		<p>Matt Ruff</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670"><img src="https://images-na.ssl-images-amazon.com/images/I/41JOmGowq-L._SX408_BO1,204,203,200_.jpg"/></a>
+		<h4>Code Complete</h4>
+		<p>Steve McConnell</p>
+		<p>(In Progress)</p>
+	</div>
+
+<div class="book">
+		<a class="cover" href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><img src="https://images-na.ssl-images-amazon.com/images/I/41yafGMO+rL._SX376_BO1,204,203,200_.jpg"/></a>
+		<h4>Clean Code</h4>
+		<p>Robert C. Martin</p>
+	</div>
+
+<div class="book">
 		<a class="cover" href="https://www.amazon.com/Black-Kids-Sitting-Together-Cafeteria-ebook/dp/B071KSKT3K"><img src="https://m.media-amazon.com/images/I/51-QWxoaVYL.jpg"/></a>
 		<h4>Why Are All The Black Kids Sitting Together In The Cafeteria</h4>
 		<p>Beverly Daniel Tatum, PhD</p>
-		<p>(In Progress)</p>
 	</div>
 
 <div class="book">
