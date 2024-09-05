@@ -1,0 +1,190 @@
+/* Outrun / Retrowave CSS Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+body {
+    /*font-family: 'Press Start 2P', cursive;*/
+    font-family: "IBM Plex Mono", monospace;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    margin: 20px;
+    line-height: 1.6;
+    background-image: radial-gradient(circle, #ff0080, #7400b8, #3a0ca3, #1a1a2e);
+    background-size: cover;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ff0080;
+}
+
+div.header{
+    background-image: url("../images/sunbg.png");
+    background-position-y: center;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    color: #ff0080;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #ff0080;
+    margin: 20px 0 10px;
+}
+
+div.header h1{
+    color:#00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+p {
+    margin: 10px 0;
+    color: #ffffff;
+    /*text-shadow: 0 0 5px #ffffff;*/
+}
+
+pre {
+    background-color: #0f0c29;
+    color: #00ffcc;
+    padding: 10px;
+    border-left: 3px solid #ff0080;
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+code {
+    background-color: #7400b8;
+    color: #00ffcc;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+blockquote {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #0f0c29;
+    color: #ff0080;
+    border-left: 5px solid #00ffcc;
+}
+
+
+ul {
+    list-style: none; /* Remove default bullet points */
+    padding-left: 0;  /* Remove left padding */
+}
+
+li::before {
+    content: "🌴";  /* Add the palm tree emoji */
+    margin-right: 10px; /* Space between emoji and text */
+}
+
+ul, ol {
+    margin: 10px 0 20px;
+    padding-left: 20px;
+}
+
+li {
+    margin: 5px 0;
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+table, th, td {
+    border: 1px solid #7400b8;
+    padding: 10px;
+}
+
+th {
+    background-color: #0f0c29;
+    color: #00ffcc;
+    text-shadow: 0 0 5px #ff0080;
+}
+
+td {
+    background-color: #1a1a2e;
+    color: #ffffff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid #ff0080;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
+a {
+    color: #00ffcc;
+    text-decoration: none;
+    text-shadow: 0 0 5px #00ffcc;
+}
+h1 a:hover{
+    text-decoration:none;
+    color:#00ffcc;
+}
+a:hover {
+    text-decoration: underline;
+    color: #ff0080;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #7400b8;
+    border-radius: 5px;
+    background-color: #0f0c29;
+    color: #ffffff;
+    box-shadow: 0 0 10px #ff0080;
+}
+
+input[type="submit"], button {
+    padding: 10px 20px;
+    background-color: #ff0080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ffcc;
+    text-transform: uppercase;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #00ffcc;
+    color: #1a1a2e;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #7400b8;
+    margin: 20px 0;
+}
+
+.highlight {
+    background-color: #ff0080;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+footer .copyright {
+    font-size:0.8em;
+    text-align: center;
+    display:block;
+}
