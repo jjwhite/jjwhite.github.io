@@ -7,7 +7,7 @@ comments: true
 category: 
 ---
 
-I've <a href="https://jonwhite.me/tech/2018/04/12/fixing-facebook.html" target="_blank">written about how to fix social media before</a> but with the giants like Reddit, Facebook, and Twitter looking like they're begining a steep decline it seems like the perfect time to revisit the topic.
+I've <a href="https://jonwhite.me/posts/2018-04-12-fixing-facebook.html" target="_blank">written about how to fix social media before</a> but with the giants like Reddit, Facebook, and Twitter looking like they're begining a steep decline it seems like the perfect time to revisit the topic.
 
 There is a lot of talk about the <a href="https://www.wired.com/story/tiktok-platforms-cory-doctorow/" target="_blank">"enshitification" of the internet lately</a>. The idea that algorithms, ads and corporate greed are destroying the platforms that the modern web was built on.  In recent weeks Reddit essentially killed off 3rd party apps, Facebook launched Threads which appears to just be Instagram without pictures and a thinly veiled attempt to lure away Twitter users.  And then there's Twitter... Hot. Dumpster. Fire.
 

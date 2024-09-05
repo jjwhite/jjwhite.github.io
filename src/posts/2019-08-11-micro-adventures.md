@@ -12,7 +12,7 @@ We recently returned from a week of camping with the kids not too far from home 
 The kids got a kick out of the fact that, as we made our approach, we managed to leave Maryland, cross the Potomac and cut through a corner of Virginia before finally landing in West Virginia. 3 states in about 10 minutes! We then had fun roaming around the old town and seeing the views of the rivers, crossing the old railroad bridge and meeting some hikers who were on their way up the Appalachian trail into Pennsylvania. My eldest son, who had never heard of the Appalachian trail, was fascinated by the idea of hiking from Maine all the way to Georgia.  Even my toddler got a thrill out of riding "the bus" down from the Harper's Ferry visitors center into the town.  At one point after climbing the natural stairs up to "Jefferson Rock" we got stuck in a rain shower and had to wait it out on the porch of Harper's Mansion which overlooked the town.  It was a memorable experience for all of us. 
 
 <figure class="image">
-	<img src="/images/micro_adventures_1.jpg" style="text-align:center">
+	<img src="../images/micro_adventures_1.jpg" style="text-align:center">
 	<figcaption>Harpers Ferry sits right on the Potomac river between Maryland, Virginia, and West Virginia</figcaption>
 </figure>
 

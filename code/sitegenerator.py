@@ -44,12 +44,12 @@ def convert_markdown_to_html(markdown_file_path, template):
 
 def generate_site():
     # Paths
-    templates_dir = 'src/templates'
-    pages_dir = 'src/pages'
-    posts_dir = 'src/posts'
-    output_pages_dir = 'site/pages'
-    output_posts_dir = 'site/posts'
-    output_dir = 'site'
+    templates_dir = '../src/templates'
+    pages_dir = '../src/pages'
+    posts_dir = '../src/posts'
+    output_pages_dir = '../pages'
+    output_posts_dir = '../posts'
+    output_dir = '../'
 
     # Load templates
     page_template = load_template(os.path.join(templates_dir, 'page.html'))

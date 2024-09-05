@@ -18,7 +18,7 @@ As I scrolled down Loretta's vast library of classic country gold, I found that 
  Maybe he's cryin' for me <br/>_
  
  <figure class="image">
-	<img src="/images/galaxie-speaker.jpg" style="text-align:center"/>
+	<img src="../images/galaxie-speaker.jpg" style="text-align:center"/>
 	<figcaption>The '64 Galaxie had a chrome speaker in the middle of the back seat.  I have fond(?) memories of bashing my head on that speaker when my dad hit the gas pedal hard and sliding around that back seat after I applied too much ArmorAll (at least until my dad finally installed some seat belts)</figcaption>
 </figure>
  

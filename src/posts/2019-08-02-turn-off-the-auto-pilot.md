@@ -11,7 +11,7 @@ Sometimes in life we're stuck in auto-pilot and don't even realize it.  One day 
 Something shakes you out of it.  Maybe it's some sort of tragedy or loss.  A sudden health scare, an ultimatum from your significant other.  Perhaps, you just got a letter, or call from a bill collector, or a long-term relationship ended suddenly.  Whatever it is, it's like someone splashed water on your face while you were sleeping.  You sit bolt-upright and look around: Where am I?  How did I get here?  Who is flying the plane?  And...where are we even going?
 
 <figure class="image">
-	<img src="/images/auto-pilot-1.jpg" style="text-align:center"/>
+	<img src="../images/auto-pilot-1.jpg" style="text-align:center"/>
 	<figcaption>It's terrifying when you realize noone is flying the plane.</figcaption>
 </figure>
 
