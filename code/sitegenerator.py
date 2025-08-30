@@ -87,7 +87,7 @@ def generate_site():
 
     # Generate index.html
     posts_list_html = ''
-    for title, link, date in sorted(posts_data, key=lambda x: x[2], reverse=True):
+    for title, link, date in sorted(posts_data, key=lambda x: x[2], reverse=True)[:5]:
         posts_list_html += f'<li><a href="{link}">{title}</a> - {date}</li>\n'
     
     final_index_content = index_template.replace('{{post_list}}', '<ul>'+posts_list_html+'</ul>')

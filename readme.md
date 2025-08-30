@@ -6,3 +6,6 @@
 cd code
 py sitegenerator.py
 ```
+
+## Inspiration
+[localghost.dev](https://localghost.dev)
