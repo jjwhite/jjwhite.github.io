@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Thoughts on Social Media in 2023</title>
-    <link rel="stylesheet" href="../css/outrun.css">
+    <link rel="stylesheet" href="/css/clean.css">
 </head>
 
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+    </button>
     <div class="container header">
         <h1><a href="https://jonwhite.me">JonWhite.me</a></h1>
         <p>A simple retro website</p>
@@ -27,11 +30,44 @@
     </div>
     <br/>
     <div class="container">
-        <footer>
-            <a href="../pages/about.html">About</a>
+       <footer>
+            <a href="/pages/about.html">About</a>
+            &nbsp;|&nbsp;
+            <a href="/posts/">Blog</a>
             <div class="copyright">&copy; 2025 Jon White</div>
         </footer>
     </div>
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.querySelector('.theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    </script>
 </body>
 
 </html>

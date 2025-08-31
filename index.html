@@ -5,42 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JonWhite.me - a simple retro website</title>
-    <link rel="stylesheet" href="css/outrun.css">
+    <link rel="stylesheet" href="css/clean.css">
 </head>
 
 <body>
+     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span class="theme-icon">🌙</span>
+    </button>
     <div class="container header">
         <h1>JonWhite.me</h1>
         <p>A simple retro website</p>
     </div>
     <br/>
     <div class="container">
+        <h2>Hey, I'm Jon.</h2>
+        <p>This website is where I write about things I love.</p>
         <h2>Latest Posts</h2>
         <ul><li><a href="posts\2025-07-15-100-albums-into-2025.html">5 Albums That Surprised Me After Listening to 100</a> - 2025-07-26</li>
 <li><a href="posts\2025-01-04-favorite-books-of-2024.html">My Favorite Reads of 2024</a> - 2025-01-04</li>
 <li><a href="posts\2023-07-10-social-media.html">My Thoughts on Social Media in 2023</a> - 2023-07-20</li>
 <li><a href="posts\2023-06-16-one-and-a-half-years-later.html">One And A Half Years Later</a> - 2023-06-16</li>
 <li><a href="posts\2020-09-15-patsy-cline.html">How A List of Albums and Patsy Cline Resurrected My Dad</a> - 2020-09-14</li>
-<li><a href="posts\2019-12-31-2019-in-review.html">2019 In Review</a> - 2019-12-31</li>
-<li><a href="posts\2019-08-16-get-to-work.html">Get To Work</a> - 2019-08-16</li>
-<li><a href="posts\2019-08-11-micro-adventures.html">Slowing Down Time with Micro Adventures</a> - 2019-08-11</li>
-<li><a href="posts\2019-08-02-turn-off-the-auto-pilot.html">Turn Off The Auto-Pilot</a> - 2019-08-02</li>
-<li><a href="posts\2019-05-14-i-ran-a-half-marathon.html">I Went from the Couch to a Half Marathon and Learned to Embrace the Process</a> - 2019-05-14</li>
-<li><a href="posts\2019-01-31-what-i-read-january-2019.html">What I Read - January 2019</a> - 2019-01-31</li>
-<li><a href="posts\2018-04-12-fixing-facebook.html">Fixing Facebook</a> - 2018-04-12</li>
-<li><a href="posts\2017-10-11-Samsung-GS8-Review.html">Samsung Galaxy S8+: A Review</a> - 2017-10-11</li>
-<li><a href="posts\2017-08-31-Reading-Bucket-List-A-Confederacy-Of-Dunces.html">Reading Bucket List: A Confederacy of Dunces</a> - 2017-08-31</li>
-<li><a href="posts\2017-08-07-Reading-Bucket-List-The-Swiss-Family-Robinson.html">Reading Bucket List: The Swiss Family Robinson</a> - 2017-08-07</li>
-<li><a href="posts\2016-01-08-book-review-off-to-be-the-wizard.html">Book Review: Off To Be The Wizard</a> - 2016-01-08</li>
 </ul>
     </div>
     <br/>
     <div class="container">
-        <footer>
-            <a href="pages/about.html">About</a>
+       <footer>
+            <a href="/pages/about.html">About</a>
+            &nbsp;|&nbsp;
+            <a href="/posts/">Blog</a>
             <div class="copyright">&copy; 2025 Jon White</div>
         </footer>
     </div>
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.querySelector('.theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    </script>
 </body>
 
 </html>
