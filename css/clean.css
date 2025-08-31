@@ -451,3 +451,19 @@ footer {
     justify-content: center;
   }
 }
+
+
+/*Custom*/
+
+/* for snake plant */
+.header img {
+    border:none;
+    height:100px;
+    float:left;
+    box-shadow:none;
+    margin-right:10px;
+}
+
+.header h1{
+    padding-top:35px;
+}
