@@ -455,13 +455,14 @@ footer {
 
 /*Custom*/
 
-/* for snake plant */
+/* for logo */
 .header img {
     border:none;
     height:100px;
     float:left;
     box-shadow:none;
     margin-right:10px;
+    width:65px;
 }
 
 .header h1{

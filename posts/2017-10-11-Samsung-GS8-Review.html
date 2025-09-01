@@ -13,7 +13,7 @@
         <span class="theme-icon">🌙</span>
     </button>
     <div class="container header">
-        <img src="/images/plant.png"/><h1><a href="https://jonwhite.me">JonWhite.me</a></h1>
+        <img id="Logo" src=""/><h1><a href="https://jonwhite.me">JonWhite.me</a></h1>
         <p>A simple retro website</p>
     </div>
     <br/>
@@ -49,35 +49,10 @@
             <div class="copyright">&copy; 2025 Jon White</div>
         </footer>
     </div>
+    <script src="/js/main.js"></script>
     <script>
-        // Theme toggle functionality
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.querySelector('.theme-icon');
-            const currentTheme = body.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Load saved theme on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.querySelector('.theme-icon');
-            
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-            } else {
-                themeIcon.textContent = '🌙';
-            }
+            init();
         });
     </script>
 </body>
