@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 /* CSS Custom Properties for Theme Variables */
 :root {
   /* Light Theme Colors */
@@ -466,5 +467,39 @@ footer {
 }
 
 .header h1{
-    padding-top:35px;
+    padding-top:76px;
+}
+
+.header h1 a{
+   font-family: 'Oswald';
+   margin-left:10px;
+}
+
+ul.social-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    /* Make list items display horizontally */
+    display: flex;
+    
+    /* Center the entire list on the page */
+    justify-content: center;
+
+}
+
+/* Optional: Style for individual list items */
+ul.social-links li {
+    /* Add padding or other styling as needed */
+    padding: 10px;
+}
+
+ul.social-links li a img{
+  height: 30px;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+ul.social-links li a img:hover{
+  height: 40px;
 }
