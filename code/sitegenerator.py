@@ -3,7 +3,12 @@ import markdown
 import yaml
 import re
 import math
+import html
+from email.utils import formatdate
+import time
 from datetime import datetime
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
@@ -180,7 +185,75 @@ def extract_excerpt(markdown_content, max_words=50):
     else:
         return ' '.join(words[:max_words]) + '...'
 
-def generate_site():
+def generate_rss_feed(posts_data, output_dir, site_url="https://jonwhite.me", site_title="Jon White's Blog", site_description="Latest posts from my personal blog"):
+    """Generate a clean RSS 2.0 feed using ElementTree to prevent XML escaping bugs."""
+    if not posts_data:
+        return
+
+    # Sort posts by date (newest first)
+    sorted_posts = sorted(posts_data, key=lambda x: x[2], reverse=True)
+    
+    # Root RSS element
+    rss = ET.Element('rss', {
+        'version': '2.0',
+        'xmlns:atom': 'http://www.w3.org/2005/Atom'
+    })
+    channel = ET.SubElement(rss, 'channel')
+    
+    # Metadata
+    ET.SubElement(channel, 'title').text = site_title
+    ET.SubElement(channel, 'link').text = site_url
+    ET.SubElement(channel, 'description').text = site_description
+    ET.SubElement(channel, 'language').text = 'en-us'
+    ET.SubElement(channel, 'lastBuildDate').text = formatdate(usegmt=True)
+    
+    # Atom self-link
+    clean_site_url = site_url.rstrip('/')
+    ET.SubElement(channel, '{http://www.w3.org/2005/Atom}link', {
+        'href': f"{clean_site_url}/feed.xml",
+        'rel': 'self',
+        'type': 'application/rss+xml'
+    })
+
+    # Items
+    for title, link, date_val, excerpt in sorted_posts:
+        # Normalize relative path and construct absolute URL
+        clean_link = link.replace('\\', '/').lstrip('./')
+        post_url = f"{clean_site_url}/{clean_link}"
+        
+        # Parse or format the publication date into RFC 822 format
+        pub_date = formatdate(usegmt=True)
+        if isinstance(date_val, str):
+            try:
+                dt = datetime.strptime(date_val, '%Y-%m-%d')
+                pub_date = formatdate(time.mktime(dt.timetuple()), usegmt=True)
+            except ValueError:
+                pass
+        elif hasattr(date_val, 'timetuple'):
+            pub_date = formatdate(time.mktime(date_val.timetuple()), usegmt=True)
+
+        item = ET.SubElement(channel, 'item')
+        ET.SubElement(item, 'title').text = title
+        ET.SubElement(item, 'link').text = post_url
+        
+        guid = ET.SubElement(item, 'guid', {'isPermaLink': 'true'})
+        guid.text = post_url
+        
+        ET.SubElement(item, 'pubDate').text = pub_date
+        ET.SubElement(item, 'description').text = excerpt or ''
+
+    # Pretty print XML string output
+    rough_string = ET.tostring(rss, encoding='utf-8')
+    reparsed = minidom.parseString(rough_string)
+    pretty_xml = reparsed.toprettyxml(indent="  ")
+
+    feed_file = os.path.join(output_dir, 'feed.xml')
+    with open(feed_file, 'w', encoding='utf-8') as f:
+        f.write(pretty_xml)
+    
+    print(f"Generated RSS feed: {os.path.relpath(feed_file)}")
+
+def  generate_site():
     # Paths
     templates_dir = '../src/templates'
     pages_dir = '../src/pages'
@@ -231,8 +304,8 @@ def generate_site():
                 markdown_content = f.read()
             excerpt = extract_excerpt(markdown_content)
             
-            # Collect data for index page and blog pages
-            post_link = os.path.relpath(output_file, output_dir)
+            # Collect data for index page, blog pages, and RSS feed
+            post_link = os.path.relpath(output_file, output_dir).replace('\\', '/')
             posts_data.append((
                 front_matter.get('title', 'Untitled'), 
                 post_link, 
@@ -254,7 +327,16 @@ def generate_site():
     # Generate blog pages with pagination in posts directory
     if blog_template:
         generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_page=10)
-    
+
+    # Generate RSS Feed
+    generate_rss_feed(
+        posts_data=posts_data,
+        output_dir=output_dir,
+        site_url="https://jonwhite.me",  # Replace with actual live domain name
+        site_title="Jon White's Blog",
+        site_description="Latest posts from my personal blog"
+    )
+
     print(f"Site generated in {output_dir}")
 
 # Run the generator
