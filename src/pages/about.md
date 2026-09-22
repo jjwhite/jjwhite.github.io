@@ -6,12 +6,31 @@ comments:
 category: 
 ---
 
+I'm a father of 3 residing in the United States.  My day job is as a Staff Software Engineer for a small software company.  Some of my interests include: 
 
-## Across the Interwebs
-<ul class="social-links">
-    <li><a href="https://bsky.app/profile/jjwhite01.bsky.social" target="_blank"><img src="/images/social/bluesky.svg"/></a></li>
-    <li><a href="https://mastodon.world/@jonwhite" target="_blank"><img src="/images/social/mastodon.svg"/></a></li>
-    <li><a href="https://github.com/jjwhite" target="_blank"><img src="/images/social/github.png"/></a></li>
-    <li><a href="https://www.linkedin.com/in/jonathan-white-0475a65/" target="_blank"><img src="/images/social/linkedin.png"/></a></li>
-    <li><a href="https://www.dndbeyond.com/characters/111199409" target="_blank"><img src="/images/social/dnd.png"/></a></li>
-</ul>
+- reading (particularly philosophy)
+- disc golf
+- D&D
+- music (both listening and playing)
+- lifting heavy circles
+
+---
+
+## About This Site
+This site is personal blog where I post about things that interest me or projects I'm working on.  The site is hosted on github pages and is a static site built using a custom python-based static site generator. 
+
+---
+
+## Disclosures
+
+### Compensation
+I am not currently being sponsored or paid for my posts here or anywhere else.
+
+### AI/LLM Usage
+#### Things I use AI for
+- assisting with coding of the custom site-generator that builds this site
+- analyzing data associated with posts
+- as a post editor
+
+#### Things I don't use AI for
+- writing post content (as mentioned above, I only use it as an editor)
