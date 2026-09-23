@@ -224,11 +224,11 @@
     </div>
   </div>
 
-  <!-- Modal: OPML & Feed Management -->
+  <!-- Modal: OPML & Backup Management -->
   <div class="modal-overlay" id="modal-opml">
     <div class="modal-content" style="max-width: 600px;">
       <div class="modal-header">
-        <h2 class="modal-title">Manage Subscriptions & OPML</h2>
+        <h2 class="modal-title">Backup & Subscriptions</h2>
         <button class="btn-icon" style="background:none; border:none;" onclick="closeModal('modal-opml')">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -237,12 +237,41 @@
         </button>
       </div>
       <div class="modal-body">
-        <h3 style="font-size: 1rem; margin-bottom: 12px;">Import / Export</h3>
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
-          You can backup your subscribed feeds by exporting them, or import feeds from another reader using an OPML file.
+        <!-- Full Data Backup Section -->
+        <h3 style="font-size: 1rem; margin-bottom: 8px;">Full App Backup (Feeds, Read & Starred States)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+          Export or restore your complete application state including subscriptions, read statuses, and starred bookmarks.
+        </p>
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <button class="btn-primary" style="flex: 1;" id="btn-export-backup">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export Backup (.json)
+          </button>
+          
+          <button class="btn-secondary" style="flex: 1;" id="btn-select-backup">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Import Backup (.json)
+          </button>
+          <input type="file" id="file-backup-input" accept=".json" style="display: none;">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 20px;">
+
+        <!-- Standard OPML Subscriptions Section -->
+        <h3 style="font-size: 1rem; margin-bottom: 8px;">OPML Subscriptions (Feed List Only)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+          Standard OPML files import/export feed URLs only (compatible with Feedly, NetNewsWire, Inoreader, etc.).
         </p>
         
-        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
           <button class="btn-secondary" style="flex: 1;" id="btn-export-opml">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -252,7 +281,7 @@
             Export OPML
           </button>
           
-          <button class="btn-primary" style="flex: 1;" id="btn-select-opml">
+          <button class="btn-secondary" style="flex: 1;" id="btn-select-opml">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
@@ -269,7 +298,7 @@
             <polyline points="17 8 12 3 7 8"></polyline>
             <line x1="12" y1="3" x2="12" y2="15"></line>
           </svg>
-          <div>Drag & Drop OPML file here to import</div>
+          <div>Drag & Drop JSON backup or OPML file here to import</div>
         </div>
       </div>
       <div class="modal-footer">
