@@ -978,7 +978,71 @@ function navigateReader(direction) {
   }
 }
 
-// --- OPML Handling ---
+// --- OPML & Full Backup Handling ---
+
+function exportFullBackup() {
+  if (state.feeds.length === 0 && state.articles.length === 0) {
+    showToast('No data available to export.', 'error');
+    return;
+  }
+
+  const backupData = JSON.stringify(state, null, 2);
+  const blob = new Blob([backupData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `aura-rss-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Full backup (feeds & article states) exported successfully!', 'success');
+}
+
+function parseAndImportBackup(jsonText) {
+  try {
+    const importedState = JSON.parse(jsonText);
+    if (!importedState || typeof importedState !== 'object') {
+      throw new Error('Invalid JSON format');
+    }
+
+    if (Array.isArray(importedState.feeds)) {
+      importedState.feeds.forEach(impFeed => {
+        if (!state.feeds.some(f => f.id === impFeed.id || f.url.toLowerCase() === impFeed.url.toLowerCase())) {
+          state.feeds.push(impFeed);
+        }
+      });
+    }
+
+    if (Array.isArray(importedState.articles)) {
+      importedState.articles.forEach(impArt => {
+        const existingIdx = state.articles.findIndex(a => a.id === impArt.id || (a.link && a.link === impArt.link));
+        if (existingIdx !== -1) {
+          // Merge imported read/starred state
+          state.articles[existingIdx].read = impArt.read || state.articles[existingIdx].read;
+          state.articles[existingIdx].starred = impArt.starred || state.articles[existingIdx].starred;
+        } else {
+          state.articles.push(impArt);
+        }
+      });
+    }
+
+    if (importedState.theme) {
+      applyTheme(importedState.theme);
+    }
+
+    trimArticlesCache();
+    saveState();
+    renderSidebarFeeds();
+    renderArticles();
+    updateBadges();
+    closeModal('modal-opml');
+    showToast('Full backup imported successfully! Feeds, read statuses, and starred items restored.', 'success');
+  } catch (error) {
+    console.error('Backup import failed:', error);
+    showToast('Failed to import backup JSON. Invalid file format.', 'error');
+  }
+}
 
 function exportToOPML() {
   if (state.feeds.length === 0) {
@@ -1199,6 +1263,25 @@ function initEventListeners() {
     addNewFeed(url, name);
   });
 
+  // Export/Import Full Backup Buttons (.json)
+  const btnExportBackup = document.getElementById('btn-export-backup');
+  if (btnExportBackup) {
+    btnExportBackup.addEventListener('click', exportFullBackup);
+  }
+
+  const backupFileInput = document.getElementById('file-backup-input');
+  const btnSelectBackup = document.getElementById('btn-select-backup');
+  if (btnSelectBackup && backupFileInput) {
+    btnSelectBackup.addEventListener('click', () => backupFileInput.click());
+    backupFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => parseAndImportBackup(event.target.result);
+      reader.readAsText(file);
+    });
+  }
+
   // Export/Import OPML Buttons
   document.getElementById('btn-export-opml').addEventListener('click', exportToOPML);
   
@@ -1209,11 +1292,17 @@ function initEventListeners() {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (event) => parseAndImportOPML(event.target.result);
+    reader.onload = (event) => {
+      if (file.name.endsWith('.json')) {
+        parseAndImportBackup(event.target.result);
+      } else {
+        parseAndImportOPML(event.target.result);
+      }
+    };
     reader.readAsText(file);
   });
 
-  // OPML Drag & Drop Zone
+  // OPML & Backup Drag & Drop Zone
   const dropZone = document.getElementById('opml-drop-zone');
   dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -1226,7 +1315,13 @@ function initEventListeners() {
     const file = e.dataTransfer.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (event) => parseAndImportOPML(event.target.result);
+      reader.onload = (event) => {
+        if (file.name.endsWith('.json')) {
+          parseAndImportBackup(event.target.result);
+        } else {
+          parseAndImportOPML(event.target.result);
+        }
+      };
       reader.readAsText(file);
     }
   });
