@@ -160,42 +160,19 @@ const btnReaderNext = document.getElementById('btn-reader-next');
 
 let currentlyOpenArticleId = null;
 
-// --- CORS Proxy Feed Fetching & Parsing ---
-async function fetchFeedXML(url) {
-  const encodedUrl = encodeURIComponent(url);
-  const proxies = [
-    `https://api.allorigins.win/get?url=${encodedUrl}`,
-    `https://corsproxy.io/?${url}`
-  ];
+// --- Multi-Provider CORS Proxy Feed Fetching & Parsing ---
 
-  let parsedXML = null;
-
-  for (const proxyUrl of proxies) {
-    try {
-      const res = await fetch(proxyUrl);
-      if (!res.ok) continue;
-
-      let responseText = '';
-      if (proxyUrl.includes('allorigins.win')) {
-        const json = await res.json();
-        responseText = json.contents;
-      } else {
-        responseText = await res.text();
-      }
-
-      if (responseText) {
-        const parser = new DOMParser();
-        parsedXML = parser.parseFromString(responseText, 'text/xml');
-        if (!parsedXML.querySelector('parsererror')) {
-          return parsedXML; // Success
-        }
-      }
-    } catch (e) {
-      console.warn(`Proxy failed: ${proxyUrl}`, e);
-    }
+function parseRawXML(responseText, feedId) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(responseText, 'text/xml');
+  if (xmlDoc.querySelector('parsererror')) {
+    throw new Error('Invalid XML document format');
   }
 
-  throw new Error('All CORS proxies failed to fetch or parse this feed URL.');
+  const title = xmlDoc.querySelector('channel > title')?.textContent || 
+                xmlDoc.querySelector('feed > title')?.textContent || '';
+  const articles = parseXMLToArticles(xmlDoc, feedId);
+  return { title: title.trim(), articles };
 }
 
 function parseXMLToArticles(xmlDoc, feedId) {
@@ -275,24 +252,180 @@ function parseXMLToArticles(xmlDoc, feedId) {
   return articles;
 }
 
+function parseFeed2JSON(data, feedId) {
+  const title = data.title || '';
+  const items = data.items || [];
+  const articles = items.map(item => {
+    const itemTitle = item.title || 'Untitled Article';
+    const link = (item.url || item.external_url || item.id || '').trim();
+    const dateStr = item.date_published || item.date_modified || '';
+    const pubDate = dateStr ? new Date(dateStr).getTime() : Date.now();
+    const rawContent = item.content_html || item.content_text || item.summary || '';
+    const description = item.summary || rawContent;
+
+    let cleanSnippet = description
+      .replace(/<[^>]*>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (cleanSnippet.length > 180) {
+      cleanSnippet = cleanSnippet.substring(0, 180) + '...';
+    }
+
+    const articleId = hashString(link || (itemTitle + pubDate));
+
+    return {
+      id: articleId,
+      feedId: feedId,
+      title: itemTitle,
+      link: link,
+      pubDate: pubDate,
+      description: cleanSnippet,
+      content: rawContent || description,
+      read: false,
+      starred: false
+    };
+  });
+
+  return { title: title.trim(), articles };
+}
+
+function parseRSS2JSON(data, feedId) {
+  const title = data.feed?.title || '';
+  const items = data.items || [];
+  const articles = items.map(item => {
+    const itemTitle = item.title || 'Untitled Article';
+    const link = (item.link || item.guid || '').trim();
+    const dateStr = item.pubDate || '';
+    const pubDate = dateStr ? new Date(dateStr).getTime() : Date.now();
+    const description = item.description || '';
+    const content = item.content || description;
+
+    let cleanSnippet = description
+      .replace(/<[^>]*>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (cleanSnippet.length > 180) {
+      cleanSnippet = cleanSnippet.substring(0, 180) + '...';
+    }
+
+    const articleId = hashString(link || (itemTitle + pubDate));
+
+    return {
+      id: articleId,
+      feedId: feedId,
+      title: itemTitle,
+      link: link,
+      pubDate: pubDate,
+      description: cleanSnippet,
+      content: content || description,
+      read: false,
+      starred: false
+    };
+  });
+
+  return { title: title.trim(), articles };
+}
+
+async function fetchFeedData(url, feedId) {
+  const encodedUrl = encodeURIComponent(url);
+  const timeoutMs = 5000;
+
+  const fetchWithTimeout = async (requestUrl, options = {}) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const res = await fetch(requestUrl, { ...options, signal: controller.signal });
+      clearTimeout(timer);
+      return res;
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
+    }
+  };
+
+  const providers = [
+    {
+      name: 'Direct Fetch',
+      fn: async () => {
+        const res = await fetchWithTimeout(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        return parseRawXML(text, feedId);
+      }
+    },
+    {
+      name: 'Feed2JSON',
+      fn: async () => {
+        const res = await fetchWithTimeout(`https://feed2json.org/convert?url=${encodedUrl}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        return parseFeed2JSON(data, feedId);
+      }
+    },
+    {
+      name: 'RSS2JSON',
+      fn: async () => {
+        const res = await fetchWithTimeout(`https://api.rss2json.com/v1/api.json?rss_url=${encodedUrl}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data.status !== 'ok') throw new Error('RSS2JSON returned error status');
+        return parseRSS2JSON(data, feedId);
+      }
+    },
+    {
+      name: 'AllOrigins JSON',
+      fn: async () => {
+        const res = await fetchWithTimeout(`https://api.allorigins.win/get?url=${encodedUrl}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!data.contents) throw new Error('No contents');
+        return parseRawXML(data.contents, feedId);
+      }
+    },
+    {
+      name: 'CodeTabs Proxy',
+      fn: async () => {
+        const res = await fetchWithTimeout(`https://api.codetabs.com/v1/proxy?quest=${encodedUrl}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        if (!text || text.length === 0) throw new Error('Empty response body');
+        return parseRawXML(text, feedId);
+      }
+    }
+  ];
+
+  for (const provider of providers) {
+    try {
+      const result = await provider.fn();
+      if (result && result.articles && result.articles.length > 0) {
+        console.log(`Successfully fetched feed ${url} via ${provider.name}`);
+        return result;
+      }
+    } catch (err) {
+      console.warn(`Provider [${provider.name}] failed for ${url}:`, err.message);
+    }
+  }
+
+  throw new Error('All CORS proxies and feed fetching providers failed to fetch or parse this feed URL.');
+}
+
 // Fetch single feed and merge articles
 async function refreshFeed(feed) {
   try {
-    const xmlDoc = await fetchFeedXML(feed.url);
+    const feedData = await fetchFeedData(feed.url, feed.id);
     
     // Auto-rename feed if it has no name yet
-    if (!feed.name || feed.name === 'New Feed' || feed.name === feed.url) {
-      const parsedName = xmlDoc.querySelector('channel > title')?.textContent || xmlDoc.querySelector('feed > title')?.textContent;
-      if (parsedName) {
-        feed.name = parsedName.trim();
-      }
+    if ((!feed.name || feed.name === 'New Feed' || feed.name === feed.url) && feedData.title) {
+      feed.name = feedData.title;
     }
 
-    const fetchedArticles = parseXMLToArticles(xmlDoc, feed.id);
+    const fetchedArticles = feedData.articles;
     
     // Merge fetched with current articles, preserving read/starred status
     fetchedArticles.forEach(newArt => {
-      const existingIdx = state.articles.findIndex(a => a.id === newArt.id || a.link === newArt.link);
+      const existingIdx = state.articles.findIndex(a => a.id === newArt.id || (a.link && a.link === newArt.link));
       if (existingIdx !== -1) {
         // Keep read and starred state
         newArt.read = state.articles[existingIdx].read;
@@ -307,9 +440,10 @@ async function refreshFeed(feed) {
     saveState();
   } catch (error) {
     console.error(`Error refreshing feed ${feed.name}:`, error);
-    showToast(`Error refreshing "${feed.name}": feed might be invalid.`, 'error');
+    showToast(`Error refreshing "${feed.name}": feed might be invalid or unreachable.`, 'error');
   }
 }
+
 
 // Refresh all feeds
 async function refreshAllFeeds() {
@@ -622,18 +756,14 @@ async function addNewFeed(url, customName = '') {
   openModalSkeletons();
   
   try {
-    const xmlDoc = await fetchFeedXML(url);
-    const parsedName = xmlDoc.querySelector('channel > title')?.textContent || xmlDoc.querySelector('feed > title')?.textContent || 'New RSS Feed';
+    const feedData = await fetchFeedData(url, feedId);
     
     if (!newFeed.name || newFeed.name === url) {
-      newFeed.name = parsedName.trim();
+      newFeed.name = feedData.title || 'New RSS Feed';
     }
 
     state.feeds.push(newFeed);
-    
-    // Parse articles
-    const fetchedArticles = parseXMLToArticles(xmlDoc, feedId);
-    state.articles.push(...fetchedArticles);
+    state.articles.push(...feedData.articles);
 
     trimArticlesCache();
     saveState();
