@@ -10,12 +10,10 @@
 </head>
 
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <span class="theme-icon">🌙</span>
-    </button>
-    <div class="container header">
-        <img id="Logo" src=""/><h1><a href="https://jonwhite.me">Jon White</a></h1>
-    </div>
+    <header>
+        <h1><a href="https://jonwhite.me">Jon White's Blog</a></h1>
+        <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+    </header>
     <br/>
     <div class="container">
         <h1>Get To Work</h1>
@@ -35,7 +33,10 @@ Breath.</p>
     <br/>
     <div class="container">
       <footer>
-            <a href="/pages/about.html">About</a>&nbsp;|&nbsp;<a href="/posts/">Blog</a>&nbsp;|&nbsp;<a href="/pages/blogroll.html">Blogroll</a>&nbsp;|&nbsp;<a href="/feed.xml">RSS</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
             <div class="copyright">&copy; 2026 Jon White</div>
         </footer>
     </div>

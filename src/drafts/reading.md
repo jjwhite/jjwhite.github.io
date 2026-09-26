@@ -8,7 +8,9 @@ As AI becomes more prevelent and even our knowledge work is being offloaded we a
 
 I've already seen this in my line of work as an engineer.  I do far less problem solving and thinking than I used to.  It was novel for the first month or so but then it just became, well, kinda sad. I'm not one to be stubborn though, I see the direction this industry is going and I gain nothing by remaining steadfast in my ways.  At least not from a professional and financial standpoint. But, the lack of thinking during my workday is...scary.  So, I've found myself being drawn to reading and writing and doing things on my own that excercise my brain.
 
+In some ways we've already seen this trend.  There are countless "brain training" apps that can be found on the app store that claim to stave off brain rot.  However, studies show that these don't really do anything.
+
 ## What does this mean for the human race?
 When it was just our physical activity that we were outsourcing, we could at least lean on the fact that we were still using our highly evolved brains.  And really, isn't that what separates us from the rest of the animal kingdom?  Well, what happens if we no longer do physical labor OR knowledge work.  If we offload EVERYTHING to a machine?  What separates us now?
 
-If humans are no longer DOING anyting and we're no longer THINKING about anything...what are we? 
+If humans are no longer DOING anyting and we're no longer THINKING about anything...what are we?
