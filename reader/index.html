@@ -108,7 +108,13 @@
           </div>
         </div>
 
-        <button class="btn-icon" id="btn-opml-trigger" title="OPML Import/Export" aria-label="OPML Settings">
+        <button class="btn-icon" id="btn-cloud-trigger" title="Cloud Storage & Auto-Sync" aria-label="Cloud Sync">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="btn-opml-trigger" title="OPML & Backup" aria-label="OPML Settings">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="17 8 12 3 7 8"></polyline>
@@ -145,6 +151,12 @@
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </div>
+
+          <button class="btn-icon" id="btn-topbar-sync" title="Cloud Sync" aria-label="Cloud Sync Status">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="icon-topbar-sync">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+            </svg>
+          </button>
 
           <button class="btn-icon" id="btn-refresh" title="Refresh Feeds">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -221,6 +233,100 @@
           <button type="submit" class="btn-primary">Subscribe</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal: Cloud Storage & Auto-Sync -->
+  <div class="modal-overlay" id="modal-cloud-sync">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Cloud Storage & Auto-Sync</h2>
+        <button class="btn-icon" style="background:none; border:none;" onclick="closeModal('modal-cloud-sync')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+          Automatically sync your subscriptions, read articles, and starred bookmarks across devices using your preferred cloud location.
+        </p>
+
+        <!-- Sync Provider Selection -->
+        <div class="form-group">
+          <label class="form-label" for="sync-provider-select">Storage Sync Provider</label>
+          <select class="form-input" id="sync-provider-select">
+            <option value="none">Disabled (Local Browser Storage Only)</option>
+            <option value="dropbox">Dropbox API (Direct Cloud Storage)</option>
+            <option value="remote">Remote JSON Endpoint (WebDAV / JSONBin / Custom URL)</option>
+            <option value="localfile">Synced Local File (Dropbox / Drive Folder on Disk)</option>
+          </select>
+        </div>
+
+        <!-- Section: Dropbox Config -->
+        <div id="sync-panel-dropbox" class="sync-panel" style="display: none; background: var(--bg-input); padding: 16px; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 16px;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--text-primary);">Dropbox API Integration</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+            Enter your Dropbox Access Token to read/write state directly to your Dropbox account.
+          </p>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="dropbox-token">Dropbox Access Token</label>
+            <input class="form-input" type="password" id="dropbox-token" placeholder="sl.B...">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="dropbox-file-path">File Path in Dropbox</label>
+            <input class="form-input" type="text" id="dropbox-file-path" value="/aura_rss_state.json">
+          </div>
+        </div>
+
+        <!-- Section: Remote JSON Config -->
+        <div id="sync-panel-remote" class="sync-panel" style="display: none; background: var(--bg-input); padding: 16px; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 16px;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--text-primary);">Remote JSON URL / WebDAV / JSONBin</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+            Enter any CORS-enabled HTTP REST URL that accepts GET (read) and PUT (write).
+          </p>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="remote-sync-url">Storage Endpoint URL</label>
+            <input class="form-input" type="url" id="remote-sync-url" placeholder="https://api.jsonbin.io/v3/b/YOUR_BIN_ID">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="remote-sync-token">Auth Token / Key (Optional)</label>
+            <input class="form-input" type="password" id="remote-sync-token" placeholder="Bearer token or Master Key">
+          </div>
+        </div>
+
+        <!-- Section: Local Synced File Config -->
+        <div id="sync-panel-localfile" class="sync-panel" style="display: none; background: var(--bg-input); padding: 16px; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 16px;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--text-primary);">Local Cloud-Synced File</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+            Link a file inside your local Dropbox, Google Drive, or OneDrive desktop sync folder. The browser will auto-save state directly to that file on disk.
+          </p>
+          <button type="button" class="btn-secondary" id="btn-pick-local-file" style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 8px;">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span id="label-local-file-status">Select File in Synced Folder...</span>
+          </button>
+        </div>
+
+        <!-- Auto Sync Status & Actions -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <div style="font-size: 0.85rem; color: var(--text-muted);" id="sync-status-text">
+            Sync is currently disabled.
+          </div>
+          <button type="button" class="btn-primary" id="btn-sync-now" style="display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" id="icon-sync-now">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+            </svg>
+            Sync Now
+          </button>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btn-save-cloud-config">Save Settings</button>
+      </div>
     </div>
   </div>
 

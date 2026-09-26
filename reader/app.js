@@ -1,5 +1,6 @@
 // --- State Management ---
 const STATE_KEY = 'aura_rss_state';
+const SYNC_CONFIG_KEY = 'aura_rss_sync_config';
 
 let state = {
   feeds: [],
@@ -10,6 +11,237 @@ let state = {
   viewLayout: 'grid',  // 'grid' or 'list'
   theme: 'dark'
 };
+
+let syncConfig = {
+  mode: 'none', // 'none', 'dropbox', 'remote', 'localfile'
+  dropboxToken: '',
+  dropboxPath: '/aura_rss_state.json',
+  remoteUrl: '',
+  remoteToken: '',
+  lastSynced: null
+};
+
+let localFileHandle = null;
+let isSyncing = false;
+let syncDebounceTimer = null;
+
+function loadSyncConfig() {
+  const raw = localStorage.getItem(SYNC_CONFIG_KEY);
+  if (raw) {
+    try {
+      syncConfig = { ...syncConfig, ...JSON.parse(raw) };
+    } catch (e) {
+      console.error('Failed to parse syncConfig:', e);
+    }
+  }
+}
+
+function saveSyncConfig() {
+  try {
+    localStorage.setItem(SYNC_CONFIG_KEY, JSON.stringify(syncConfig));
+  } catch (e) {
+    console.error('Failed to save syncConfig:', e);
+  }
+}
+
+function updateSyncUIStatus(statusMsg, isError = false) {
+  const statusEl = document.getElementById('sync-status-text');
+  const iconTopbar = document.getElementById('icon-topbar-sync');
+  const btnTopbar = document.getElementById('btn-topbar-sync');
+  
+  if (statusEl) {
+    statusEl.textContent = statusMsg;
+    statusEl.style.color = isError ? 'var(--danger)' : 'var(--text-muted)';
+  }
+
+  if (btnTopbar) {
+    if (syncConfig.mode === 'none') {
+      btnTopbar.style.color = 'var(--text-muted)';
+      btnTopbar.title = 'Cloud Sync: Disabled';
+    } else if (isSyncing) {
+      btnTopbar.style.color = 'var(--accent-primary)';
+      btnTopbar.title = 'Cloud Syncing...';
+    } else if (isError) {
+      btnTopbar.style.color = 'var(--danger)';
+      btnTopbar.title = 'Cloud Sync Error: Click to check settings';
+    } else {
+      btnTopbar.style.color = 'var(--success)';
+      btnTopbar.title = `Cloud Synced (${syncConfig.mode}). Last: ${syncConfig.lastSynced ? formatRelativeTime(syncConfig.lastSynced) : 'Just now'}`;
+    }
+  }
+
+  if (iconTopbar) {
+    if (isSyncing) {
+      iconTopbar.classList.add('loading-spin');
+    } else {
+      iconTopbar.classList.remove('loading-spin');
+    }
+  }
+}
+
+async function syncFromCloud(showNotifications = true) {
+  if (syncConfig.mode === 'none' || isSyncing) return;
+
+  isSyncing = true;
+  updateSyncUIStatus('Syncing from cloud storage...');
+
+  try {
+    let cloudData = null;
+
+    if (syncConfig.mode === 'dropbox') {
+      if (!syncConfig.dropboxToken) throw new Error('Dropbox token is missing.');
+      const res = await fetch('https://content.dropboxapi.com/2/files/download', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${syncConfig.dropboxToken.trim()}`,
+          'Dropbox-API-Arg': JSON.stringify({ path: syncConfig.dropboxPath || '/aura_rss_state.json' })
+        }
+      });
+      if (!res.ok) {
+        if (res.status === 409) {
+          console.log('Dropbox file not found yet. Creating initial file in Dropbox...');
+          isSyncing = false;
+          await syncToCloud(showNotifications);
+          return;
+        }
+        throw new Error(`Dropbox download failed (HTTP ${res.status})`);
+      }
+      cloudData = await res.json();
+    } else if (syncConfig.mode === 'remote') {
+      if (!syncConfig.remoteUrl) throw new Error('Remote JSON URL is missing.');
+      const headers = {};
+      if (syncConfig.remoteToken) {
+        headers['Authorization'] = syncConfig.remoteToken.trim();
+        headers['X-Master-Key'] = syncConfig.remoteToken.trim();
+      }
+      const res = await fetch(syncConfig.remoteUrl, { headers });
+      if (!res.ok) throw new Error(`Remote JSON fetch failed (HTTP ${res.status})`);
+      const resData = await res.json();
+      cloudData = resData.record || resData;
+    } else if (syncConfig.mode === 'localfile') {
+      if (!localFileHandle) throw new Error('Local synced file not linked.');
+      const file = await localFileHandle.getFile();
+      const text = await file.text();
+      if (text.trim()) {
+        cloudData = JSON.parse(text);
+      }
+    }
+
+    if (cloudData && typeof cloudData === 'object') {
+      if (Array.isArray(cloudData.feeds)) {
+        cloudData.feeds.forEach(cf => {
+          if (!state.feeds.some(f => f.id === cf.id || f.url.toLowerCase() === cf.url.toLowerCase())) {
+            state.feeds.push(cf);
+          }
+        });
+      }
+
+      if (Array.isArray(cloudData.articles)) {
+        cloudData.articles.forEach(ca => {
+          const existingIdx = state.articles.findIndex(a => a.id === ca.id || (a.link && a.link === ca.link));
+          if (existingIdx !== -1) {
+            state.articles[existingIdx].read = ca.read || state.articles[existingIdx].read;
+            state.articles[existingIdx].starred = ca.starred || state.articles[existingIdx].starred;
+          } else {
+            state.articles.push(ca);
+          }
+        });
+      }
+
+      trimArticlesCache();
+      localStorage.setItem(STATE_KEY, JSON.stringify(state));
+      renderSidebarFeeds();
+      renderArticles();
+      updateBadges();
+
+      syncConfig.lastSynced = Date.now();
+      saveSyncConfig();
+      updateSyncUIStatus(`Synced with cloud (${syncConfig.mode}).`);
+      if (showNotifications) {
+        showToast(`Cloud state synced successfully (${syncConfig.mode})!`, 'success');
+      }
+    }
+  } catch (err) {
+    console.warn('Cloud sync load failed:', err.message);
+    updateSyncUIStatus(`Sync failed: ${err.message}`, true);
+    if (showNotifications) {
+      showToast(`Cloud Sync Error: ${err.message}`, 'error');
+    }
+  } finally {
+    isSyncing = false;
+  }
+}
+
+async function syncToCloud(showNotifications = false) {
+  if (syncConfig.mode === 'none' || isSyncing) return;
+
+  isSyncing = true;
+  updateSyncUIStatus('Uploading state to cloud...');
+
+  try {
+    const payload = JSON.stringify(state, null, 2);
+
+    if (syncConfig.mode === 'dropbox') {
+      if (!syncConfig.dropboxToken) throw new Error('Dropbox token is missing.');
+      const res = await fetch('https://content.dropboxapi.com/2/files/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${syncConfig.dropboxToken.trim()}`,
+          'Dropbox-API-Arg': JSON.stringify({
+            path: syncConfig.dropboxPath || '/aura_rss_state.json',
+            mode: 'overwrite',
+            autorename: false,
+            mute: true
+          }),
+          'Content-Type': 'application/octet-stream'
+        },
+        body: payload
+      });
+      if (!res.ok) throw new Error(`Dropbox upload failed (HTTP ${res.status})`);
+    } else if (syncConfig.mode === 'remote') {
+      if (!syncConfig.remoteUrl) throw new Error('Remote JSON URL is missing.');
+      const headers = { 'Content-Type': 'application/json' };
+      if (syncConfig.remoteToken) {
+        headers['Authorization'] = syncConfig.remoteToken.trim();
+        headers['X-Master-Key'] = syncConfig.remoteToken.trim();
+      }
+      const res = await fetch(syncConfig.remoteUrl, {
+        method: 'PUT',
+        headers,
+        body: payload
+      });
+      if (!res.ok) throw new Error(`Remote upload failed (HTTP ${res.status})`);
+    } else if (syncConfig.mode === 'localfile') {
+      if (!localFileHandle) throw new Error('Local synced file handle not linked.');
+      const writable = await localFileHandle.createWritable();
+      await writable.write(payload);
+      await writable.close();
+    }
+
+    syncConfig.lastSynced = Date.now();
+    saveSyncConfig();
+    updateSyncUIStatus(`Saved to cloud (${syncConfig.mode}).`);
+    if (showNotifications) {
+      showToast('State successfully saved to cloud!', 'success');
+    }
+  } catch (err) {
+    console.warn('Cloud sync save failed:', err.message);
+    updateSyncUIStatus(`Cloud save error: ${err.message}`, true);
+    if (showNotifications) {
+      showToast(`Cloud Save Failed: ${err.message}`, 'error');
+    }
+  } finally {
+    isSyncing = false;
+  }
+}
+
+function triggerAutoSyncToCloud() {
+  if (syncConfig.mode === 'none') return;
+  if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+  syncDebounceTimer = setTimeout(() => {
+    syncToCloud(false);
+  }, 1500);
+}
 
 // Default Feeds list
 const DEFAULT_FEEDS = [
@@ -24,12 +256,11 @@ function loadState() {
   if (raw) {
     try {
       state = JSON.parse(raw);
-      // Ensure arrays exist
       state.feeds = state.feeds || [];
       state.articles = state.articles || [];
       state.activeFilter = state.activeFilter || 'all';
       state.activeTab = state.activeTab || 'all';
-      state.searchQuery = ''; // Reset search query on load
+      state.searchQuery = '';
       state.viewLayout = state.viewLayout || 'grid';
       state.theme = state.theme || 'dark';
     } catch (e) {
@@ -52,13 +283,12 @@ function initializeDefaultState() {
   saveState();
 }
 
-// Save state to local storage
+// Save state to local storage and trigger cloud sync
 function saveState() {
   try {
     localStorage.setItem(STATE_KEY, JSON.stringify(state));
   } catch (e) {
     console.error('Failed to save state to localStorage:', e);
-    // If full, trim and try again
     trimArticlesCache(true);
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify(state));
@@ -66,6 +296,9 @@ function saveState() {
       showToast('Storage quota full. Failed to cache some feeds.', 'error');
     }
   }
+
+  // Auto-sync to cloud if enabled
+  triggerAutoSyncToCloud();
 }
 
 // Trim old articles to prevent localStorage overflow
@@ -127,6 +360,7 @@ const btnTheme = document.getElementById('btn-theme');
 const themeDropdown = document.getElementById('theme-dropdown');
 const btnRefresh = document.getElementById('btn-refresh');
 const btnAddFeedTrigger = document.getElementById('btn-add-feed-trigger');
+const btnCloudTrigger = document.getElementById('btn-cloud-trigger');
 const btnOpmlTrigger = document.getElementById('btn-opml-trigger');
 const searchBar = document.getElementById('search-bar');
 const layoutGrid = document.getElementById('layout-grid');
@@ -1242,6 +1476,43 @@ function applyTheme(themeName) {
 // --- Initialize Event Listeners ---
 
 function initEventListeners() {
+  // Cloud Sync Modal Elements & Helpers
+  const btnTopbarSync = document.getElementById('btn-topbar-sync');
+  const providerSelect = document.getElementById('sync-provider-select');
+  const btnSaveCloudConfig = document.getElementById('btn-save-cloud-config');
+  const btnSyncNow = document.getElementById('btn-sync-now');
+  const btnPickLocalFile = document.getElementById('btn-pick-local-file');
+  const labelLocalFileStatus = document.getElementById('label-local-file-status');
+
+  const updateProviderPanels = () => {
+    if (!providerSelect) return;
+    const val = providerSelect.value;
+    document.querySelectorAll('.sync-panel').forEach(p => p.style.display = 'none');
+    if (val === 'dropbox') document.getElementById('sync-panel-dropbox').style.display = 'block';
+    if (val === 'remote') document.getElementById('sync-panel-remote').style.display = 'block';
+    if (val === 'localfile') document.getElementById('sync-panel-localfile').style.display = 'block';
+  };
+
+  const populateCloudModal = () => {
+    if (!providerSelect) return;
+    providerSelect.value = syncConfig.mode || 'none';
+    const dbTokenInput = document.getElementById('dropbox-token');
+    const dbPathInput = document.getElementById('dropbox-file-path');
+    const remoteUrlInput = document.getElementById('remote-sync-url');
+    const remoteTokenInput = document.getElementById('remote-sync-token');
+
+    if (dbTokenInput) dbTokenInput.value = syncConfig.dropboxToken || '';
+    if (dbPathInput) dbPathInput.value = syncConfig.dropboxPath || '/aura_rss_state.json';
+    if (remoteUrlInput) remoteUrlInput.value = syncConfig.remoteUrl || '';
+    if (remoteTokenInput) remoteTokenInput.value = syncConfig.remoteToken || '';
+
+    if (labelLocalFileStatus) {
+      labelLocalFileStatus.textContent = localFileHandle ? `Linked: ${localFileHandle.name}` : 'Select File in Synced Folder...';
+    }
+    updateProviderPanels();
+    updateSyncUIStatus(syncConfig.mode !== 'none' ? `Configured for ${syncConfig.mode}` : 'Sync is currently disabled.');
+  };
+
   // Mobile Sidebar Toggles
   menuOpen.addEventListener('click', () => sidebar.classList.add('open'));
   menuClose.addEventListener('click', () => sidebar.classList.remove('open'));
@@ -1252,7 +1523,26 @@ function initEventListeners() {
     openModal('modal-add-feed');
   });
 
-  // OPML Trigger
+  // OPML & Cloud Triggers
+  if (btnCloudTrigger) {
+    btnCloudTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      populateCloudModal();
+      openModal('modal-cloud-sync');
+    });
+  }
+
+  if (btnTopbarSync) {
+    btnTopbarSync.addEventListener('click', () => {
+      if (syncConfig.mode === 'none') {
+        populateCloudModal();
+        openModal('modal-cloud-sync');
+      } else {
+        syncFromCloud(true);
+      }
+    });
+  }
+
   btnOpmlTrigger.addEventListener('click', () => openModal('modal-opml'));
 
   // Feed Form Submit
@@ -1396,6 +1686,69 @@ function initEventListeners() {
   btnReaderPrev.addEventListener('click', () => navigateReader('prev'));
   btnReaderNext.addEventListener('click', () => navigateReader('next'));
 
+  if (providerSelect) {
+    providerSelect.addEventListener('change', updateProviderPanels);
+  }
+
+  if (btnPickLocalFile) {
+    btnPickLocalFile.addEventListener('click', async () => {
+      try {
+        if ('showOpenFilePicker' in window) {
+          const [handle] = await window.showOpenFilePicker({
+            types: [{ description: 'JSON State File', accept: { 'application/json': ['.json'] } }]
+          });
+          localFileHandle = handle;
+          if (labelLocalFileStatus) {
+            labelLocalFileStatus.textContent = `Linked: ${handle.name}`;
+          }
+          showToast(`Linked local file "${handle.name}"`, 'success');
+        } else {
+          showToast('File System Access API not supported in this browser. Use Dropbox API or Remote JSON URL.', 'error');
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          showToast(`File error: ${err.message}`, 'error');
+        }
+      }
+    });
+  }
+
+  if (btnSaveCloudConfig) {
+    btnSaveCloudConfig.addEventListener('click', () => {
+      syncConfig.mode = providerSelect ? providerSelect.value : 'none';
+      const dbTokenInput = document.getElementById('dropbox-token');
+      const dbPathInput = document.getElementById('dropbox-file-path');
+      const remoteUrlInput = document.getElementById('remote-sync-url');
+      const remoteTokenInput = document.getElementById('remote-sync-token');
+
+      if (dbTokenInput) syncConfig.dropboxToken = dbTokenInput.value.trim();
+      if (dbPathInput) syncConfig.dropboxPath = dbPathInput.value.trim() || '/aura_rss_state.json';
+      if (remoteUrlInput) syncConfig.remoteUrl = remoteUrlInput.value.trim();
+      if (remoteTokenInput) syncConfig.remoteToken = remoteTokenInput.value.trim();
+
+      saveSyncConfig();
+      closeModal('modal-cloud-sync');
+
+      if (syncConfig.mode !== 'none') {
+        showToast(`Cloud Sync enabled (${syncConfig.mode}). Syncing...`, 'info');
+        syncFromCloud(true);
+      } else {
+        showToast('Cloud Sync disabled.', 'info');
+        updateSyncUIStatus('Sync is currently disabled.');
+      }
+    });
+  }
+
+  if (btnSyncNow) {
+    btnSyncNow.addEventListener('click', () => {
+      if (syncConfig.mode === 'none') {
+        showToast('Please select a storage sync provider first.', 'error');
+      } else {
+        syncFromCloud(true);
+      }
+    });
+  }
+
   // Keyboard navigation support for Reader
   document.addEventListener('keydown', (e) => {
     if (!currentlyOpenArticleId) return;
@@ -1413,6 +1766,7 @@ function initEventListeners() {
 // --- Main Init ---
 
 window.addEventListener('DOMContentLoaded', () => {
+  loadSyncConfig();
   loadState();
   applyTheme(state.theme);
   
@@ -1429,6 +1783,11 @@ window.addEventListener('DOMContentLoaded', () => {
   renderSidebarFeeds();
   renderArticles();
   updateBadges();
+
+  // Initial cloud sync on load
+  if (syncConfig.mode !== 'none') {
+    syncFromCloud(false);
+  }
 
   // Auto refresh feeds on load
   refreshAllFeeds();
