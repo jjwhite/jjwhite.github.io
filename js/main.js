@@ -1,10 +1,9 @@
 function init(){
-    loadLogo();
-    loadThemme();
+    loadTheme();
             
 }
 
-function loadThemme(){
+function loadTheme(){
     const savedTheme = localStorage.getItem('theme');
     const themeIcon = document.querySelector('.theme-icon');
             
@@ -15,12 +14,6 @@ function loadThemme(){
         themeIcon.textContent = '🌙';
     }
 
-    loadSocials();
-}
-
-function loadLogo(){
-    let num = Math.floor(Math.random() * 3) + 1;
-    document.getElementById('Logo').src = '/images/logos/logo_' + num +".png";
 }
 
 function toggleTheme() {
@@ -39,16 +32,4 @@ function toggleTheme() {
         localStorage.setItem('theme', 'dark');
     }
 
-    loadSocials();
-}
-
-function loadSocials(){
-    const swapImages = document.querySelectorAll('.theme-swap');
-    swapImages.forEach(element => {
-            const srcParts = element.src.split('.');
-            const extension = srcParts.pop(); // Get the last part (extension)
-            const baseName = srcParts.join('.'); // Join everything else back
-            const theme = document.body.getAttribute('data-theme') == null ? 'light' : 'dark' 
-            element.src = baseName.split("-")[0] + "-" + theme + '.' + extension;
-        });
 }

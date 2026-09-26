@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 /* CSS Custom Properties for Theme Variables */
 :root {
   /* Light Theme Colors */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --bg-tertiary: #e9ecef;
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
+  --text-primary: #000;
+  --text-secondary: #212529;
   --text-muted: #868e96;
   --accent-primary: #0066cc;
   --accent-hover: #0052a3;
@@ -27,8 +26,8 @@
   --code-number: #ed8936;
   
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-family: Cambria;
+  --font-family-mono: Monaco;
   --line-height: 1.6;
   --border-radius: 8px;
   --transition: all 0.2s ease-in-out;
@@ -36,14 +35,14 @@
 
 /* Dark Theme Colors */
 [data-theme="dark"] {
-  --bg-primary: #1a202c;
+  --bg-primary: #1c1e26;
   --bg-secondary: #2d3748;
   --bg-tertiary: #4a5568;
   --text-primary: #f7fafc;
   --text-secondary: #e2e8f0;
   --text-muted: #a0aec0;
-  --accent-primary: #4299e1;
-  --accent-hover: #3182ce;
+  --accent-primary: #29d398;
+  --accent-hover: #2d9c7b;
   --border-color: #4a5568;
   --border-light: #2d3748;
   --shadow: rgba(0, 0, 0, 0.3);
@@ -79,31 +78,6 @@ body {
   padding: 0 20px;
 }
 
-/* Theme Toggle Button */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  transition: var(--transition);
-  z-index: 1000;
-  box-shadow: 0 2px 10px var(--shadow);
-}
-
-.theme-toggle:hover {
-  background: var(--bg-tertiary);
-  box-shadow: 0 4px 20px var(--shadow-hover);
-}
-
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
@@ -113,12 +87,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.12rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.75rem; }
 
 p {
   margin-bottom: 1.5rem;
@@ -138,9 +112,7 @@ a:hover {
 
 /* Header */
 header {
-  margin-bottom: 3rem;
-  padding: 2rem 0;
-  border-bottom: 2px solid var(--border-light);
+  padding: 2rem 0 0 0;
 }
 
 header h1 {
@@ -164,6 +136,10 @@ nav a {
 nav a:hover {
   background-color: var(--bg-secondary);
   text-decoration: none;
+}
+
+span.divider {
+  padding: 0 7px;
 }
 
 /* Main Content */
@@ -387,12 +363,18 @@ td {
 
 /* Footer */
 footer {
-  text-align: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
   padding: 2rem 0;
   border-top: 2px solid var(--border-light);
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+button.theme-toggle{
+  border: none;
+  background: none;
+  float: right;
+  cursor:pointer;
 }
 
 /* Responsive Design */
@@ -424,7 +406,7 @@ footer {
     display: inline-block;
   }
   
-  .theme-toggle {
+  button.theme-toggle {
     top: 15px;
     right: 15px;
     width: 45px;
@@ -451,55 +433,4 @@ footer {
   .pagination-numbers {
     justify-content: center;
   }
-}
-
-
-/*Custom*/
-
-/* for logo */
-.header img {
-    border:none;
-    height:100px;
-    float:left;
-    box-shadow:none;
-    margin-right:10px;
-    width:65px;
-}
-
-.header h1{
-    padding-top:76px;
-}
-
-.header h1 a{
-   font-family: 'Oswald';
-   margin-left:10px;
-}
-
-ul.social-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    
-    /* Make list items display horizontally */
-    display: flex;
-    
-    /* Center the entire list on the page */
-    justify-content: center;
-
-}
-
-/* Optional: Style for individual list items */
-ul.social-links li {
-    /* Add padding or other styling as needed */
-    padding: 10px;
-}
-
-ul.social-links li a img{
-  height: 30px;
-  box-shadow: none;
-  border-radius: 0px;
-}
-
-ul.social-links li a img:hover{
-  height: 40px;
 }
