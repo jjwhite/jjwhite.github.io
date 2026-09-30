@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Asked Claude To Finish A Decade-Old Project</title>
+    <link rel="stylesheet" href="/css/clean.css">
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="RSS Feed">
+</head>
+
+<body>
+    <header>
+        <h1><a href="https://jonwhite.me">Jon White's Blog</a></h1>
+        <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+    </header>
+    <br/>
+    <div class="container">
+        <h1>I Asked Claude To Finish A Decade-Old Project</h1>
+        <p>2026-09-29</p>
+        <p>Recently my 4th-grader informed me that they were practicing typing skills at school.  The first thing I thought was just that I was glad they were still teaching this skill.  The second thing I thought was: "Wait, didn't I build (or at least <em>start</em> ) a typing game for my older kids like, 10 years ago?  Where the heck did that go?" I completely forgot about it.</p>
+<p>At the time I had been tinkering with some simple html canvas projects and learning how game loops work.  I thought I could turn that into a simple typing game.  I was inspired by the old Typer Shark game that I remember playing as a kid.  Except, instead of fish and sharks, I just went with simple bubbles that floated up from the bottom.</p>
+<p>As with almost every other side project I ever started, I got it <em>sort of working</em> and then abandoned it in favor of the dopamine rush of some shiny new project.  The state I found it in (after finally tracking it down in some long-forgotten backup folder) was that a timer runs for 60 seconds, you see how many bubbles you can pop by typing the letter in the bubble as they float up.  There’s no increasing difficulty or way to speed up the bubbles.  There are no full words or levels, or ways to “die”.   I was really happy just to have found it and thought I might post it here just to avoid losing it again. But then a thought occurred to me…  <em>“I bet AI could finish this in like 5 minutes.”</em> </p>
+<figure>
+  <img title="The decade old unfinished version" alt="" src="../images/2026-09-29/bubble_letters_orig.jpg">
+  <figcaption>The unfinished version with single letters only and just a 60 second countdown</figcaption>
+</figure>
+
+<p>So, I fired up Claude and prompted it to complete the game, adding levels, increasing difficulty, and a “3 strikes you’re out” rule if you miss bubbles by letting them go off the screen.  My assumption was correct and after a few minutes I had a finished game. </p>
+<figure>
+  <img title="The ai finished version" alt="" src="../images/2026-09-29/bubble_letters_claude.jpg">
+  <figcaption>Claude's updates include 9 levels, full words, and "lives"</figcaption>
+</figure>
+
+<p>Give it a try:</p>
+<p><a href="https://jonwhite.me/fun/BubbleLetters/v2">Play Claude's version here</a> (<a href="https://github.com/jjwhite/jjwhite.github.io/tree/master/fun/BubbleLetters/v2">source</a>)</p>
+<p><a href="https://jonwhite.me/fun/BubbleLetters">Play the original version here</a> (<a href="https://github.com/jjwhite/jjwhite.github.io/tree/master/fun/BubbleLetters">source</a>)</p>
+<h3>AI Disclosure</h3>
+<ul>
+<li>I used AntiGravity with the Claude Sonnet 4.6 model for this</li>
+<li>My exact prompt was: <blockquote>
+<p>Take a look at the code in this folder.  I made this years ago and it's a simple typing game where bubbles float up from the bottom and they have a letter in them.  You type the letter to pop the bubble.  However, it's not anywhere near complete.  What I'd like to do is turn it into a real game:</p>
+<blockquote>
+<ul>
+<li>levels that get progressively more difficult (start with letters, introduce words over time, bubbles speed up over time, etc.)</li>
+<li>if you miss a letter or word, right now you just don't get credit for it.  But I'd like it to be that if you miss it and it goes off screen that you get a strike against you and after some number of strikes you lose.”</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li>I made no modifications to the code that was generated after the fact and had no follow-up prompts.  What is posted at the link above is the result of that single prompt</li>
+</ul>
+    </div>
+    <br/>
+    <div class="container">
+      <footer>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+            <div class="copyright">&copy; 2026 Jon White</div>
+        </footer>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+    </script>
+</body>
+
+</html>

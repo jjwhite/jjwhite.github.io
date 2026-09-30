@@ -34,3 +34,5 @@ I am not currently being sponsored or paid for my posts here or anywhere else.
 
 #### Things I don't use AI for
 - writing post content (as mentioned above, I only use it as an editor)
+
+If AI is used for a specific post it will also be disclosed in the post itself.

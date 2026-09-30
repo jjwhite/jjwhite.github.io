@@ -5,8 +5,15 @@
     <link>https://jonwhite.me</link>
     <description>Latest posts from my personal blog</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Sep 2026 01:10:43 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 02:26:17 GMT</lastBuildDate>
     <ns0:link href="https://jonwhite.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>I Asked Claude To Finish A Decade-Old Project</title>
+      <link>https://jonwhite.me/posts/2026-09-29-claude-finished-my-decade-old-project.html</link>
+      <guid isPermaLink="true">https://jonwhite.me/posts/2026-09-29-claude-finished-my-decade-old-project.html</guid>
+      <pubDate>Tue, 29 Sep 2026 04:00:00 GMT</pubDate>
+      <description>Recently my 4th-grader informed me that they were practicing typing skills at school. The first thing I thought was just that I was glad they were still teaching this skill. The second thing I thought was: &quot;Wait, didn't I build or at least start a typing game for my older...</description>
+    </item>
     <item>
       <title>I Vibe-Coded an RSS Reader - You Can Use It Too</title>
       <link>https://jonwhite.me/posts/2026-09-27-aura-rss-reader.html</link>
