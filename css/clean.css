@@ -325,6 +325,12 @@ blockquote {
   color: var(--text-secondary);
 }
 
+blockquote blockquote{
+  border-left: none;
+  margin:0;
+  padding:0;
+}
+
 /* Images */
 img {
   max-width: 100%;
@@ -332,6 +338,20 @@ img {
   border-radius: var(--border-radius);
   box-shadow: 0 4px 20px var(--shadow);
   margin: 1.5rem 0;
+}
+
+figure {
+  margin-bottom:30px;
+}
+
+figure img{
+  margin: 0px;
+}
+
+figure figcaption{
+  text-align:center;
+  font-style:italic;
+  color: var(--text-muted)
 }
 
 /* Tables */
