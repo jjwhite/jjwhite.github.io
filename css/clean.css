@@ -31,6 +31,11 @@
   --line-height: 1.6;
   --border-radius: 8px;
   --transition: all 0.2s ease-in-out;
+
+  /* Chords */
+  --line: 2px;
+  --d: 22px;            /* dot diameter */
+  --w: 100px;           /* diagram width (5 string gaps) */
 }
 
 /* Dark Theme Colors */
@@ -54,6 +59,7 @@
   --code-text: #f687b3;
   --code-block-bg: #1a202c;
   --code-block-text: #e2e8f0;
+
 }
 
 /* Base Styles */
@@ -454,3 +460,80 @@ button.theme-toggle{
     justify-content: center;
   }
 }
+
+/* Guitar Chords */
+
+.chords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem 2.5rem;
+    justify-content: center;
+  }
+
+  .chord { text-align: center; }
+  .chord h2 { margin: 0 0 1.75rem; font-size: 1.25rem; }
+
+  /* The fretboard: strings = vertical lines, frets = horizontal lines */
+  .board {
+    position: relative;
+    width: var(--w);
+    height: calc(var(--w) * 1.2);   /* 4 frets */
+    border-right: var(--line) solid var(--text-primary);
+    border-bottom: var(--line) solid var(--text-primary);
+    border-top: 5px solid var(--text-primary); /* the nut */
+    background:
+      linear-gradient(to right, var(--text-primary) 0 var(--line), transparent var(--line)) 0 0 / 20% 100% repeat-x,
+      linear-gradient(to bottom, var(--text-primary) 0 var(--line), transparent var(--line)) 0 0 / 100% 25% repeat-y;
+  }
+  /* Chord shapes higher up the neck: thin top line instead of the nut */
+  .board.no-nut { border-top: var(--line) solid var(--ink); }
+
+  /* Finger dots: --s = string (0 low E ... 5 high e), --f = fret (1-4) */
+  .dot {
+    position: absolute;
+    left: calc(var(--s) * 20%);
+    top: calc((var(--f) - .5) * 25%);
+    width: var(--d);
+    height: var(--d);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    font-size: .75rem;
+    line-height: var(--d);
+    font-weight: 600;
+  }
+
+  /* Barre: --a to --b = strings it spans, --f = fret */
+  .barre {
+    position: absolute;
+    left: calc(var(--a) * 20% - var(--d) / 2);
+    width: calc((var(--b) - var(--a)) * 20% + var(--d));
+    top: calc((var(--f) - .5) * 25%);
+    height: var(--d);
+    transform: translateY(-50%);
+    border-radius: var(--d);
+    background: var(--text-primary);
+  }
+
+  /* x / o markers above the nut: --s = string */
+  .mark {
+    position: absolute;
+    left: calc(var(--s) * 20%);
+    top: -1.6rem;
+    transform: translateX(-50%);
+    font-size: .9rem;
+    line-height: 1;
+  }
+  .mark.mute::before { content: "\00d7"; font-weight: 700; }
+  .mark.open::before { content: "\25cb"; }
+
+  /* Starting fret label, e.g. "2fr" */
+  .fret-label {
+    position: absolute;
+    left: -2.4rem;
+    top: calc(.125 * 100% - .5em);
+    font-size: .8rem;
+  }
+
+/****************/
