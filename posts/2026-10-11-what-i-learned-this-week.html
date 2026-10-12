@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What I Learned This Week</title>
+    <link rel="stylesheet" href="/css/clean.css">
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="RSS Feed">
+</head>
+
+<body>
+    <header>
+        <h1><a href="https://jonwhite.me">Jon White's Blog</a></h1>
+        <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+    </header>
+    <br/>
+    <div class="container">
+        <h1>What I Learned This Week</h1>
+        <p>2026-10-11</p>
+        <p>Every Sunday I write about things I learned the previous week. I try to do at least one deep dive on something I'm trying to learn and write it in my own words.  Then I usually share some other random tidbits I picked up last this week.</p>
+<h1>Deep Dive</h1>
+<h2>Guitar</h2>
+<p>The scale pattern I shared <a href="/posts/2026-10-04-what-i-learned-this-week.html">last week</a> was just for major scales. Minor scales follow a similar pattern of: </p>
+<p><em>W-H-W-W-H-W-W</em></p>
+<h3>Triads</h3>
+<p>A <em>triad</em> is a three note combination that makes up chords and are built off of the scales:</p>
+<ul>
+<li><em>Major Chords</em>: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)</li>
+<li><em>Minor Chords</em>: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)</li>
+<li><em>Sus2 Chords</em>: Root Note + Major 2nd + Perfect 5th (Frets: 0, 2, 7)</li>
+<li><em>Sus4 Chords</em>: Root Note + Perfect 4th + Perfect 5th (Frets: 0, 5, 7)</li>
+<li><em>Diminished Chords</em>: Root Note + Minor 3rd + Lowered 5th (Frets: 0, 3, 6)</li>
+<li><em>Augmented Chords</em>: Root Note + Major 3rd + Raised 5th (Frets: 0, 4, 8)</li>
+</ul>
+<p>Notice how the majority of these is just a change to the "middle" note.  This is seen easily with the E and Em chords:</p>
+<!-- E major: 022100 -->
+<div style="float:left; margin-right:20px;">
+  <div class="chord">
+    <div class="board">
+      <span class="mark open" style="--s:0"></span>
+      <span class="mark open" style="--s:4"></span>
+      <span class="mark open" style="--s:5"></span>
+      <span class="dot" style="--s:1; --f:2">2</span>
+      <span class="dot" style="--s:2; --f:2">3</span>
+      <span class="dot" style="--s:3; --f:1">1</span>
+    </div>
+  </div>
+</div>
+
+<div style="float:left">
+  <!-- E minor: 022000 -->
+  <div class="chord">
+    <div class="board">
+      <span class="mark open" style="--s:0"></span>
+      <span class="mark open" style="--s:3"></span>
+      <span class="mark open" style="--s:4"></span>
+      <span class="mark open" style="--s:5"></span>
+      <span class="dot" style="--s:1; --f:2">2</span>
+      <span class="dot" style="--s:2; --f:2">3</span>
+    </div>
+  </div>
+</div>
+<div style="clear:both"></div>
+<p>The only difference between the major and minor chord is that the 4th string is a G# in the major and an open G in the minor.  So, that middle note in a major chord is a Major 3rd (G#) and in the E minor it's a Minor 3rd (G).  In this particular case that is simply putting your finger down on the first fret of the G string for the major and leaving it open for the minor.</p>
+<p><em>I'm still working on understanding harmonizing and the I, ii, iii, IV, V, vi, vii° notation.  Not ready to write that in my own words yet.</em></p>
+<h3>Progress Recordings</h3>
+<p><a href="/media/guitar/knockin_take3.mp3">Knockin' On Heaven's Door</a></p>
+<h1>Other Stuff</h1>
+<h2>Misc</h2>
+<ul>
+<li>The Ancient Greek concept of <a href="https://www.artofmanliness.com/character/self-improvement/got-thumos/"><em>Thumos</em></a></li>
+<li><a href="https://wikimediafoundation.org/news/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/">AI agents are editing wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Theory_of_constraints">The Theory of Constraints</a></li>
+<li><a href="https://www.imdb.com/title/tt3718778/">Over The Garden Wall</a> - I'm watching this with my 9-year-old (we're only about halfway through as of this writing) and it's so weird, quirky, funny, and just the perfect amount of creepy.  We're really enjoying it so far</li>
+</ul>
+<h3>AI Disclosure</h3>
+<ul>
+<li>I used AI to help build the html and css for the guitar chord diagrams in this post.</li>
+<li>I didn't mention it last week, but I'm using Claude to assist me in learning guitar: putting together weekly practice plans, explaining theory concepts, and answering questions I have.</li>
+</ul>
+    </div>
+    <br/>
+    <div class="container">
+      <footer>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+            <div class="copyright">&copy; 2026 Jon White</div>
+        </footer>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+    </script>
+</body>
+
+</html>
