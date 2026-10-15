@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI dependency loop</title>
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5d6679; --surface: #ffffff; --line: #c9cfdb;
+    --me: #0066cc;  /* my context */
+    --ai: #e83e8c;  /* AI reliance */
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8ebf2; --muted: #98a1b5; --surface: #1d2230; --line: #3a4258;
+    --me: #29d398; --ai: #f687b3;
+  }
+  /* no ?theme given: follow the OS setting */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --ink: #e8ebf2; --muted: #98a1b5; --surface: #1d2230; --line: #3a4258;
+      --me: #29d398; --ai: #f687b3;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: transparent; color: var(--ink);
+         font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .loop { max-width: 640px; margin: 0 auto; padding: 16px; }
+  svg { width: 100%; height: auto; display: block; }
+  .ring { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 3 7; stroke-linecap: round; }
+  .arrow { fill: var(--muted); }
+  .node rect { fill: var(--surface); stroke: var(--line); stroke-width: 2; transition: stroke .3s, stroke-width .3s; }
+  .node.on rect { stroke: var(--ai); stroke-width: 3.5; }
+  .node text { fill: var(--ink); text-anchor: middle; }
+  .node .t { font-size: 16px; font-weight: 650; }
+  .node .s { font-size: 12.5px; fill: var(--muted); }
+  .donut { fill: none; stroke-width: 24; transform: rotate(-90deg); transform-origin: 300px 265px;
+           transition: stroke-dasharray 1.1s cubic-bezier(.4,0,.2,1), transform 1.1s cubic-bezier(.4,0,.2,1); }
+  .donut.track { stroke: var(--line); opacity: .35; }
+  .donut.ai { stroke: var(--ai); }
+  .donut.me { stroke: var(--me); }
+  .pct { font-size: 34px; font-weight: 700; fill: var(--me); text-anchor: middle; }
+  .pctlabel { font-size: 12.5px; fill: var(--muted); text-anchor: middle; }
+  .dot { fill: var(--ai); stroke: var(--surface); stroke-width: 3; }
+  .legend { font-size: 13px; fill: var(--muted); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+         margin-top: 4px; font-size: 14px; color: var(--muted); min-height: 2.6em; }
+  .bar button { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line);
+                border-radius: 6px; padding: 6px 14px; cursor: pointer; flex-shrink: 0; }
+  .bar button:hover { border-color: var(--ai); }
+  .bar button:focus-visible { outline: 3px solid var(--ai); outline-offset: 2px; }
+  #caption { transition: opacity .4s; }
+</style>
+</head>
+<body>
+<figure class="loop" style="margin:0 auto">
+  <svg viewBox="0 0 600 470" role="img" aria-labelledby="ttl desc">
+    <title id="ttl">The AI dependency loop</title>
+    <desc id="desc">A cycle: AI writes the code, so I retain less context, so I rely on AI more, which leads to AI writing more of the code. Each lap, the share of the codebase I understand shrinks.</desc>
+
+    <circle class="ring" cx="300" cy="265" r="185"/>
+    <g id="arrows"></g>
+
+    <!-- center donut -->
+    <circle class="donut track" cx="300" cy="265" r="70" stroke-dasharray="439.8 439.8"/>
+    <circle class="donut ai" id="aiArc" cx="300" cy="265" r="70" stroke-dasharray="0 439.8"/>
+    <circle class="donut me" id="meArc" cx="300" cy="265" r="70" stroke-dasharray="439.8 439.8"/>
+    <text class="pct" id="pct" x="300" y="268">100%</text>
+    <text class="pctlabel" x="300" y="288">still in my head</text>
+
+    <g class="node" id="n0"><rect x="205" y="50" width="190" height="62" rx="10"/>
+      <text class="t" x="300" y="77">AI writes the code</text><text class="s" x="300" y="97">it's faster, so I let it</text></g>
+    <g class="node" id="n1"><rect x="372" y="328" width="190" height="62" rx="10"/>
+      <text class="t" x="467" y="355">I retain less context</text><text class="s" x="467" y="375">I skim instead of read</text></g>
+    <g class="node" id="n2"><rect x="38" y="328" width="190" height="62" rx="10"/>
+      <text class="t" x="133" y="355">I rely on AI more</text><text class="s" x="133" y="375">I can't dig in without it</text></g>
+
+    <circle class="dot" id="dot" r="9" cx="300" cy="80"/>
+
+    <rect x="212" y="418" width="11" height="11" rx="2" fill="var(--me)"/>
+    <text class="legend" x="229" y="428">my understanding</text>
+    <rect x="352" y="418" width="11" height="11" rx="2" fill="var(--ai)"/>
+    <text class="legend" x="369" y="428">handed to AI</text>
+  </svg>
+  <figcaption class="bar">
+    <span id="caption" aria-live="polite"></span>
+    <button id="toggle" type="button">Pause</button>
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  var CX = 300, CY = 265, R = 185, C = 2 * Math.PI * 70;
+  var LAP_MS = 6500, HOLD_MS = 2600;
+  var levels = [1, 0.78, 0.58, 0.42, 0.30, 0.22];
+  var captions = [
+    "Lap 1: I understand all of it.",
+    "Lap 2: a few helper functions are a mystery.",
+    "Lap 3: I can describe what the code does, not why.",
+    "Lap 4: debugging means asking the AI to explain my own project.",
+    "Lap 5: I'm the reviewer of code I couldn't have written today.",
+    "Lap 6: the loop feeds itself."
+  ];
+  var nodeAngles = [-90, 30, 150];
+  var NS = "http://www.w3.org/2000/svg";
+  var $ = function (id) { return document.getElementById(id); };
+  var dot = $("dot"), nodes = [$("n0"), $("n1"), $("n2")];
+  // ---- theming: ?theme=dark|light, optional color overrides, live postMessage ----
+  var root = document.documentElement, COLOR_KEYS = ["ink", "muted", "line", "surface", "me", "ai"];
+  function applyTheme(t) {
+    if (t === "dark" || t === "light") root.setAttribute("data-theme", t);
+    else root.removeAttribute("data-theme");
+  }
+  function applyColors(c) {
+    COLOR_KEYS.forEach(function (k) {
+      var v = c && c[k];
+      if (typeof v === "string" && /^#?[0-9a-f]{3,8}$/i.test(v)) {
+        root.style.setProperty("--" + k, v.charAt(0) === "#" ? v : "#" + v);
+      } else {
+        root.style.removeProperty("--" + k);
+      }
+    });
+  }
+  var q = new URLSearchParams(location.search), initial = {};
+  COLOR_KEYS.forEach(function (k) { if (q.get(k)) initial[k] = q.get(k); });
+  applyTheme(q.get("theme"));
+  applyColors(initial);
+  window.addEventListener("message", function (e) {
+    var d = e.data;
+    if (d && d.type === "theme") { applyTheme(d.theme); applyColors(d.colors); }
+  });
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function pos(deg) {
+    var a = deg * Math.PI / 180;
+    return [CX + R * Math.cos(a), CY + R * Math.sin(a)];
+  }
+
+  // arrowheads at the midpoint of each arc, pointing clockwise
+  [-30, 90, 210].forEach(function (deg) {
+    var p = pos(deg), t = document.createElementNS(NS, "path");
+    t.setAttribute("d", "M10 0 L-7 -8 L-7 8 Z");
+    t.setAttribute("class", "arrow");
+    t.setAttribute("transform", "translate(" + p[0] + " " + p[1] + ") rotate(" + (deg + 90) + ")");
+    $("arrows").appendChild(t);
+  });
+
+  function setLevel(i) {
+    var v = levels[i], me = C * v, ai = C * (1 - v);
+    $("meArc").style.strokeDasharray = me + " " + C;
+    // AI arc fills the remainder, starting where the amber arc ends
+    var ar = $("aiArc");
+    ar.style.strokeDasharray = ai + " " + C;
+    ar.style.transform = "rotate(" + (-90 + v * 360) + "deg)";
+    $("pct").textContent = Math.round(v * 100) + "%";
+    var cap = $("caption");
+    cap.style.opacity = 0;
+    setTimeout(function () { cap.textContent = captions[i]; cap.style.opacity = 1; }, 250);
+  }
+
+  function highlight(deg) {
+    nodes.forEach(function (n, i) {
+      var d = Math.abs(((deg - nodeAngles[i] + 540) % 360) - 180);
+      n.classList.toggle("on", d < 22);
+    });
+  }
+
+  var lap = 0, start = null, hold = null, paused = false, pausedAt = 0;
+
+  function frame(now) {
+    if (paused) return;
+    if (start === null) start = now;
+    var elapsed = now - start;
+
+    if (hold !== null) {                       // resting after final lap
+      if (now - hold > HOLD_MS) { hold = null; lap = 0; start = now; setLevel(0); }
+      requestAnimationFrame(frame); return;
+    }
+    var t = Math.min(elapsed / LAP_MS, 1);
+    var deg = -90 + t * 360;
+    var p = pos(deg);
+    dot.setAttribute("cx", p[0]); dot.setAttribute("cy", p[1]);
+    highlight(deg);
+
+    if (t >= 1) {
+      lap++;
+      setLevel(lap);
+      start = now;
+      if (lap >= levels.length - 1) { hold = now; }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // controls
+  $("toggle").addEventListener("click", function () {
+    paused = !paused;
+    this.textContent = paused ? "Play" : "Pause";
+    if (!paused) { start = null; requestAnimationFrame(frame); }
+  });
+
+  setLevel(0);
+  if (reduced) {
+    // no motion: show the end state and stop
+    paused = true; $("toggle").style.display = "none";
+    setLevel(levels.length - 1);
+    var p = pos(-90); dot.setAttribute("cx", p[0]); dot.setAttribute("cy", p[1]);
+  } else {
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
