@@ -6,7 +6,7 @@ comments:
 category: 
 ---
 
-Other blogs across the internet that I find interesting. I try to stick with personal blogs with a few exceptions like Art of Manliness which is not a personal blog but is run by a couple.
+Other blogs and sites across the internet that I find interesting. I try to stick with personal, independent sites.
 
 ## Programming/Tech
 
@@ -20,6 +20,7 @@ Other blogs across the internet that I find interesting. I try to stick with per
 - [Dave Morrow - Landscape Photography](https://www.davemorrowphotography.com/)
 - [Colossal](https://www.thisiscolossal.com/)
 - [Steve McCurry](https://www.stevemccurry.com/)
+- [Wes Lang](https://weslang.com/)
 
 ## Fun
 
@@ -30,3 +31,4 @@ Other blogs across the internet that I find interesting. I try to stick with per
 - [The Art of Manliness](https://www.artofmanliness.com/)
 - [Maurycy's blog](https://maurycyz.com/)
 - [DYNOMIGHT](https://dynomight.net/)
+- [NOT-SHIP](https://www.not-ship.com)
