@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Can No Longer Justify Writing Code By Hand</title>
+    <link rel="stylesheet" href="/css/clean.css">
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="RSS Feed">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="bf94dfe7-4588-4670-9be8-95866d7c0879"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="https://jonwhite.me">Jon White's Blog</a></h1>
+        <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+    </header>
+    <br/>
+    <div class="container">
+        <h1>I Can No Longer Justify Writing Code By Hand</h1>
+        <p>2026-10-15</p>
+        <p>Over the course of just over a year the percentage of my workday time spent hand writing code has gone from 90+ to essentially 0.  I did not change jobs.  I’m still being paid to produce the same work.  It’s just that AI does it for me now.  Leveraging AI to write my code in this way drains my soul.  It’s not fulfilling, I no longer get the pleasure of solving problems on my own, and it slowly erodes my skills.  These are all very bad things yet, despite them, I can no longer justify writing code by hand, at least when I’m being paid to produce it.</p>
+<h2>Using AI To Write My Code Is Bad</h2>
+<p>I no longer have intimate knowledge of the code I’m committing.  I review the PRs and get a general understanding of how the code works but that’s not the same thing as writing it myself.   I can’t count how many times there has been a bug reported in production and due to my intimate knowledge of how that feature worked, I instantly thought: “Oh, I know what might be going on there.” Those days are becomming fewer and further between. I often have to turn to AI to diagnose the problem.  This creates a never-ending cycle of relying more and more on AI.   I’m slowly becoming dependent on it which feels, well, <em>gross</em>.</p>
+<p><iframe
+  id="ai-loop"
+  src="/media/assets/ai-dependency-loop_v2.html"
+  title="Diagram: the loop of AI writing my code, me retaining less context, and relying on AI more"
+  loading="lazy"
+  style="width:100%; max-width:640px; aspect-ratio:640/560; border:0; display:block; margin:1.5rem auto;">
+</iframe>
+</p>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var frame = document.getElementById("ai-loop");
+  if (!frame) return; // page has no diagram
+
+  var KEY = "theme"; // <- your localStorage key
+
+  function currentTheme() {
+    var v = localStorage.getItem(KEY);
+    if (v === "dark" || v === "light") return v;
+    // nothing stored yet: fall back to the OS setting
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function sendTheme() {
+    if (frame.contentWindow) {
+      frame.contentWindow.postMessage({ type: "theme", theme: currentTheme() }, "*");
+    }
+  }
+
+  frame.addEventListener("load", sendTheme);
+  sendTheme(); // in case it already loaded
+
+  // same-tab changes: wrap setItem, since "storage" doesn't fire in the tab that wrote
+  var origSet = Storage.prototype.setItem;
+  Storage.prototype.setItem = function (k) {
+    origSet.apply(this, arguments);
+    if (k === KEY) sendTheme();
+  };
+
+  // changes made from other tabs
+  window.addEventListener("storage", function (e) {
+    if (e.key === KEY) sendTheme();
+  });
+});
+</script>
+
+<p>And the problems aren’t just technical in nature. It’s also impacting my mental health.  Coding by hand is best done in a <em>flow state</em> and you’d be hard pressed to find anyone who gets into a flow state while chatting with Claude Code.  When I write my own code I feel more fulfilled and valuable.  And, frankly, it’s <a href="https://www.autodidacts.io/vibecoding-isnt-as-fun-as-writing-code-by-hand/">just way more fun.</a>  A few years back I transitioned from an IC to an Engineering Manager and, despite learning a lot from the experience, I hated it and, when given the opportunity, transitioned back.  Working with AI feels a bit like being forced back into that role: orchestrating and reviewing work instead of building it.</p>
+<p>Then there is the fact that AI makes mistakes.  We’ve all seen it hallucinate things.  Sometimes it introduces “features” I did not ask for, unintentionally breaks things, or misunderstands what I asked for.  Admittedly these concerns are becoming less of a problem as models improve to the point that I don’t see it making any more mistakes than a human engineer would make.</p>
+<h2>Why I Use It Anyway</h2>
+<p>But let’s face facts, AI can do the coding part of my job as well as I can (often better), in a tiny fraction of the time.  It’s <em>way</em> better than me at writing tests, and I’ve even been having it use a browser extension to do some of my manual validation.  If I were to do these things by hand it would take me orders of magnitude longer and I can’t necessarily guarantee that the results would be any better. If my employer is okay with the costs associated with my token usage, choosing not to use it because I don’t like it feels selfish.   But maybe all the time I save by not writing code at work will give me more time for my hobby projects where I get to write the code I <em>want</em> to write?  Just don’t tell my boss…</p>
+<h3>AI Disclosure</h3>
+<ul>
+<li>AI was my editor on this post. All words are mine, it just helped me with structure and some grammatical errors</li>
+<li>AI created that pretty animated diagram (I did make a few minor tweaks <em>by hand!</em>)</li>
+</ul>
+    </div>
+    <br/>
+    <div class="container">
+      <footer>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+            <div class="copyright">&copy; 2026 Jon White</div>
+        </footer>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+    </script>
+</body>
+
+</html>
