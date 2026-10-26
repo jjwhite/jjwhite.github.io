@@ -8,17 +8,29 @@ category:
 ---
 
 # Notes
-The thickest string on the Guitar is E and the thinnest is also E
-(E)ddie
-(A)te
-(D)ynamite
-(G)ood
-(B)ye
-(E)ddie
+Each string on the guitar corresponds to a specific note. For this post we're going to assume _standard tuning_ which means that the strings are tuned in this order:
 
-Playing any string open plays that strings note.  Holding down the string on each fret goes by the following pattern:
+E(thickest string)
+A
+D
+G
+B
+E(thinest string)
+
+There is a good pneumonic device to help remember this order: *E*ddie *A*te *D*ynamite *G*ood *B*ye *E*ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
 
 A, A#, B, C, C#, D, D#, E, F, F#, G, G#, back to A
+
+It doesn't matter what note you start on, you just follow the pattern from the point.  The pattern is circular when you reach the starting point, you just keep going around.
+
+<iframe
+  id="notes-loop"
+  src="/media/assets/note-circle.html"
+  title="Basic Guitar"
+  loading="lazy"
+  style="width:100%; aspect-ratio:2/1; border:0; display:block; margin:1.0em auto;">
+</iframe>
+
 
 Notice the "gaps" between B and C, E and F.  There are no #'s between them.  This will become important later.
 
@@ -209,5 +221,39 @@ A few things to notice here.
 
 _[My original understanding](link to week 1) was that chords are built from notes of a scale.  But that's not necessarily true.  It can be true when you're talking about the diatonic scales in that a G major chord will only contain notes in teh G Major scale and a G minor chord will only contain notes in the G minor scale but that is sort of just a coincidence, not a rule._
 
+## Roman Numeral Notation
+
+If you’re looking at any given scale, a chord can be made by using each note in the scale as the root.  These are usually notated with roman numerals like this:
+
+I, II, III, IV, V, VII, VIII
+
+For a given scale you would use uppercase and lowercase to indicate whether it’s a major or minor chord.
+
+This happens because you build each chord by taking the root + 3rd + 5th.  Depending on where those notes land it could be a major or a minor chord.  This is due to the fact that the fretboard on a guitar is not uniform as we talked about [a couple of weeks ago](/posts/2026-10-04-what-i-learned-this-week.html).  
+
+As an example let’s stay in the G Major Key.  That scale is: G-A-B-C-D-E-F#
+
+So, the chord for A is: A(root), C(3rd), E(5th)
+
+Now, if we look at what we learned [last week](.posts/2026-10-11-what-i-learned-this-week.html):
+
+- *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
+- *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
+
+if we start at A on the fretboard and move to the next note in the chord (C) that is only 3 frets away so it’s a MINOR 3rd instead of a major so the chord is minor which is why for G Major Key the notation is:
+
+I, ii, iii, IV, V, vi, vii°
+
+- I (G major): G – B – D (Major)
+- ii (A minor): A – C – E (Minor)
+- iii (B minor): B – D – F♯ (Minor)
+- IV (C major): C – E – G (Major)
+- V (D major): D – F♯ – A (Major)
+- vi (E minor): E – G – B (Minor)
+- vii° (F♯ diminished): F♯ – A – C (Diminished)
+
+# Next Time
+- Chord Progressions
+- Borrowed Chords
 
 
