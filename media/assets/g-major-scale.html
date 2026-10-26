@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fretboard animation</title>
+<style>
+  :root { --text: #1f2933; --bg: #ffffff; }
+  @media (prefers-color-scheme: dark) { :root { --text: #e6e2da; --bg: #16191d; } }
+  body { margin: 0; padding: 2rem 1rem; background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; }
+  h2 { text-align: center; font-weight: 600; margin: 3rem 0 1rem; }
+
+  /* ---- Fretboard component ---- */
+  .fretboard {
+    --fb-wood: #2b1d17;
+    --fb-fret: #b9bec5;
+    --fb-string: #d9d3c5;
+    --fb-inlay: rgba(255, 255, 255, .12);
+    --fb-dot: #f2a93b;
+    --fb-dot-ink: #1b1209;
+    max-width: 780px; margin: 0 auto; cursor: pointer; user-select: none;
+  }
+  .fb-label { height: 5rem; text-align: center; transition: opacity .18s; }
+  .fb-label strong { display: block; font-size: 2.8rem; line-height: 1.15; }
+  .fb-label small { display: block; opacity: .65; font-size: .95rem; min-height: 1.2em; }
+  .fb-label.swap { opacity: 0; }
+
+  .fb-board, .fb-nums { margin-left: 64px; position: relative; }  /* left gutter holds string names + open/muted markers */
+  .fb-name {
+    position: absolute; left: -46px; width: 24px; height: 24px; margin: -12px 0 0 -12px;
+    text-align: center; font: 600 .9rem/24px system-ui, sans-serif; opacity: .7;
+  }
+  .fb-board { background: var(--fb-wood); border-radius: 0 4px 4px 0; }
+  .fb-fret { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--fb-fret); }
+  .fb-fret.nut { width: 7px; margin-left: -7px; background: #e8e3d6; }
+  .fb-string { position: absolute; left: 0; right: 0; background: var(--fb-string); transform: translateY(-50%); }
+  .fb-inlay { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--fb-inlay); }
+
+  .fb-dot {
+    position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
+    background: var(--fb-dot); box-shadow: 0 0 0 4px rgba(242, 169, 59, .25);
+    opacity: 0; transform: scale(.4);
+    transition: left .45s cubic-bezier(.3, .7, .2, 1), top .45s cubic-bezier(.3, .7, .2, 1),
+                opacity .3s, transform .3s, background .3s, box-shadow .3s;
+  }
+  .fb-dot.on { opacity: 1; transform: scale(1); }
+  .fb-dot.open { background: transparent; box-shadow: inset 0 0 0 3px var(--fb-dot); }
+
+  .fb-x {
+    position: absolute; left: -18px; width: 24px; height: 24px; margin: -12px 0 0 -12px;
+    text-align: center; font: 700 1.5rem/24px system-ui, sans-serif; color: var(--fb-dot);
+    opacity: 0; transition: opacity .3s;
+  }
+  .fb-x.on { opacity: 1; }
+
+  .fb-nums { height: 1.8rem; }
+  .fb-num { position: absolute; top: .4rem; transform: translateX(-50%); font-size: .75rem; opacity: .6; }
+
+  @media (prefers-reduced-motion: reduce) { .fb-dot, .fb-label { transition-duration: .01s; } }
+</style>
+</head>
+<body>
+
+<h2>G Major</h2>
+<div id="g-major"></div>
+
+<h2>G Minor</h2>
+<div id="g-minor"></div>
+
+<!-- <div id="a-string"></div> -->
+<!-- <h2>A chord progression</h2>
+<div id="chords"></div> -->
+
+<script>
+/* ---------- Music helpers ---------- */
+const NOTES_SHARP = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const NOTES_FLAT  = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+const TUNING = [4, 9, 2, 7, 11, 4];   // low E, A, D, G, B, high e as semitones above C
+const SCALES = {
+  major:           [0, 2, 4, 5, 7, 9, 11],
+  minor:           [0, 2, 3, 5, 7, 8, 10],
+  majorPentatonic: [0, 2, 4, 7, 9],
+  minorPentatonic: [0, 3, 5, 7, 10],
+  blues:           [0, 3, 5, 6, 7, 10]
+};
+
+/* Walk up one string from the root's first fret, one step per scale note. */
+function scaleSteps({ root, scale = 'major', string = 0, frets = 15, flats = false }) {
+  const names = flats ? NOTES_FLAT : NOTES_SHARP;
+  let r = NOTES_SHARP.indexOf(root);
+  if (r < 0) r = NOTES_FLAT.indexOf(root);
+  const open = TUNING[string], steps = [];
+  for (let f = (r - open + 12) % 12; f <= frets; f++) {
+    const n = (open + f) % 12;
+    if (SCALES[scale].includes((n - r + 12) % 12)) {
+      steps.push({ label: names[n], sub: f === 0 ? 'open string' : 'fret ' + f, dots: [{ string, fret: f }] });
+    }
+  }
+  return steps;
+}
+
+/* Every note on one string, open string up to `frets` (a chromatic walk). */
+function stringSteps({ string = 0, frets = 12, flats = false }) {
+  const names = flats ? NOTES_FLAT : NOTES_SHARP, steps = [];
+  for (let f = 0; f <= frets; f++) {
+    steps.push({ label: names[(TUNING[string] + f) % 12], sub: f === 0 ? 'open string' : 'fret ' + f, dots: [{ string, fret: f }] });
+  }
+  return steps;
+}
+
+const STRING_NAMES = ['E', 'A', 'D', 'G', 'B', 'E'];   // low to high
+
+/* A chord step from six fret numbers, low E first; null = muted. */
+const chord = (label, frets, sub = '') => ({
+  label, sub,
+  dots:  frets.flatMap((fret, string) => fret == null ? [] : [{ string, fret }]),
+  muted: frets.flatMap((fret, string) => fret == null ? [string] : [])
+});
+
+/* ---------- The animation ----------
+   A step is { label, sub?, dots: [{ string, fret }] }
+   string: 0 = low E ... 5 = high e.  fret: 0 = open string.            */
+function fretboard(el, opts) {
+  const o = { frets: 15, strings: [0, 1, 2, 3, 4, 5], interval: 1000, ...opts };
+  const rows = [...o.strings].sort((a, b) => b - a);          // high strings on top
+  const GAP = 30, PAD = 26, H = (rows.length - 1) * GAP + PAD * 2;
+  const max = 1 - 2 ** (-o.frets / 12);
+  const pos = n => (1 - 2 ** (-n / 12)) / max * 100;           // realistic fret spacing, as %
+  const mid = n => (pos(n - 1) + pos(n)) / 2;
+
+  el.classList.add('fretboard');
+  el.title = 'Click to pause / play';
+  el.innerHTML = '<div class="fb-label"><strong></strong><small></small></div>' +
+                 `<div class="fb-board" style="height:${H}px"></div><div class="fb-nums"></div>`;
+  const label = el.querySelector('.fb-label'), big = label.querySelector('strong'),
+        small = label.querySelector('small'), board = el.querySelector('.fb-board'),
+        nums = el.querySelector('.fb-nums');
+  const mk = (parent, cls, css = '', txt = '') => {
+    const d = document.createElement('div');
+    d.className = cls; d.style.cssText = css; d.textContent = txt;
+    parent.appendChild(d); return d;
+  };
+
+  for (let n = 0; n <= o.frets; n++) mk(board, n ? 'fb-fret' : 'fb-fret nut', `left:${pos(n)}%`);
+  rows.forEach((s, r) => mk(board, 'fb-string', `top:${PAD + r * GAP}px;height:${3 - s * 0.4}px`));
+  if (o.labels !== false) rows.forEach((s, r) => mk(board, 'fb-name', `top:${PAD + r * GAP}px`, STRING_NAMES[s]));
+  [3, 5, 7, 9, 12, 15, 17].filter(n => n <= o.frets).forEach(n =>
+    (n === 12 ? [30, 70] : [50]).forEach(t => mk(board, 'fb-inlay', `left:${mid(n)}%;top:${t}%`)));
+  for (let n = 1; n <= o.frets; n++) mk(nums, 'fb-num', `left:${mid(n)}%`, n);
+
+  /* One "x" marker per string, faded in for muted strings. */
+  const xs = {};
+  rows.forEach((s, r) => { xs[s] = mk(board, 'fb-x', `top:${PAD + r * GAP}px`, '\u00d7'); });
+
+  /* Dots are pooled and reused, so a dot glides from one position to the next. */
+  const pool = [];
+  function show(step) {
+    rows.forEach(s => xs[s].classList.toggle('on', (step.muted || []).includes(s)));
+    const ds = step.dots.filter(d => rows.includes(d.string));
+    ds.forEach((d, k) => {
+      const dot = pool[k] || (pool[k] = mk(board, 'fb-dot'));
+      dot.style.left = d.fret ? mid(d.fret) + '%' : '-18px';
+      dot.style.top = PAD + rows.indexOf(d.string) * GAP + 'px';
+      dot.classList.toggle('open', !d.fret);
+      void dot.offsetWidth;                                    // commit start position before fading in
+      dot.classList.add('on');
+    });
+    pool.slice(ds.length).forEach(dot => dot.classList.remove('on'));
+    label.classList.add('swap');
+    setTimeout(() => { big.textContent = step.label; small.textContent = step.sub || ''; label.classList.remove('swap'); }, 180);
+  }
+
+  let i = 0, timer = null;
+  const tick = () => { show(o.steps[i]); i = (i + 1) % o.steps.length; };
+  const play = () => { if (!timer) { tick(); timer = setInterval(tick, o.interval); } };
+  const pause = () => { clearInterval(timer); timer = null; };
+
+  el.addEventListener('click', () => timer ? pause() : play());
+  new IntersectionObserver(e => e[0].isIntersecting ? play() : pause()).observe(el);  // only runs while visible
+  return { play, pause };
+}
+
+/* ---------- Examples ---------- */
+fretboard(document.getElementById('g-major'), {
+  steps: scaleSteps({ root: 'G', scale: 'major', string: 0, frets: 15 }),
+  interval: 1200
+});
+
+fretboard(document.getElementById('g-minor'), {
+  steps: scaleSteps({ root: 'G', scale: 'minor', string: 0, frets: 15 }),
+  interval: 1200
+});
+
+// fretboard(document.getElementById('a-string'), {
+//   steps: stringSteps({ string: 1, frets: 12 }),   // 0 = low E, 1 = A, 2 = D, 3 = G, 4 = B, 5 = high e
+//   frets: 12,
+//   interval: 1200
+// });
+
+// fretboard(document.getElementById('chords'), {
+//   steps: [
+//     chord('C',  [null, 3, 2, 0, 1, 0]),
+//     chord('G',  [3, 2, 0, 0, 0, 3]),
+//     chord('Am', [null, 0, 2, 2, 1, 0]),
+//     chord('F',  [1, 3, 3, 2, 1, 1])
+//   ],
+//   frets: 5,
+//   interval: 1500
+//});
+</script>
+</body>
+</html>

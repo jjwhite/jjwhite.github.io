@@ -15,7 +15,7 @@ Every Sunday I write about things I learned the previous week. I try to do at le
 
 ### Borrowed Chords
 
-[Last week](./2026-10-11-what-i-learned-this-week.md) I talked about how minor keys follow a different pattern than major keys:
+[Last week](/posts/2026-10-11-what-i-learned-this-week.html) I talked about how minor keys follow a different pattern than major keys:
 
 Major: W-W-H-W-W-W-H
 
@@ -35,13 +35,13 @@ I, II, III, IV, V, VII, VIII
 
 For a given scale you would use uppercase and lowercase to indicate whether it’s a major or minor chord.
 
-This happens because you build each chord by taking the root + 3rd + 5th.  Depending on where those notes land it could be a major or a minor chord.  This is due to the fact that the fretboard on a guitar is not uniform as we talked about [a couple of weeks ago](./2026-10-04-what-i-learned-this-week.md).  
+This happens because you build each chord by taking the root + 3rd + 5th.  Depending on where those notes land it could be a major or a minor chord.  This is due to the fact that the fretboard on a guitar is not uniform as we talked about [a couple of weeks ago](/posts/2026-10-04-what-i-learned-this-week.html).  
 
 As an example let’s stay in the G Major Key.  That scale is: G-A-B-C-D-E-F#
 
 So, the chord for A is: A(root), C(3rd), E(5th)
 
-Now, if we look at what we learned [last week](./2026-10-11-what-i-learned-this-week.md):
+Now, if we look at what we learned [last week](.posts/2026-10-11-what-i-learned-this-week.html):
 
 - *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
 - *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
