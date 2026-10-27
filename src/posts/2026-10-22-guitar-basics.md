@@ -7,29 +7,42 @@ comments: false
 category: 
 ---
 
-_You can pause and restart any animation by simply clicking on it_
+I'm currently attempting to teach myself how to play the guitar.  As part of that process I've been trying to learn about music theory.  In this article I will walk through the basics of music theory as it relates to guitar.  I will be using my own words as I understand things.  As a result, I'm not promising that this article covers _everything_.  There are likely some gaps and assumptions. I'll try to link out to additional resources when I know I'm not covering something specific. My goals are threefold:
+
+1. By taking the time to write it out I hope to codifiy the knowledge in my brain
+2. This article can act as a reference for me to come back to when I forget things
+3. Hopefully someone else gets something else out of it
+
 
 # Notes
-Each string on the guitar corresponds to a specific note. For this post we're going to assume _standard tuning_ which means that the strings are tuned in this order:
+Each string on the guitar corresponds to a specific note. For this post we're going to assume [standard tuning](https://en.wikipedia.org/wiki/Guitar_tunings#Standard) which means that the strings are tuned in this order:
 
-E(thickest string)
-A
-D
-G
-B
+E(thickest string)  
+A  
+D  
+G  
+B  
 E(thinest string)
 
-There is a good mnemonic device to help remember this order: **E**ddie **A**te **D**ynamite **G**ood **B**ye **E**ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  Each fret corresponds to a _semitone_ also known as a _half step._ So, moving up one fret is a half-step and 2 frets is a full-step. As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
+There is a good mnemonic device to help remember this order: **E**ddie **A**te **D**ynamite **G**ood **B**ye **E**ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  Each fret corresponds to a [semitone](https://en.wikipedia.org/wiki/Semitone) also known as a _half step._ So, moving up one fret is a half-step and 2 frets is a full-step. As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
 
 A -> A# -> B -> C -> C# -> D -> D# -> E -> F -> F# -> G -> G# -> A
 
-It doesn't matter what note you start on, you just follow the pattern from the point.  The pattern is circular when you reach the starting point, you just keep going around.
+It doesn't matter what note you start on, you just follow the pattern from the point.  The pattern is circular, when you reach the starting point, you just keep going around. This is illustrated in the animation below. _Note: all animations in this article can be paused and restarted by simply clicking on them_
 
+<figure>
 <div id="circle"></div>
+<figcaption>Semitones are circular</figcaption>
+</figure>
+
 
 Here's how that looks on the "A" string of the guitar:
 
+<figure>
 <div id="a-string"></div>
+<figcaption>Playing each fret on the "A" string of the guitar</figcaption>
+</figure>
+
 
 # Scales
 
@@ -51,9 +64,7 @@ Here's what each G scale looks like on the low E string
 <h2>G Minor</h2>
 <div id="g-minor"></div>
 
-What do you notice?  
-
-Let's write out the notes:
+If we write out the notes for each scale we can see that there is quite a bit of overlap:
 
 G Major: G A B  C D E  F#
 G Minor: G A A# C D D# F
@@ -135,7 +146,7 @@ The gaps between notes are called _intervals_ and they are built from a _quality
 
 # Chords
 
-Now that we understand notes and intervals we can use those building blocks to start looking at _chords_. Chords are built using note combinations called _triads_. A _triad_ is a three note combination that makes up chords.  They are based on the root note and then stacked 3rds.
+Now that we understand notes and intervals we can use those building blocks to start looking at _chords_. Chords are built using note combinations called _triads_. A _triad_ is a three note combination that makes up chords.  They are based on the root note plus 2 additional notes that can be found using different intervals.
 
 - *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
 - *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
@@ -144,9 +155,7 @@ Now that we understand notes and intervals we can use those building blocks to s
 - *Diminished Chords*: Root Note + Minor 3rd + Lowered 5th (Frets: 0, 3, 6)
 - *Augmented Chords*: Root Note + Major 3rd + Raised 5th (Frets: 0, 4, 8)
 
-If you had really long fingers you could play chords on a single string by playing the root note and then stretching your exceptional fingers to reach down the fretboard based on the list above.  Of course, we don't play chords that way so let's explore some real chords and the notes that make them.
-
-We'll start with an easy one: E Major
+Now, since you can't play multiple notes on the same string, chords require us to use multiple strings to get all the necessary notes. Depending on the chord, we may have to hold down multiple strings at the same time.  Let's see what that looks like in practice. We'll start with an easy one: E Major (or just E. The _Major_ is implied)
 
 <!-- E major: 022100 -->
 <div>
@@ -162,17 +171,17 @@ We'll start with an easy one: E Major
   </div>
 </div>
 
-if we look at each string, these are the notes:
+The image above is called a _chord diagram_. If we look at each string and which frets are being held down we can see that the notes in the E chord are:
 
 E(open), B(2nd fret), E(2nd fret), G#(1st fret), B(open), E(open)
 
 Now, let's compare that to the notes in the E major scale.  Remember, we can build a major diatonic scale with the pattern: W-W-H-W-W-W-H.  So, for E major that would look like this:
 
-_E_, F#, _G#_, A, _B_, C#, D#
+**E**, F#, **G#**, A, **B**, C#, D#
 
-You can see that all the notes of the chord exist in the major scale.
+I've bolded the notes of the E major chord and you can see they all exist in the major scale.
 
-The same is true of E Minor:
+The same is true of E minor:
 
 <div>
   <!-- E minor: 022000 -->
@@ -192,7 +201,7 @@ Notes: E(open), B(2nd fret), E(2nd fret), G(open), B(open), E(open)
 
 And now the E minor scale (W-H-W-W-H-W-W)
 
-E, F#, G, A, B, C, D
+**E**, F#, **G**, A, **B**, C, D
 
 As with the major chord, the notes of the minor chord all exist in the E minor scale.
 
