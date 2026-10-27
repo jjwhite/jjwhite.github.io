@@ -7,6 +7,8 @@ comments: false
 category: 
 ---
 
+_You can pause and restart any animation by simply clicking on it_
+
 # Notes
 Each string on the guitar corresponds to a specific note. For this post we're going to assume _standard tuning_ which means that the strings are tuned in this order:
 
@@ -17,36 +19,23 @@ G
 B
 E(thinest string)
 
-There is a good pneumonic device to help remember this order: *E*ddie *A*te *D*ynamite *G*ood *B*ye *E*ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
+There is a good mnemonic device to help remember this order: **E**ddie **A**te **D**ynamite **G**ood **B**ye **E**ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  Each fret corresponds to a _semitone_ also known as a _half step._ So, moving up one fret is a half-step and 2 frets is a full-step. As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
 
-A, A#, B, C, C#, D, D#, E, F, F#, G, G#, back to A
+A -> A# -> B -> C -> C# -> D -> D# -> E -> F -> F# -> G -> G# -> A
 
 It doesn't matter what note you start on, you just follow the pattern from the point.  The pattern is circular when you reach the starting point, you just keep going around.
 
-<iframe
-  id="notes-loop"
-  src="/media/assets/note-circle.html"
-  title="Basic Guitar"
-  loading="lazy"
-  style="width:100%; aspect-ratio:2/1; border:0; display:block; margin:1.0em auto;">
-</iframe>
+<div id="circle"></div>
 
+Here's how that looks on the "A" string of the guitar:
 
-Notice the "gaps" between B and C, E and F.  There are no #'s between them.  This will become important later.
-
-<iframe
-  id="notes-loop"
-  src="/media/assets/guitar-notes.html"
-  title="Basic Guitar"
-  loading="lazy"
-  style="width:100%; aspect-ratio:2/1; border:0; display:block; margin:1.0em auto;">
-</iframe>
+<div id="a-string"></div>
 
 # Scales
 
-There are a multitude of different scales but when we talk about basic major and minor scales we're really referring to the [diatonic scale](https://en.wikipedia.org/wiki/Heptatonic_scale#Diatonic_scale) which is what we're going to talk about here. 
+There are many different types of scales but for the purposes of this article, we'll be discussing the minor and major scales which are both [diatonic scales](https://en.wikipedia.org/wiki/Heptatonic_scale#Diatonic_scale).
 
-Scales are made up of whole and half tones (also referred to as _steps_).  On a guitar, each fret is a half tone.  So, 2 frets for a whole tone. If we use the letter "W" to represent a _whole_ step and "H" to represent a _half_ step, we can describe the major and minor diatonic scales as:
+Scales are made up of whole and half steps.  As discussed above, on a guitar, each fret is a half step.  So, 2 frets for a whole step. If we use the letter "W" to represent a _whole_ step and "H" to represent a _half_ step, we can describe the major and minor diatonic scales as:
 
 Major: W-W-H-W-W-W-H
 
@@ -56,13 +45,11 @@ A scale is named by its root note.  So, a G Major scale starts on G and follows 
 
 Here's what each G scale looks like on the low E string
 
-<iframe
-  id="notes-loop"
-  src="/media/assets/g-major-scale.html"
-  title="Basic Guitar"
-  loading="lazy"
-  style="width:100%; aspect-ratio:2/2.5; border:0; display:block; margin:1.0em auto;">
-</iframe>
+<h2>G Major</h2>
+<div id="g-major"></div>
+
+<h2>G Minor</h2>
+<div id="g-minor"></div>
 
 What do you notice?  
 
@@ -71,17 +58,17 @@ Let's write out the notes:
 G Major: G A B  C D E  F#
 G Minor: G A A# C D D# F
 
-*** Do i comment on the overlap here?  Does that matter? ***
+You can see that they share many notes with the only differences being A# instead of B, D# instead of E, and F instead of F#.
 
 # Intervals
 
-The gaps between notes are called _intervals_ and they are built from a _quality_ and a _number_. 
+The gaps between notes are called _intervals_ and they are built from a _quality_ and a _number_. Examples are: Major(quality) 2nd(number) and Perfect(quality) 5th(number). 
 
 <table>
 <tr>
 <th>Interval</th>
-<th>No. of Semiphones</th>
-<th>Root of G</th>
+<th>No. of Semitones</th>
+<th>Note in Root of G</th>
 </tr>
 <tr>
 <td>Minor 2nd</td>
@@ -146,13 +133,9 @@ The gaps between notes are called _intervals_ and they are built from a _quality
 </table>
 
 
-This takes us to:
-
 # Chords
 
-They are built using _triads_.
-
-A _triad_ is a three note combination that makes up chords.  They are based on the root note and then stacked 3rds.
+Now that we understand notes and intervals we can use those building blocks to start looking at _chords_. Chords are built using note combinations called _triads_. A _triad_ is a three note combination that makes up chords.  They are based on the root note and then stacked 3rds.
 
 - *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
 - *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
@@ -252,8 +235,43 @@ I, ii, iii, IV, V, vi, vii°
 - vi (E minor): E – G – B (Minor)
 - vii° (F♯ diminished): F♯ – A – C (Diminished)
 
+<div id="chords"></div>
+
 # Next Time
 - Chord Progressions
 - Borrowed Chords
 
 
+<link rel="stylesheet" href="/css/guitar.css">
+<script src="/js/guitar.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+            noteCircle(document.getElementById('circle'), { string: 0, fret: 3 });
+            fretboard(document.getElementById('a-string'), {
+              steps: stringSteps({ string: 1, frets: 12 }),   
+              frets: 12,
+              interval: 1200
+            });
+            fretboard(document.getElementById('g-major'), {
+              steps: scaleSteps({ root: 'G', scale: 'major', string: 0, frets: 15 }),
+              interval: 1200
+            });
+            fretboard(document.getElementById('g-minor'), {
+              steps: scaleSteps({ root: 'G', scale: 'minor', string: 0, frets: 15 }),
+              interval: 1200
+            });
+            fretboard(document.getElementById('chords'), {
+              steps: [
+                chord('G',  [3, 2, 0, 0, 0, 3]),
+                chord('Am', [null, 0, 2, 2, 1, 0]),
+                chord('Bm', [null, 2, 4, 4, 3, 2], { barre: { fret: 2, from: 1, to: 5 } }),
+                chord('C',  [null, 3, 2, 0, 1, 0]),
+                chord('D',  [null, null, 0, 2, 3, 2]),
+                chord ('Em',[0, 2, 2, 0, 0, 0]),
+                chord ('F# diminished', [null, null, 4, 2, 1, 2])
+              ],
+              frets: 5,
+              interval: 2000
+            });
+  });
+</script>

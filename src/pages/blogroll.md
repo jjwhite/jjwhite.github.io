@@ -25,6 +25,7 @@ Other blogs and sites across the internet that I find interesting. I try to stic
 ## Fun
 
 - [Neal.fun](https://neal.fun/)
+- [Bartosz Ciechanowski](https://ciechanow.ski/)
 
 ## Misc
 

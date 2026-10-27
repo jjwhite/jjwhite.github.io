@@ -1,0 +1,77 @@
+ /* ---- Fretboard component ---- */
+  .fretboard {
+    --fb-wood: #2b1d17;
+    --fb-fret: #b9bec5;
+    --fb-string: #d9d3c5;
+    --fb-inlay: rgba(255, 255, 255, .12);
+    --fb-dot: #f2a93b;
+    --fb-dot-ink: #1b1209;
+    max-width: 780px; margin: 0 auto; cursor: pointer; user-select: none;
+  }
+  .fb-label { height: 5rem; text-align: center; transition: opacity .18s; }
+  .fb-label strong { display: block; font-size: 2.8rem; line-height: 1.15; }
+  .fb-label small { display: block; opacity: .65; font-size: .95rem; min-height: 1.2em; }
+  .fb-label.swap { opacity: 0; }
+
+  .fb-board, .fb-nums { margin-left: 64px; position: relative; }  /* left gutter holds string names + open/muted markers */
+  .fb-name {
+    position: absolute; left: -46px; width: 24px; height: 24px; margin: -12px 0 0 -12px;
+    text-align: center; font: 600 .9rem/24px system-ui, sans-serif; opacity: .7;
+  }
+  .fb-board { background: var(--fb-wood); border-radius: 0 4px 4px 0; }
+  .fb-fret { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--fb-fret); }
+  .fb-fret.nut { width: 7px; margin-left: -7px; background: #e8e3d6; }
+  .fb-string { position: absolute; left: 0; right: 0; background: var(--fb-string); transform: translateY(-50%); }
+  .fb-inlay { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--fb-inlay); }
+
+  .fb-dot {
+    position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
+    background: var(--fb-dot); box-shadow: 0 0 0 4px rgba(242, 169, 59, .25);
+    opacity: 0; transform: scale(.4);
+    transition: left .45s cubic-bezier(.3, .7, .2, 1), top .45s cubic-bezier(.3, .7, .2, 1),
+                opacity .3s, transform .3s, background .3s, box-shadow .3s;
+  }
+  .fb-dot.on { opacity: 1; transform: scale(1); }
+  .fb-dot.open { background: transparent; box-shadow: inset 0 0 0 3px var(--fb-dot); }
+
+  .fb-x {
+    position: absolute; left: -18px; width: 24px; height: 24px; margin: -12px 0 0 -12px;
+    text-align: center; font: 700 1.5rem/24px system-ui, sans-serif; color: var(--fb-dot);
+    opacity: 0; transition: opacity .3s;
+  }
+  .fb-x.on { opacity: 1; }
+
+  .fb-nums { height: 1.8rem; }
+  .fb-num { position: absolute; top: .4rem; transform: translateX(-50%); font-size: .75rem; opacity: .6; }
+
+  /* Barre: a vertical pill covering several strings at one fret */
+    .fb-barre {
+    position: absolute; width: 24px; margin: -12px 0 0 -12px; border-radius: 12px;
+    background: var(--fb-dot); box-shadow: 0 0 0 4px rgba(242, 169, 59, .25); opacity: 0;
+    transition: left .45s cubic-bezier(.3, .7, .2, 1), top .45s cubic-bezier(.3, .7, .2, 1),
+                height .45s cubic-bezier(.3, .7, .2, 1), opacity .3s;
+    }
+    .fb-barre.on { opacity: 1; }
+
+  /* ---- Note circle component ---- */
+  .note-circle {
+    --fb-dot: #f2a93b; --fb-dot-ink: #1b1209;
+    position: relative; max-width: 420px; margin: 0 auto; cursor: pointer; user-select: none;
+  }
+  .note-circle svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .nc-ring { fill: none; stroke: currentColor; stroke-opacity: .15; stroke-width: 2; }
+  .nc-node circle { fill: none; stroke: currentColor; stroke-opacity: .35; stroke-width: 2; transition: fill .3s, stroke .3s, stroke-opacity .3s; }
+  .nc-node text { fill: currentColor; font: 600 15px system-ui, sans-serif; text-anchor: middle; transition: fill .3s; }
+  .nc-node.out { opacity: .3; }
+  .nc-node.seen circle { fill: var(--fb-dot); stroke: var(--fb-dot); stroke-opacity: 1; transition-delay: .3s; }
+  .nc-node.seen text { fill: var(--fb-dot-ink); transition-delay: .3s; }
+  .nc-node.pulse circle { animation: nc-pulse .9s ease-out 2; }
+  @keyframes nc-pulse { 50% { stroke-width: 10; stroke-opacity: .5; } }
+  .nc-seg { fill: none; stroke: var(--fb-dot); stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset .45s ease; }
+  .nc-marker { transform-box: view-box; transform-origin: 200px 200px; transition: transform .45s cubic-bezier(.3, .7, .2, 1); }
+  .nc-marker circle { fill: none; stroke: var(--fb-dot); stroke-width: 3; }
+  .nc-center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; pointer-events: none; }
+  .nc-center strong { font-size: 3.2rem; line-height: 1.1; }
+  .nc-center small { display: block; max-width: 11rem; min-height: 2.6em; opacity: .7; font-size: .9rem; }
+
+  @media (prefers-reduced-motion: reduce) { .fb-dot, .fb-label, .fb-barre, .nc-marker, .nc-seg { transition-duration: .01s; } }
