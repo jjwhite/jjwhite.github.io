@@ -12,7 +12,12 @@ I'm a father of 3 residing in the United States.  My day job is as a Staff Softw
 - disc golf
 - D&D
 - music (both listening and playing)
+- photography
 - lifting heavy circles
+
+
+## Contact
+If you'd like to get in touch, you can find me on [Bluesky](https://bsky.app/profile/jjwhite01.bsky.social) or [Mastodon](https://mastodon.world/@jonwhite)
 
 ---
 

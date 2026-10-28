@@ -461,6 +461,14 @@ button.theme-toggle{
   }
 }
 
+/* AI Disclosure */
+div#ai-disclosure{
+  padding: 25px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  margin-top: 5.0em;
+}
+
 /* Guitar Chords */
 
 .chords {
