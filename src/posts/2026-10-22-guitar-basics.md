@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "An Illustrated Guide to Music Theory Basics on Guitar"
-date: 2026-10-22
+date: 2026-10-28
 tags: 
 comments: false
 category: 
@@ -9,7 +9,7 @@ category:
 
 I'm currently attempting to teach myself how to play the guitar.  As part of that process I've been trying to learn about music theory.  In this article I will walk through the basics of music theory as it relates to guitar.  I will be using my own words as I understand things.  As a result, I'm not promising that this article covers _everything_.  There are likely some gaps and assumptions. I'll try to link out to additional resources when I know I'm not covering something specific. My goals are threefold:
 
-1. By taking the time to write it out I hope to codifiy the knowledge in my brain
+1. By taking the time to write it out I hope to codify the knowledge in my brain
 2. This article can act as a reference for me to come back to when I forget things
 3. Hopefully someone else gets something else out of it
 
@@ -24,11 +24,17 @@ G
 B  
 E(thinest string)
 
-There is a good mnemonic device to help remember this order: **E**ddie **A**te **D**ynamite **G**ood **B**ye **E**ddie. Playing any string open plays that strings note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  Each fret corresponds to a [semitone](https://en.wikipedia.org/wiki/Semitone) also known as a _half step._ So, moving up one fret is a half-step and 2 frets is a full-step. As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
+There is a good mnemonic device to help remember this order: 
+
+**_E_**ddie **_A_**te **_D_**ynamite **_G_**ood **_B_**ye **_E_**ddie. 
+
+Playing any string open plays that string's note.  In order to play different notes you can press down the string in the gaps on the guitar neck. These are called _frets_.  Each fret corresponds to a [semitone](https://en.wikipedia.org/wiki/Semitone) also known as a _half step._ So, moving up one fret is a half-step and 2 frets is a full-step. As you move up the neck of the guitar, holding down each fret, the notes you play when strumming the string follow a specific pattern:
 
 A -> A# -> B -> C -> C# -> D -> D# -> E -> F -> F# -> G -> G# -> A
 
-It doesn't matter what note you start on, you just follow the pattern from the point.  The pattern is circular, when you reach the starting point, you just keep going around. This is illustrated in the animation below. _Note: all animations in this article can be paused and restarted by simply clicking on them_
+It doesn't matter what note you start on, you just follow the pattern from that point.  The pattern is circular, when you reach the starting point, you just keep going around. This is illustrated in the animation below. 
+
+_Note: all animations in this article can be paused and restarted by simply clicking on them_
 
 <figure>
 <div id="circle"></div>
@@ -66,7 +72,7 @@ Here's what each G scale looks like on the low E string
 
 If we write out the notes for each scale we can see that there is quite a bit of overlap:
 
-G Major: G A B  C D E  F#
+G Major: G A B  C D E  F#  
 G Minor: G A A# C D D# F
 
 You can see that they share many notes with the only differences being A# instead of B, D# instead of E, and F instead of F#.
@@ -146,14 +152,14 @@ The gaps between notes are called _intervals_ and they are built from a _quality
 
 # Chords
 
-Now that we understand notes and intervals we can use those building blocks to start looking at _chords_. Chords are built using note combinations called _triads_. A _triad_ is a three note combination that makes up chords.  They are based on the root note plus 2 additional notes that can be found using different intervals.
+Now that we understand notes and intervals we can use those building blocks to start looking at _chords_. The simple beginner chords are built using note combinations called _triads_. A _triad_ is a three note combination that makes up chords.  They are based on the root note plus 2 additional notes that can be found using different intervals.
 
-- *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
-- *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
-- *Sus2 Chords*: Root Note + Major 2nd + Perfect 5th (Frets: 0, 2, 7)
-- *Sus4 Chords*: Root Note + Perfect 4th + Perfect 5th (Frets: 0, 5, 7)
-- *Diminished Chords*: Root Note + Minor 3rd + Lowered 5th (Frets: 0, 3, 6)
-- *Augmented Chords*: Root Note + Major 3rd + Raised 5th (Frets: 0, 4, 8)
+- *Major Chords*: Root Note + Major 3rd + Perfect 5th (Semitone from root: 0, 4, 7)
+- *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Semitone from root: 0, 3, 7)
+- *Sus2 Chords*: Root Note + Major 2nd + Perfect 5th (Semitone from root: 0, 2, 7)
+- *Sus4 Chords*: Root Note + Perfect 4th + Perfect 5th (Semitone from root: 0, 5, 7)
+- *Diminished Chords*: Root Note + Minor 3rd + Diminished 5th (Semitone from root: 0, 3, 6)
+- *Augmented Chords*: Root Note + Major 3rd + Augmented 5th (Semitone from root: 0, 4, 8)
 
 Now, since you can't play multiple notes on the same string, chords require us to use multiple strings to get all the necessary notes. Depending on the chord, we may have to hold down multiple strings at the same time.  Let's see what that looks like in practice. We'll start with an easy one: E Major (or just E. The _Major_ is implied)
 
@@ -211,28 +217,28 @@ A few things to notice here.
 
 2. In both chords, there are repeated notes (the E and B in both cases).  This is called _doubling_ and you can have either an octave doubling which is when the same note is played at different octaves or unison doubling when it's the same note at the same octave.
 
-_[My original understanding](link to week 1) was that chords are built from notes of a scale.  But that's not necessarily true.  It can be true when you're talking about the diatonic scales in that a G major chord will only contain notes in teh G Major scale and a G minor chord will only contain notes in the G minor scale but that is sort of just a coincidence, not a rule._
-
 ## Roman Numeral Notation
 
 If you’re looking at any given scale, a chord can be made by using each note in the scale as the root.  These are usually notated with roman numerals like this:
 
-I, II, III, IV, V, VII, VIII
+I, II, III, IV, V, VI, VII
 
 For a given scale you would use uppercase and lowercase to indicate whether it’s a major or minor chord.
 
-This happens because you build each chord by taking the root + 3rd + 5th.  Depending on where those notes land it could be a major or a minor chord.  This is due to the fact that the fretboard on a guitar is not uniform as we talked about [a couple of weeks ago](/posts/2026-10-04-what-i-learned-this-week.html).  
+This happens because you build each chord by taking the root + 3rd + 5th.  Depending on where those notes land it could be a major or a minor chord.  This is due to the fact that the scale's step pattern is not uniform.
 
-As an example let’s stay in the G Major Key.  That scale is: G-A-B-C-D-E-F#
+As an example let’s stay in the G Major Key.  
+
+That scale is: G-A-B-C-D-E-F#
 
 So, the chord for A is: A(root), C(3rd), E(5th)
 
-Now, if we look at what we learned [last week](.posts/2026-10-11-what-i-learned-this-week.html):
+As discussed above, simple chords are built with triads.  The major and minor chords are built like this:
 
 - *Major Chords*: Root Note + Major 3rd + Perfect 5th (Frets: 0, 4, 7)
 - *Minor Chords*: Root Note + Minor 3rd + Perfect 5th (Frets: 0, 3, 7)
 
-if we start at A on the fretboard and move to the next note in the chord (C) that is only 3 frets away so it’s a MINOR 3rd instead of a major so the chord is minor which is why for G Major Key the notation is:
+If we start at A on the fretboard and move to the next note in the chord (C) that is only 3 frets away so it’s a MINOR 3rd instead of a major so the chord is minor which is why for G Major Key the notation is:
 
 I, ii, iii, IV, V, vi, vii°
 
@@ -244,12 +250,30 @@ I, ii, iii, IV, V, vi, vii°
 - vi (E minor): E – G – B (Minor)
 - vii° (F♯ diminished): F♯ – A – C (Diminished)
 
+<figure>
 <div id="chords"></div>
+<figcaption>
+All the chords in the key of G major
+</figcaption>
+</figure>
 
-# Next Time
-- Chord Progressions
-- Borrowed Chords
+# Summary
 
+In this article I attempted to cover some entry-level music theory as it applies to learning the guitar. We covered the basics of notes scales and simple chords which is about as far as I've gotten on my journey to date. 
+
+# Additional Resources
+
+- [Marty Music](https://www.youtube.com/channel/UCmnlTWVJysjWPFiZhQ5uudg) on YouTube has so many great tutorials.  He's usually my first stop when I'm looking to learn a new song
+- A special Thank You to [Bartosz Ciechanowski](https://ciechanow.ski/) whose animated articles inspired the style of this article (he does it **much** better than me though!)
+
+<div id="ai-disclosure">
+  <h3>AI Disclosure</h3>
+  <ul>
+    <li>AI was used to build the animations used in this article</li>
+    <li>I used AI as an editor and fact checker for this article</li>
+  </ul>
+  <a href="/pages/about.html">Read my sitewide AI disclosure</a>
+</div>
 
 <link rel="stylesheet" href="/css/guitar.css">
 <script src="/js/guitar.js"></script>
