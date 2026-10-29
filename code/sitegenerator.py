@@ -10,42 +10,50 @@ from datetime import datetime
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
+SITE_URL = "https://jonwhite.me"
+
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
         return file.read()
 
-def convert_markdown_to_html(markdown_file_path, template):
+def convert_markdown_to_html(markdown_file_path, template, permalink=''):
     with open(markdown_file_path, 'r', encoding='utf-8') as markdown_file:
         markdown_content = markdown_file.read()
-    
-    # Extract YAML front matter
+
     yaml_match = re.match(r'---\s*\n(.*?)\n---\s*\n(.*)', markdown_content, re.DOTALL)
     if yaml_match:
-        yaml_content = yaml_match.group(1)
-        markdown_content = yaml_match.group(2)  # Markdown content without YAML
-        front_matter = yaml.safe_load(yaml_content)
+        front_matter = yaml.safe_load(yaml_match.group(1))
+        markdown_content = yaml_match.group(2)
     else:
         front_matter = {}
-    
-    # Convert Markdown to HTML
+
     html_content = markdown.markdown(markdown_content)
-    
-    # Replace placeholders in the template
-    final_content = template.replace('{{page_content}}', html_content)
-   
+
     title = front_matter.get('title', 'Untitled')
     date = front_matter.get('date', 'Unknown Date')
-    
-    # Convert date to string if it's a date object
     if isinstance(date, (str, type(None))):
         date_str = date
     else:
-        date_str = date.strftime('%Y-%m-%d')  # or another format like '%B %d, %Y'
-    
-    final_content = final_content.replace('{{title}}', title)
+        date_str = date.strftime('%Y-%m-%d')
+
+    # Optional front matter:  syndication: [https://..., https://...]
+    syndication = front_matter.get('syndication') or []
+    if isinstance(syndication, str):
+        syndication = [syndication]
+    syndication_html = ''.join(
+        f'<a class="u-syndication" href="{html.escape(str(u), quote=True)}" hidden></a>\n'
+        for u in syndication
+        if str(u).startswith(('http://', 'https://'))
+    )
+
+    final_content = template
+    final_content = final_content.replace('{{title}}', html.escape(str(title)))
     final_content = final_content.replace('{{date}}', date_str)
     final_content = final_content.replace('{{year}}', str(datetime.now().year))
-    
+    final_content = final_content.replace('{{permalink}}', permalink)
+    final_content = final_content.replace('{{syndication_links}}', syndication_html)
+    final_content = final_content.replace('{{page_content}}', html_content)  # last
+
     return final_content, front_matter
 
 def generate_pagination_links(current_page, total_pages, page_depth=1):
@@ -285,7 +293,8 @@ def  generate_site():
     for markdown_file in os.listdir(pages_dir):
         if markdown_file.endswith('.md'):
             file_path = os.path.join(pages_dir, markdown_file)
-            html_content, front_matter = convert_markdown_to_html(file_path, page_template)
+            page_url = f"{SITE_URL}/pages/{markdown_file.replace('.md', '.html')}"
+            html_content, front_matter = convert_markdown_to_html(file_path, page_template, permalink=page_url)
             output_file = os.path.join(output_pages_dir, markdown_file.replace('.md', '.html'))
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(html_content)
@@ -294,7 +303,8 @@ def  generate_site():
     for markdown_file in os.listdir(posts_dir):
         if markdown_file.endswith('.md'):
             file_path = os.path.join(posts_dir, markdown_file)
-            html_content, front_matter = convert_markdown_to_html(file_path, post_template)
+            post_url = f"{SITE_URL}/posts/{markdown_file.replace('.md', '.html')}"
+            html_content, front_matter = convert_markdown_to_html(file_path, post_template, permalink=post_url)
             output_file = os.path.join(output_posts_dir, markdown_file.replace('.md', '.html'))
             with open(output_file, 'w', encoding='utf-8') as f:
                 f.write(html_content)
@@ -332,7 +342,7 @@ def  generate_site():
     generate_rss_feed(
         posts_data=posts_data,
         output_dir=output_dir,
-        site_url="https://jonwhite.me",  # Replace with actual live domain name
+        site_url=SITE_URL,  # Replace with actual live domain name
         site_title="Jon White's Blog",
         site_description="Latest posts from my personal blog"
     )
