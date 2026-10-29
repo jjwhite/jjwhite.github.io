@@ -17,7 +17,7 @@ I'm a father of 3 residing in the United States.  My day job is as a Staff Softw
 
 
 ## Contact
-If you'd like to get in touch, you can find me on <a href="https://bsky.app/profile/jjwhite01.bsky.social" rel="me" target="_blank">Bluesky</a> or <a href="https://mastodon.world/@jonwhite" rel="me" target="_blank">Mastodon</a>
+If you'd like to get in touch, you can find me on <a href="https://bsky.app/profile/jjwhite01.bsky.social" rel="me atproto" target="_blank">Bluesky</a> or <a href="https://mastodon.world/@jonwhite" rel="me" target="_blank">Mastodon</a>
 
 ---
 
