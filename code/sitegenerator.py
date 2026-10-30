@@ -4,13 +4,45 @@ import yaml
 import re
 import math
 import html
+import json
 from email.utils import formatdate
 import time
 from datetime import datetime
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+from html.parser import HTMLParser
+from urllib.parse import urlparse
 
 SITE_URL = "https://jonwhite.me"
+SITE_HOST = "jonwhite.me"
+
+class _LinkCollector(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            href = dict(attrs).get('href')
+            if href:
+                self.links.append(href)
+
+def extract_outbound_links(html_content):
+    """Return unique external http(s) links from rendered post HTML, in order."""
+    parser = _LinkCollector()
+    parser.feed(html_content)
+    seen, outbound = set(), []
+    for href in parser.links:
+        parsed = urlparse(href)
+        if parsed.scheme not in ('http', 'https'):
+            continue
+        host = (parsed.hostname or '').lower()
+        if host == SITE_HOST or host.endswith('.' + SITE_HOST):
+            continue
+        if href not in seen:
+            seen.add(href)
+            outbound.append(href)
+    return outbound
 
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
@@ -269,6 +301,7 @@ def  generate_site():
     output_pages_dir = '../pages'
     output_posts_dir = '../posts'
     output_dir = '../'
+    webmention_manifest = {}
     
     # Load templates
     page_template = load_template(os.path.join(templates_dir, 'page.html'))
@@ -313,6 +346,12 @@ def  generate_site():
             with open(file_path, 'r', encoding='utf-8') as f:
                 markdown_content = f.read()
             excerpt = extract_excerpt(markdown_content)
+
+            fm_match = re.match(r'---\s*\n(.*?)\n---\s*\n(.*)', markdown_content, re.DOTALL)
+            body_md = fm_match.group(2) if fm_match else markdown_content
+            outbound = extract_outbound_links(markdown.markdown(body_md))
+            if outbound:
+                webmention_manifest[post_url] = outbound
             
             # Collect data for index page, blog pages, and RSS feed
             post_link = os.path.relpath(output_file, output_dir).replace('\\', '/')
@@ -346,6 +385,11 @@ def  generate_site():
         site_title="Jon White's Blog",
         site_description="Latest posts from my personal blog"
     )
+
+       # Generate webmention manifest
+    with open('webmention-manifest.json', 'w', encoding='utf-8') as f:
+        json.dump(webmention_manifest, f, indent=2)
+    print(f"Wrote webmention manifest: {len(webmention_manifest)} posts with outbound links")
 
     print(f"Site generated in {output_dir}")
 
