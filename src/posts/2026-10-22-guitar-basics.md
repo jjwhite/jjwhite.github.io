@@ -5,6 +5,9 @@ date: 2026-10-28
 tags: 
 comments: false
 category: 
+syndication: 
+ - https://mastodon.world/@jonwhite/117518704034415279
+ - https://bsky.app/profile/jjwhite01.bsky.social/post/3mywtezzd2k25
 ---
 
 I'm currently attempting to teach myself how to play the guitar.  As part of that process I've been trying to learn about music theory.  In this article I will walk through the basics of music theory as it relates to guitar.  I will be using my own words as I understand things.  As a result, I'm not promising that this article covers _everything_.  There are likely some gaps and assumptions. I'll try to link out to additional resources when I know I'm not covering something specific. My goals are threefold:

@@ -4,12 +4,46 @@ import yaml
 import re
 import math
 import html
+import json
 import argparse
 from email.utils import formatdate
 import time
 from datetime import datetime, date
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+from html.parser import HTMLParser
+from urllib.parse import urlparse
+
+SITE_URL = "https://jonwhite.me"
+SITE_HOST = "jonwhite.me"
+
+class _LinkCollector(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            href = dict(attrs).get('href')
+            if href:
+                self.links.append(href)
+
+def extract_outbound_links(html_content):
+    """Return unique external http(s) links from rendered post HTML, in order."""
+    parser = _LinkCollector()
+    parser.feed(html_content)
+    seen, outbound = set(), []
+    for href in parser.links:
+        parsed = urlparse(href)
+        if parsed.scheme not in ('http', 'https'):
+            continue
+        host = (parsed.hostname or '').lower()
+        if host == SITE_HOST or host.endswith('.' + SITE_HOST):
+            continue
+        if href not in seen:
+            seen.add(href)
+            outbound.append(href)
+    return outbound
 
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
@@ -34,25 +68,34 @@ def format_display_date(date_val, include_time_if_present=True):
     dt = parse_date(date_val)
     if include_time_if_present and isinstance(date_val, (datetime, str)) and (':' in str(date_val)):
         formatted = dt.strftime('%B %d, %Y at %I:%M %p')
-        # Remove leading zero on hour if present: ' 09:' -> ' 9:'
         return re.sub(r'at 0(\d):', r'at \1:', formatted)
     else:
         return dt.strftime('%B %d, %Y')
 
 def format_syndication_html(syndication):
     """Generate HTML links for syndicated platforms."""
-    if not syndication or not isinstance(syndication, dict):
+    if not syndication:
         return ""
     links = []
-    if syndication.get('mastodon'):
-        links.append(f'<a href="{html.escape(str(syndication["mastodon"]))}" target="_blank" rel="syndication me">Mastodon</a>')
-    if syndication.get('bluesky'):
-        links.append(f'<a href="{html.escape(str(syndication["bluesky"]))}" target="_blank" rel="syndication me">Bluesky</a>')
+    if isinstance(syndication, dict):
+        if syndication.get('mastodon'):
+            links.append(f'<a href="{html.escape(str(syndication["mastodon"]))}" target="_blank" rel="syndication me">Mastodon</a>')
+        if syndication.get('bluesky'):
+            links.append(f'<a href="{html.escape(str(syndication["bluesky"]))}" target="_blank" rel="syndication me">Bluesky</a>')
+    elif isinstance(syndication, list):
+        for item in syndication:
+            s_item = str(item)
+            if 'mastodon' in s_item:
+                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Mastodon</a>')
+            elif 'bsky.app' in s_item:
+                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Bluesky</a>')
+            else:
+                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Syndicated</a>')
     if not links:
         return ""
     return f'<div class="note-syndication"><span>Syndicated to:</span> ' + ' <span class="divider">|</span> '.join(links) + '</div>'
 
-def convert_markdown_to_html(markdown_file_path, template):
+def convert_markdown_to_html(markdown_file_path, template, permalink=''):
     with open(markdown_file_path, 'r', encoding='utf-8') as markdown_file:
         markdown_content = markdown_file.read()
     
@@ -60,7 +103,7 @@ def convert_markdown_to_html(markdown_file_path, template):
     yaml_match = re.match(r'---\s*\n(.*?)\n---\s*\n(.*)', markdown_content, re.DOTALL)
     if yaml_match:
         yaml_content = yaml_match.group(1)
-        markdown_content = yaml_match.group(2)  # Markdown content without YAML
+        markdown_content = yaml_match.group(2)
         front_matter = yaml.safe_load(yaml_content) or {}
     else:
         front_matter = {}
@@ -68,16 +111,34 @@ def convert_markdown_to_html(markdown_file_path, template):
     # Convert Markdown to HTML
     html_content = markdown.markdown(markdown_content)
     
-    # Replace placeholders in the template
-    final_content = template.replace('{{page_content}}', html_content)
-   
     title = front_matter.get('title', 'Untitled')
     date_val = front_matter.get('date', 'Unknown Date')
     date_str = format_display_date(date_val, include_time_if_present=False) if date_val != 'Unknown Date' else 'Unknown Date'
+
+    # Support syndication in front matter: list or dict
+    raw_syndication = front_matter.get('syndication') or []
+    if isinstance(raw_syndication, str):
+        synd_list = [raw_syndication]
+    elif isinstance(raw_syndication, dict):
+        synd_list = list(raw_syndication.values())
+    elif isinstance(raw_syndication, list):
+        synd_list = raw_syndication
+    else:
+        synd_list = []
+
+    syndication_html = ''.join(
+        f'<a class="u-syndication" href="{html.escape(str(u), quote=True)}" hidden></a>\n'
+        for u in synd_list
+        if str(u).startswith(('http://', 'https://'))
+    )
     
-    final_content = final_content.replace('{{title}}', title)
+    final_content = template
+    final_content = final_content.replace('{{title}}', html.escape(str(title)))
     final_content = final_content.replace('{{date}}', date_str)
     final_content = final_content.replace('{{year}}', str(datetime.now().year))
+    final_content = final_content.replace('{{permalink}}', permalink)
+    final_content = final_content.replace('{{syndication_links}}', syndication_html)
+    final_content = final_content.replace('{{page_content}}', html_content)
     
     return final_content, front_matter
 
@@ -88,10 +149,8 @@ def generate_pagination_links(current_page, total_pages, page_depth=1):
     
     # Adjust paths based on directory depth
     if page_depth == 1:
-        # Main page (/posts/index.html or /notes/index.html)
         path_prefix = ""
     else:
-        # Subpages (/posts/page/X/index.html or /notes/page/X/index.html) - need to go up two levels
         path_prefix = "../../"
     
     pagination_html = '<div class="pagination">\n'
@@ -138,7 +197,6 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
         # Generate posts list HTML for this page
         posts_list_html = '<div class="blog-posts">\n'
         for title, link, date_val, excerpt in page_posts:
-            # Calculate correct relative link based on page depth
             if page == 1:
                 relative_link = os.path.basename(link)
             else:
@@ -155,25 +213,21 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
             posts_list_html += f'  </article>\n'
         posts_list_html += '</div>\n'
         
-        # Generate pagination links with correct depth
         page_depth = 1 if page == 1 else 2
         pagination_html = generate_pagination_links(page, total_pages, page_depth)
         
-        # Replace template placeholders
         page_content = blog_template.replace('{{post_list}}', posts_list_html)
         page_content = page_content.replace('{{pagination}}', pagination_html)
         page_content = page_content.replace('{{current_page}}', str(page))
         page_content = page_content.replace('{{total_pages}}', str(total_pages))
         page_content = page_content.replace('{{year}}', str(datetime.now().year))
         
-        # Set page title
         if page == 1:
             page_title = 'Blog'
         else:
             page_title = f'Blog - Page {page}'
         page_content = page_content.replace('{{title}}', page_title)
         
-        # Create directory structure and write files
         if page == 1:
             output_file = os.path.join(output_posts_dir, 'index.html')
         else:
@@ -191,7 +245,6 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
     if not notes_data:
         return
         
-    # Sort notes by date object descending (newest first)
     sorted_notes = sorted(notes_data, key=lambda x: x['date_obj'], reverse=True)
     total_notes = len(sorted_notes)
     total_pages = math.ceil(total_notes / notes_per_page)
@@ -202,7 +255,6 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
         end_idx = start_idx + notes_per_page
         page_notes = sorted_notes[start_idx:end_idx]
         
-        # Build notes timeline HTML
         notes_list_html = ''
         for note in page_notes:
             slug = note['slug']
@@ -210,7 +262,6 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
             html_content = note['html_content']
             syndication_html = note['syndication_html']
             
-            # Permalink relative link
             if page == 1:
                 permalink = f"{slug}.html"
             else:
@@ -253,23 +304,19 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
 
 def extract_excerpt(markdown_content, max_words=50):
     """Extract an excerpt from markdown content, stripping images and formatting"""
-    # Remove YAML front matter
     yaml_match = re.match(r'---\s*\n(.*?)\n---\s*\n(.*)', markdown_content, re.DOTALL)
     if yaml_match:
         content = yaml_match.group(2)
     else:
         content = markdown_content
     
-    # Remove images (both inline and reference style)
     content = re.sub(r'!\[.*?\]\(.*?\)', '', content)
     content = re.sub(r'!\[.*?\]\[.*?\]', '', content)
     content = re.sub(r'!\[.*?\]:\s*.*?(?:\s|$)', '', content)
     
-    # Remove HTML img tags
     content = re.sub(r'<img[^>]*/?>', '', content, flags=re.IGNORECASE)
     content = re.sub(r'<img[^>]*>.*?</img>', '', content, flags=re.IGNORECASE)
     
-    # Remove other markdown formatting
     content = re.sub(r'[#*`\[\]()_~]', '', content)
     content = re.sub(r'\n+', ' ', content)
     content = content.strip()
@@ -280,7 +327,7 @@ def extract_excerpt(markdown_content, max_words=50):
     else:
         return ' '.join(words[:max_words]) + '...'
 
-def generate_rss_feed(items_data, output_dir, feed_filename="feed.xml", site_url="https://jonwhite.me", site_title="Jon White's Blog", site_description="Latest posts from my personal blog"):
+def generate_rss_feed(items_data, output_dir, feed_filename="feed.xml", site_url=SITE_URL, site_title="Jon White's Blog", site_description="Latest posts from my personal blog"):
     """Generate a clean RSS 2.0 feed using ElementTree."""
     if not items_data:
         return
@@ -343,6 +390,7 @@ def generate_site():
     output_posts_dir = '../posts'
     output_notes_dir = '../notes'
     output_dir = '../'
+    webmention_manifest = {}
     
     # Load templates
     page_template = load_template(os.path.join(templates_dir, 'page.html'))
@@ -381,7 +429,8 @@ def generate_site():
         for markdown_file in os.listdir(pages_dir):
             if markdown_file.endswith('.md'):
                 file_path = os.path.join(pages_dir, markdown_file)
-                html_content, front_matter = convert_markdown_to_html(file_path, page_template)
+                page_url = f"{SITE_URL}/pages/{markdown_file.replace('.md', '.html')}"
+                html_content, front_matter = convert_markdown_to_html(file_path, page_template, permalink=page_url)
                 output_file = os.path.join(output_pages_dir, markdown_file.replace('.md', '.html'))
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(html_content)
@@ -391,7 +440,8 @@ def generate_site():
         for markdown_file in os.listdir(posts_dir):
             if markdown_file.endswith('.md'):
                 file_path = os.path.join(posts_dir, markdown_file)
-                html_content, front_matter = convert_markdown_to_html(file_path, post_template)
+                post_url = f"{SITE_URL}/posts/{markdown_file.replace('.md', '.html')}"
+                html_content, front_matter = convert_markdown_to_html(file_path, post_template, permalink=post_url)
                 output_file = os.path.join(output_posts_dir, markdown_file.replace('.md', '.html'))
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(html_content)
@@ -400,6 +450,12 @@ def generate_site():
                 with open(file_path, 'r', encoding='utf-8') as f:
                     markdown_content = f.read()
                 excerpt = extract_excerpt(markdown_content)
+
+                fm_match = re.match(r'---\s*\n(.*?)\n---\s*\n(.*)', markdown_content, re.DOTALL)
+                body_md = fm_match.group(2) if fm_match else markdown_content
+                outbound = extract_outbound_links(markdown.markdown(body_md))
+                if outbound:
+                    webmention_manifest[post_url] = outbound
                 
                 post_link = os.path.relpath(output_file, output_dir).replace('\\', '/')
                 posts_data.append((
@@ -437,11 +493,18 @@ def generate_site():
                     
                 syndication = front_matter.get('syndication')
                 syndication_html = format_syndication_html(syndication)
+                note_url = f"{SITE_URL}/notes/{slug}.html"
+                
+                # Check for outbound links from note for webmentions
+                outbound = extract_outbound_links(note_html_body)
+                if outbound:
+                    webmention_manifest[note_url] = outbound
                 
                 # Single note page
                 single_html = note_template.replace('{{page_content}}', note_html_body)
                 single_html = single_html.replace('{{title}}', title)
                 single_html = single_html.replace('{{date}}', date_str)
+                single_html = single_html.replace('{{permalink}}', note_url)
                 single_html = single_html.replace('{{syndication_html}}', syndication_html)
                 single_html = single_html.replace('{{year}}', str(datetime.now().year))
                 
@@ -487,7 +550,7 @@ def generate_site():
         items_data=posts_data,
         output_dir=output_dir,
         feed_filename="feed.xml",
-        site_url="https://jonwhite.me",
+        site_url=SITE_URL,
         site_title="Jon White's Blog",
         site_description="Latest posts from my personal blog"
     )
@@ -506,10 +569,15 @@ def generate_site():
             items_data=notes_rss_items,
             output_dir=output_dir,
             feed_filename="notes-feed.xml",
-            site_url="https://jonwhite.me",
+            site_url=SITE_URL,
             site_title="Jon White's Notes",
             site_description="Micro-notes and updates from Jon White"
         )
+
+    # Generate webmention manifest
+    with open('webmention-manifest.json', 'w', encoding='utf-8') as f:
+        json.dump(webmention_manifest, f, indent=2)
+    print(f"Wrote webmention manifest: {len(webmention_manifest)} posts with outbound links")
 
     print(f"Site generated in {output_dir}")
 

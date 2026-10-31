@@ -1,0 +1,46 @@
+name: Send webmentions
+
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Resend even if already sent"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: webmentions
+  cancel-in-progress: false
+
+jobs:
+  send:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Wait for the CDN to serve the new pages
+        run: sleep 60
+
+      - name: Send webmentions
+        working-directory: code
+        run: python send_webmentions.py ${{ inputs.force && '--force' || '' }}
+
+      - name: Save sent-state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add generator/webmentions-sent.json
+          git diff --cached --quiet || (git commit -m "Update webmention state" && git push)
