@@ -1,0 +1,75 @@
+name: POSSE Syndication
+
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (preview without publishing)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: posse-syndication
+  cancel-in-progress: false
+
+jobs:
+  syndicate:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install markdown pyyaml
+
+      - name: Wait for CDN deployment
+        if: github.event_name != 'workflow_dispatch'
+        run: sleep 45
+
+      - name: Run POSSE syndication
+        working-directory: code
+        env:
+          SITE_URL: "https://jonwhite.me"
+          MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE || 'mastodon.world' }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE || 'jjwhite01.bsky.social' }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: |
+          python posse.py ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Check for syndicated notes and rebuild site
+        id: check_changes
+        run: |
+          # Check if any markdown note in src/notes was updated with syndication URLs
+          if git status --porcelain src/notes | grep -q 'src/notes'; then
+            echo "notes_updated=true" >> $GITHUB_OUTPUT
+            echo "New syndication URLs detected. Rebuilding site..."
+            cd code
+            python sitegenerator.py
+          else
+            echo "notes_updated=false" >> $GITHUB_OUTPUT
+            echo "No notes required syndication."
+          fi
+
+      - name: Commit and push updated site
+        if: steps.check_changes.outputs.notes_updated == 'true' && !inputs.dry_run
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/notes/ notes/ feed.xml notes-feed.xml code/webmention-manifest.json
+          git diff --cached --quiet || (git commit -m "Auto-syndicate notes and update site" && git pull --rebase && git push)
