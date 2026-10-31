@@ -1,9 +1,10 @@
 name: POSSE Syndication
 
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types: [completed]
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/notes/**'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -20,7 +21,6 @@ concurrency:
 
 jobs:
   syndicate:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -37,9 +37,11 @@ jobs:
       - name: Install dependencies
         run: pip install markdown pyyaml
 
-      - name: Wait for CDN deployment
+      - name: Wait for GitHub Pages deployment
         if: github.event_name != 'workflow_dispatch'
-        run: sleep 45
+        run: |
+          echo "Waiting 60s for GitHub Pages to deploy the live note..."
+          sleep 60
 
       - name: Run POSSE syndication
         working-directory: code
@@ -55,7 +57,6 @@ jobs:
       - name: Check for syndicated notes and rebuild site
         id: check_changes
         run: |
-          # Check if any markdown note in src/notes was updated with syndication URLs
           if git status --porcelain src/notes | grep -q 'src/notes'; then
             echo "notes_updated=true" >> $GITHUB_OUTPUT
             echo "New syndication URLs detected. Rebuilding site..."
@@ -72,4 +73,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/notes/ notes/ feed.xml notes-feed.xml code/webmention-manifest.json
-          git diff --cached --quiet || (git commit -m "Auto-syndicate notes and update site" && git pull --rebase && git push)
+          git diff --cached --quiet || (git commit -m "Auto-syndicate notes and update site [skip ci]" && git pull --rebase && git push)
