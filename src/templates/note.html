@@ -20,15 +20,25 @@
     </header>
     <br/>
     <div class="container">
-        <article class="note-single">
-            <p class="post-date">{{date}}</p>
-            <div class="note-content">
+        <article class="h-entry note-single">
+            <p>
+                <a class="p-author h-card" href="https://jonwhite.me" hidden>Jon White</a>
+                <a class="u-url" href="{{permalink}}"><time class="dt-published post-date" datetime="{{date}}">{{date}}</time></a>
+            </p>
+            <div class="e-content note-content">
                 {{page_content}}
             </div>
             {{syndication_html}}
             <p class="note-back-nav"><a href="/notes/" class="back-link">&larr; Back to all notes</a></p>
         </article>
+
+        <section id="webmentions" hidden>
+            <h2>Responses</h2>
+            <p id="wm-summary"></p>
+            <ul id="wm-list"></ul>
+        </section>
     </div>
+    <script src="/js/webmentions.js" defer></script>
     <br/>
     <div class="container">
       <footer>

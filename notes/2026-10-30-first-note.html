@@ -20,15 +20,25 @@
     </header>
     <br/>
     <div class="container">
-        <article class="note-single">
-            <p class="post-date">October 30, 2026 at 10:30 PM</p>
-            <div class="note-content">
+        <article class="h-entry note-single">
+            <p>
+                <a class="p-author h-card" href="https://jonwhite.me" hidden>Jon White</a>
+                <a class="u-url" href="https://jonwhite.me/notes/2026-10-30-first-note.html"><time class="dt-published post-date" datetime="October 30, 2026 at 10:30 PM">October 30, 2026 at 10:30 PM</time></a>
+            </p>
+            <div class="e-content note-content">
                 <p>Added a new Notes section to the site powered by POSSE! Notes will publish here first on <a href="https://jonwhite.me">jonwhite.me</a> and automatically syndicate to Mastodon and Bluesky.</p>
             </div>
-            <div class="note-syndication"><span>Syndicated to:</span> <a href="https://mastodon.world/@jonwhite/117533350668136022" target="_blank" rel="syndication me">Mastodon</a> <span class="divider">|</span> <a href="https://bsky.app/profile/jjwhite01.bsky.social/post/3mz5dfvxce426" target="_blank" rel="syndication me">Bluesky</a></div>
+            <div class="note-syndication"><span>Syndicated to:</span> <a class="u-syndication" href="https://mastodon.world/@jonwhite/117533350668136022" target="_blank" rel="syndication me">Mastodon</a> <span class="divider">|</span> <a class="u-syndication" href="https://bsky.app/profile/jjwhite01.bsky.social/post/3mz5dfvxce426" target="_blank" rel="syndication me">Bluesky</a></div>
             <p class="note-back-nav"><a href="/notes/" class="back-link">&larr; Back to all notes</a></p>
         </article>
+
+        <section id="webmentions" hidden>
+            <h2>Responses</h2>
+            <p id="wm-summary"></p>
+            <ul id="wm-list"></ul>
+        </section>
     </div>
+    <script src="/js/webmentions.js" defer></script>
     <br/>
     <div class="container">
       <footer>

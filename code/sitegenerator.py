@@ -79,18 +79,18 @@ def format_syndication_html(syndication):
     links = []
     if isinstance(syndication, dict):
         if syndication.get('mastodon'):
-            links.append(f'<a href="{html.escape(str(syndication["mastodon"]))}" target="_blank" rel="syndication me">Mastodon</a>')
+            links.append(f'<a class="u-syndication" href="{html.escape(str(syndication["mastodon"]))}" target="_blank" rel="syndication me">Mastodon</a>')
         if syndication.get('bluesky'):
-            links.append(f'<a href="{html.escape(str(syndication["bluesky"]))}" target="_blank" rel="syndication me">Bluesky</a>')
+            links.append(f'<a class="u-syndication" href="{html.escape(str(syndication["bluesky"]))}" target="_blank" rel="syndication me">Bluesky</a>')
     elif isinstance(syndication, list):
         for item in syndication:
             s_item = str(item)
             if 'mastodon' in s_item:
-                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Mastodon</a>')
+                links.append(f'<a class="u-syndication" href="{html.escape(s_item)}" target="_blank" rel="syndication me">Mastodon</a>')
             elif 'bsky.app' in s_item:
-                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Bluesky</a>')
+                links.append(f'<a class="u-syndication" href="{html.escape(s_item)}" target="_blank" rel="syndication me">Bluesky</a>')
             else:
-                links.append(f'<a href="{html.escape(s_item)}" target="_blank" rel="syndication me">Syndicated</a>')
+                links.append(f'<a class="u-syndication" href="{html.escape(s_item)}" target="_blank" rel="syndication me">Syndicated</a>')
     if not links:
         return ""
     return f'<div class="note-syndication"><span>Syndicated to:</span> ' + ' <span class="divider">|</span> '.join(links) + '</div>'
@@ -267,12 +267,12 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
             else:
                 permalink = f"../../{slug}.html"
                 
-            notes_list_html += f'  <article class="note-card" id="{slug}">\n'
+            notes_list_html += f'  <article class="h-entry note-card" id="{slug}">\n'
             notes_list_html += f'    <header class="note-header">\n'
-            notes_list_html += f'      <time class="note-date">{date_display}</time>\n'
-            notes_list_html += f'      <a href="{permalink}" class="note-permalink" title="Permalink to note">#</a>\n'
+            notes_list_html += f'      <time class="dt-published note-date">{date_display}</time>\n'
+            notes_list_html += f'      <a href="{permalink}" class="u-url note-permalink" title="Permalink to note">#</a>\n'
             notes_list_html += f'    </header>\n'
-            notes_list_html += f'    <div class="note-content">\n{html_content}\n    </div>\n'
+            notes_list_html += f'    <div class="e-content note-content">\n{html_content}\n    </div>\n'
             if syndication_html:
                 notes_list_html += f'    {syndication_html}\n'
             notes_list_html += f'  </article>\n'
