@@ -7,6 +7,27 @@ cd code
 py sitegenerator.py
 ```
 
+### Notes & POSSE Syndication
+Short notes live in `src/notes/*.md`. You can publish on your site and syndicate to Mastodon and Bluesky via POSSE:
+
+1. Copy `code/.env.example` to `code/.env` and add your Mastodon and Bluesky credentials.
+2. Preview social posts without publishing:
+   ```
+   py sitegenerator.py --dry-run
+   # or
+   py posse.py --dry-run
+   ```
+3. Syndicate unposted notes and generate the site:
+   ```
+   py sitegenerator.py --syndicate
+   ```
+   Or run the standalone POSSE script:
+   ```
+   py posse.py
+   ```
+   Once published, the social post URLs are automatically written to the note's frontmatter and displayed on the site.
+
+
 ## Backlog
 - logo/wordmark for "Jon White"
 - add socials to footer

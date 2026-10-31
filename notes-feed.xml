@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Jon White's Notes</title>
+    <link>https://jonwhite.me</link>
+    <description>Micro-notes and updates from Jon White</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 31 Oct 2026 03:02:42 GMT</lastBuildDate>
+    <ns0:link href="https://jonwhite.me/notes-feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Note - October 30, 2026 at 10:30 PM</title>
+      <link>https://jonwhite.me/notes/2026-10-30-first-note.html</link>
+      <guid isPermaLink="true">https://jonwhite.me/notes/2026-10-30-first-note.html</guid>
+      <pubDate>Sat, 31 Oct 2026 02:30:00 GMT</pubDate>
+      <description>&lt;p&gt;Added a new Notes section to the site powered by POSSE! Notes will publish here first on &lt;a href=&quot;https://jonwhite.me&quot;&gt;jonwhite.me&lt;/a&gt; and automatically syndicate to Mastodon and Bluesky.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -536,12 +536,91 @@ div#ai-disclosure{
   .mark.mute::before { content: "\00d7"; font-weight: 700; }
   .mark.open::before { content: "\25cb"; }
 
-  /* Starting fret label, e.g. "2fr" */
-  .fret-label {
-    position: absolute;
-    left: -2.4rem;
-    top: calc(.125 * 100% - .5em);
-    font-size: .8rem;
-  }
-
 /****************/
+
+/* Notes & POSSE Styles */
+.notes-feed {
+  margin-bottom: 3rem;
+}
+
+.note-card, .note-single {
+  margin-bottom: 2rem;
+  padding: 1.75rem 2rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.note-card:hover {
+  box-shadow: 0 4px 20px var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.note-date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.note-permalink {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.note-permalink:hover {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+.note-content {
+  font-size: 1.05rem;
+  line-height: var(--line-height);
+  color: var(--text-primary);
+}
+
+.note-content p:last-child {
+  margin-bottom: 0;
+}
+
+.note-syndication {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.note-syndication a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
+
+.note-syndication a:hover {
+  text-decoration: underline;
+}
+
+.note-back-nav {
+  margin-top: 2rem;
+}
+
+.back-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
