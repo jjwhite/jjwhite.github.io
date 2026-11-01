@@ -40,8 +40,8 @@ jobs:
       - name: Wait for GitHub Pages deployment
         if: github.event_name != 'workflow_dispatch'
         run: |
-          echo "Waiting 60s for GitHub Pages to deploy the live note..."
-          sleep 60
+          echo "Waiting 120s for GitHub Pages to deploy the live note..."
+          sleep 120
 
       - name: Run POSSE syndication
         working-directory: code
