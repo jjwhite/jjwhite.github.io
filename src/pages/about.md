@@ -19,12 +19,8 @@ I'm a father of 3 residing in the United States.  My day job is as a Staff Softw
 ## Contact
 If you'd like to get in touch, you can find me on <a href="https://jjwhite01.bsky.social" rel="me atproto" target="_blank">Bluesky</a> or <a href="https://mastodon.world/@jonwhite" rel="me" target="_blank">Mastodon</a>
 
----
-
 ## About This Site
 This site is personal blog where I post about things that interest me or projects I'm working on.  The site is hosted on github pages and is a static site built using a custom python-based static site generator. 
-
----
 
 ## Disclosures
 
