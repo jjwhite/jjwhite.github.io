@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What I Learned This Week</title>
+    <link rel="webmention" href="https://webmention.io/jonwhite.me/webmention">
+    <link rel="pingback" href="https://webmention.io/jonwhite.me/xmlrpc">
+    <link rel="stylesheet" href="/css/clean.css">
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="RSS Feed">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="bf94dfe7-4588-4670-9be8-95866d7c0879"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="https://jonwhite.me">Jon White's Blog</a></h1>
+        <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/notes/">Notes</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a>
+    </header>
+    <br/>
+    <article class="h-entry">
+        <div class="container">
+            <h1 class="p-name">What I Learned This Week</h1>
+            <p>
+                <a class="p-author h-card" href="https://jonwhite.me">Jon White</a> ·
+                <a class="u-url" href="https://jonwhite.me/posts/2026-11-01-what-i-learned-this-week.html"><time class="dt-published" datetime="November 01, 2026">November 01, 2026</time></a>
+            </p>
+            <div class="e-content">
+                <p>Every Sunday I write about things I learned the previous week. I try to do at least one deep dive on something I'm trying to learn and write it in my own words.  Then I usually share some other random tidbits I picked up last this week.</p>
+<h1>Deep Dive</h1>
+<h2>The Indie Web</h2>
+<p>This week I ended up going on a bit of a journey into the <a href="https://indieweb.org">indie web</a>.  The concept is relatively straight forward: it's all about owning your own domain and your own content.  I'm a big advocate of having your own site and owning your own domain.  The internet has turned into a bunch of walled gardens that sell your data for profit.  You are not the customer, you're the product.  They lock you in, spy on you, manipulate you with algorithms and lock down your content.  They can lock you out of your own account without notification and leave you with little recourse.  The indie web is all about you taking the power back and this is really what the original promise of the internet was all about.</p>
+<figure>
+<img src="https://imgs.xkcd.com/comics/instagram.png"></img>
+<figcaption>Source: <a href="https://xkcd.com/1150/" target="_blank">XKCD</a> </figcaption>
+</figure>
+
+<p>There are a number of concepts that are key to making the indie web work:</p>
+<p><a href="https://indieweb.org/Web_sign-in"><em>Web Sign-In</em></a> - using your own web address to sign in to other websites.  This is trivially easy to configure.  Simply add a link to your preferred login site (bluesky, mastadon, github, etc.) with a <code>rel="me"</code> attribute to your site's homepage. Then, ensure your profile page on those sites links back to your domain.  That's it. </p>
+<p><a href="https://indieweb.org/POSSE"><em>POSSE</em></a> - Post (on your) Own Site, Syndicate Elsewhere.  The idea here is that rather than publishing directly on a social media platform, you publish to your own site and then publish that link to social media (in Indie Web vernacular, social media sites are called <a href="https://indieweb.org/silo"><em>silos</em></a>).  </p>
+<p><em>Webmentions</em> - <a href="https://www.w3.org/TR/webmention/">an open web standard</a> used to facilitate communication between websites for things like comments, likes, etc.</p>
+<p>Additional resources:</p>
+<ul>
+<li><a href="https://indiewebify.me/">Indie Webify</a></li>
+<li><a href="https://brid.gy/">Bridgy</a> - captures comments, etc. from social media posts and webmentions them back to your site. (aka <a href="https://indieweb.org/backfeed">backfeeding</a>)</li>
+<li><a href="https://webmention.io/">Webmention.io</a> - a hosted service that recieves webmentions for any domain.  Saves you from implementing your own webmention listener.  I'm using webmention.io for jonwhite.me</li>
+</ul>
+<figure>
+<img src="/images/2026-11-01/webmention_brid_gy_flow.svg"></img>
+<figcaption>A possible webmention configuration using webmention.io and brid.gy</figcaption>
+</figure>
+
+<h1>Other Stuff</h1>
+<ul>
+<li>
+<p>I watched <em>You Can See Everything</em> and like most people, I couldn't stop thinking about it.  I think <a href="https://lennypane.substack.com/p/you-can-see-everything-knows-what">Penny Lane</a> had my favorite write-up about the film</p>
+</li>
+<li>
+<p>I've always been a big fan of <a href="https://arstechnica.com/science/2026/10/meet-the-2026-winner-of-nikons-small-world-photomicrography-contest">macro photography</a></p>
+</li>
+</ul>
+<div id="ai-disclosure">
+  <h3>AI Disclosure</h3>
+  <ul>
+    <li>AI was used to build the indie web diagram in this article</li>
+  </ul>
+  <a href="/pages/about.html">Read my sitewide AI disclosure</a>
+</div>
+            </div>
+        </div>
+        
+    </article>
+    <section id="webmentions" hidden>
+        <h2>Responses</h2>
+        <p id="wm-summary"></p>
+        <ul id="wm-list"></ul>
+    </section>
+<script src="/js/webmentions.js" defer></script>
+    <br/>
+    <div class="container">
+      <footer>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="/pages/about.html">About</a><span class="divider">|</span><a href="/posts/">Articles</a><span class="divider">|</span><a href="/notes/">Notes</a><span class="divider">|</span><a href="/pages/blogroll.html">Blogroll</a><span class="divider">|</span><a href="/feed.xml">RSS</a><span class="divider">|</span><a href="https://jjwhite01.bsky.social" rel="me atproto" target="_blank">Bluesky</a><span class="divider">|</span><a href="https://mastodon.world/@jonwhite" rel="me" target="_blank">Mastodon</a>
+            <div class="copyright">&copy; 2026 Jon White</div>
+        </footer>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+    </script>
+</body>
+
+</html>
