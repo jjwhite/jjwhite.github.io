@@ -5,6 +5,8 @@ date: 2026-11-01
 tags: 
 comments: false
 category: 
+image: /images/wilt-card.png
+description: This week I dove into the Indie Web.
 ---
 
 Every Sunday I write about things I learned the previous week. I try to do at least one deep dive on something I'm trying to learn and write it in my own words.  Then I usually share some other random tidbits I picked up last this week.
