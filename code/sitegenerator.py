@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 
 SITE_URL = "https://jonwhite.me"
 SITE_HOST = "jonwhite.me"
+DEFAULT_OG_IMAGE = f"{SITE_URL}/images/og-default.png"
 
 class _LinkCollector(HTMLParser):
     def __init__(self):
@@ -44,6 +45,52 @@ def extract_outbound_links(html_content):
             seen.add(href)
             outbound.append(href)
     return outbound
+
+def html_to_text(html_content):
+    """Strip tags from rendered HTML and collapse whitespace."""
+    text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = html.unescape(text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+def truncate_text(text, max_chars=200):
+    if len(text) <= max_chars:
+        return text
+    cut = text[:max_chars].rsplit(' ', 1)[0]
+    return cut.rstrip('.,;:!? ') + '…'
+
+def absolute_url(url):
+    url = str(url).strip()
+    if url.startswith(('http://', 'https://')):
+        return url
+    return f"{SITE_URL}/{url.lstrip('/')}"
+
+def first_image(html_content):
+    """Return the src of the first non-data-URI <img> in rendered HTML, or None."""
+    for m in re.finditer(r'<img[^>]+src=["\']([^"\']+)["\']', html_content, flags=re.IGNORECASE):
+        if not m.group(1).startswith('data:'):
+            return m.group(1)
+    return None
+
+def build_meta_tags(title, permalink, front_matter, html_content):
+    """Open Graph / description tags for link previews."""
+    description = front_matter.get('description') or truncate_text(html_to_text(html_content))
+    image = absolute_url(front_matter.get('image') or first_image(html_content) or DEFAULT_OG_IMAGE)
+
+    tags = [
+        ('name',     'description',    description),
+        ('property', 'og:type',        'article'),
+        ('property', 'og:site_name',   "Jon White's Blog"),
+        ('property', 'og:title',       title),
+        ('property', 'og:description', description),
+        ('property', 'og:url',         permalink),
+        ('property', 'og:image',       image),
+        ('name',     'twitter:card',   'summary_large_image'),
+    ]
+    return '\n    '.join(
+        f'<meta {attr}="{key}" content="{html.escape(str(val), quote=True)}">'
+        for attr, key, val in tags
+    )
 
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
@@ -138,6 +185,9 @@ def convert_markdown_to_html(markdown_file_path, template, permalink=''):
     final_content = final_content.replace('{{year}}', str(datetime.now().year))
     final_content = final_content.replace('{{permalink}}', permalink)
     final_content = final_content.replace('{{syndication_links}}', syndication_html)
+    final_content = final_content.replace('{{meta_tags}}',
+        build_meta_tags(str(title), permalink, front_matter, html_content))
+    final_content = final_content.replace('{{page_content}}', html_content)
     final_content = final_content.replace('{{page_content}}', html_content)
     
     return final_content, front_matter
@@ -501,7 +551,9 @@ def generate_site():
                     webmention_manifest[note_url] = outbound
                 
                 # Single note page
-                single_html = note_template.replace('{{page_content}}', note_html_body)
+                note_meta = build_meta_tags(title, note_url, front_matter, note_html_body)
+                single_html = note_template.replace('{{meta_tags}}', note_meta)
+                single_html = single_html.replace('{{page_content}}', note_html_body)
                 single_html = single_html.replace('{{title}}', title)
                 single_html = single_html.replace('{{date}}', date_str)
                 single_html = single_html.replace('{{permalink}}', note_url)
