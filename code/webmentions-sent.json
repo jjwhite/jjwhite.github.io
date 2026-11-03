@@ -86,5 +86,8 @@
     "https://webmention.io/",
     "https://www.w3.org/TR/webmention/",
     "https://xkcd.com/1150/"
+  ],
+  "https://jonwhite.me/notes/2026-11-03-i-voted.html": [
+    "https://www.vote.org/polling-place-locator/"
   ]
 }
