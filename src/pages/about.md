@@ -6,6 +6,8 @@ comments:
 category: 
 ---
 
+<img id="headshot" src="/images/headshot.jpg"></img>
+
 I'm a father of 3 residing in the United States.  My day job is as a Staff Software Engineer for a small software company.  Some of my interests include: 
 
 - reading (particularly philosophy)

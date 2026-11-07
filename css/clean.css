@@ -403,64 +403,6 @@ button.theme-toggle{
   cursor:pointer;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  body {
-    padding: 0 15px;
-  }
-  
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
-  
-  .blog-post-preview {
-    padding: 1.5rem;
-  }
-  
-  .pagination {
-    gap: 0.5rem;
-  }
-  
-  .pagination-btn, .page-number, .current-page {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-  
-  nav a {
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-  }
-  
-  button.theme-toggle {
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-  }
-  
-  pre {
-    padding: 1rem;
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    text-align: center;
-  }
-  
-  .pagination {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .pagination-numbers {
-    justify-content: center;
-  }
-}
-
 /* AI Disclosure */
 div#ai-disclosure{
   padding: 25px;
@@ -623,4 +565,73 @@ div#ai-disclosure{
 
 .back-link:hover {
   text-decoration: underline;
-}
+}
+
+img#headshot {
+  float:right;
+  display:block;
+  width: 250px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 0 15px;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .blog-post-preview {
+    padding: 1.5rem;
+  }
+  
+  .pagination {
+    gap: 0.5rem;
+  }
+  
+  .pagination-btn, .page-number, .current-page {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  nav a {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  
+  button.theme-toggle {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  img#headshot{
+    display:inline-block;
+    width:100%
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    text-align: center;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pagination-numbers {
+    justify-content: center;
+  }
+}
