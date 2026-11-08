@@ -2,7 +2,7 @@
 layout: post
 title:  "Slowing Down Time with Micro Adventures"
 date:   2019-08-11
-categories: thoughts
+tags: life
 ---
 
 I've noticed over the past year or so of my life that my days really blend together.  As I'm approaching middle age time seems to be flying by and I feel as though I'm missing out on life a bit.  I've been [asleep at the wheel](https://jonwhite.me/life/2019/08/02/turn-off-the-auto-pilot.html) so to speak and I've been doing a lot of looking in the mirror lately and trying to understand how I got here and what I can do to slow my life down and make it more fulfilling. 

@@ -2,7 +2,7 @@
 layout: post
 title: "What I Learned This Week"
 date: 2026-11-01
-tags: 
+tags: indieweb, WILTW
 comments: false
 category: 
 image: /images/wilt-card.png

@@ -92,6 +92,47 @@ def build_meta_tags(title, permalink, front_matter, html_content):
         for attr, key, val in tags
     )
 
+def extract_tags(front_matter):
+    """Extract and normalize tags from front matter into a sorted unique list of lowercase strings."""
+    if not front_matter:
+        return []
+    raw = front_matter.get('tags')
+    if not raw:
+        return []
+    tags = []
+    if isinstance(raw, list):
+        for item in raw:
+            if item is not None:
+                for sub in str(item).split(','):
+                    cleaned = sub.strip().lstrip('#').strip().lower()
+                    if cleaned and cleaned not in tags:
+                        tags.append(cleaned)
+    elif isinstance(raw, (str, int)):
+        raw_str = str(raw).strip()
+        if ',' in raw_str:
+            parts = raw_str.split(',')
+        elif '#' in raw_str:
+            parts = raw_str.split()
+        else:
+            parts = [raw_str]
+        for part in parts:
+            cleaned = part.strip().lstrip('#').strip().lower()
+            if cleaned and cleaned not in tags:
+                tags.append(cleaned)
+    return tags
+
+def format_tags_html(tags, base_url="/posts/"):
+    """Format tags as clickable badge links."""
+    if not tags:
+        return ""
+    clean_base = base_url.rstrip('?')
+    sep = '&' if '?' in clean_base else '?'
+    links = [
+        f'<a href="{clean_base}{sep}tag={html.escape(t, quote=True)}" class="post-tag p-category">#{html.escape(t)}</a>'
+        for t in tags
+    ]
+    return f'<div class="post-tags">{" ".join(links)}</div>'
+
 def load_template(template_path):
     with open(template_path, 'r', encoding='utf-8') as file:
         return file.read()
@@ -179,6 +220,9 @@ def convert_markdown_to_html(markdown_file_path, template, permalink=''):
         if str(u).startswith(('http://', 'https://'))
     )
     
+    tags = extract_tags(front_matter)
+    tags_html = format_tags_html(tags, base_url="/posts/")
+    
     final_content = template
     final_content = final_content.replace('{{title}}', html.escape(str(title)))
     final_content = final_content.replace('{{date}}', date_str)
@@ -188,7 +232,7 @@ def convert_markdown_to_html(markdown_file_path, template, permalink=''):
     final_content = final_content.replace('{{meta_tags}}',
         build_meta_tags(str(title), permalink, front_matter, html_content))
     final_content = final_content.replace('{{page_content}}', html_content)
-    final_content = final_content.replace('{{page_content}}', html_content)
+    final_content = final_content.replace('{{tags_html}}', tags_html)
     
     return final_content, front_matter
 
@@ -239,6 +283,19 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
     total_posts = len(sorted_posts)
     total_pages = math.ceil(total_posts / posts_per_page)
     
+    # Prepare JSON for client-side tag filtering
+    all_posts_json_list = [
+        {
+            'title': p[0],
+            'link': f"/posts/{os.path.basename(p[1])}",
+            'date_display': format_display_date(p[2], include_time_if_present=False),
+            'excerpt': p[3],
+            'tags': p[4] if len(p) > 4 else []
+        }
+        for p in sorted_posts
+    ]
+    posts_json_str = json.dumps(all_posts_json_list, ensure_ascii=False).replace('<', '\\u003c')
+    
     for page in range(1, total_pages + 1):
         start_idx = (page - 1) * posts_per_page
         end_idx = start_idx + posts_per_page
@@ -246,7 +303,15 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
         
         # Generate posts list HTML for this page
         posts_list_html = '<div class="blog-posts">\n'
-        for title, link, date_val, excerpt in page_posts:
+        for item in page_posts:
+            title = item[0]
+            link = item[1]
+            date_val = item[2]
+            excerpt = item[3]
+            tags = item[4] if len(item) > 4 else []
+            tags_html = format_tags_html(tags, base_url="/posts/")
+            tags_attr = html.escape(','.join(tags), quote=True)
+            
             if page == 1:
                 relative_link = os.path.basename(link)
             else:
@@ -254,12 +319,14 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
             
             date_display = format_display_date(date_val, include_time_if_present=False)
             
-            posts_list_html += f'  <article class="blog-post-preview">\n'
+            posts_list_html += f'  <article class="blog-post-preview" data-tags="{tags_attr}">\n'
             posts_list_html += f'    <h2><a href="{relative_link}">{title}</a></h2>\n'
             posts_list_html += f'    <p class="post-date">{date_display}</p>\n'
             if excerpt:
                 posts_list_html += f'    <p class="post-excerpt">{excerpt}</p>\n'
             posts_list_html += f'    <p><a href="{relative_link}" class="read-more">Read more...</a></p>\n'
+            if tags_html:
+                posts_list_html += f'    {tags_html}\n'
             posts_list_html += f'  </article>\n'
         posts_list_html += '</div>\n'
         
@@ -268,6 +335,7 @@ def generate_blog_pages(posts_data, blog_template, output_posts_dir, posts_per_p
         
         page_content = blog_template.replace('{{post_list}}', posts_list_html)
         page_content = page_content.replace('{{pagination}}', pagination_html)
+        page_content = page_content.replace('{{posts_json}}', posts_json_str)
         page_content = page_content.replace('{{current_page}}', str(page))
         page_content = page_content.replace('{{total_pages}}', str(total_pages))
         page_content = page_content.replace('{{year}}', str(datetime.now().year))
@@ -300,6 +368,20 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
     total_pages = math.ceil(total_notes / notes_per_page)
     os.makedirs(output_notes_dir, exist_ok=True)
     
+    # Prepare JSON for client-side tag filtering
+    all_notes_json_list = [
+        {
+            'slug': n['slug'],
+            'link': f"/notes/{n['slug']}.html",
+            'date_display': n['date_str'],
+            'html_content': n['html_content'],
+            'syndication_html': n.get('syndication_html', ''),
+            'tags': n.get('tags', [])
+        }
+        for n in sorted_notes
+    ]
+    notes_json_str = json.dumps(all_notes_json_list, ensure_ascii=False).replace('<', '\\u003c')
+    
     for page in range(1, total_pages + 1):
         start_idx = (page - 1) * notes_per_page
         end_idx = start_idx + notes_per_page
@@ -311,18 +393,23 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
             date_display = note['date_str']
             html_content = note['html_content']
             syndication_html = note['syndication_html']
+            tags = note.get('tags', [])
+            tags_html = note.get('tags_html', '')
+            tags_attr = html.escape(','.join(tags), quote=True)
             
             if page == 1:
                 permalink = f"{slug}.html"
             else:
                 permalink = f"../../{slug}.html"
                 
-            notes_list_html += f'  <article class="h-entry note-card" id="{slug}">\n'
+            notes_list_html += f'  <article class="h-entry note-card" id="{slug}" data-tags="{tags_attr}">\n'
             notes_list_html += f'    <header class="note-header">\n'
             notes_list_html += f'      <time class="dt-published note-date">{date_display}</time>\n'
             notes_list_html += f'      <a href="{permalink}" class="u-url note-permalink" title="Permalink to note">#</a>\n'
             notes_list_html += f'    </header>\n'
             notes_list_html += f'    <div class="e-content note-content">\n{html_content}\n    </div>\n'
+            if tags_html:
+                notes_list_html += f'    {tags_html}\n'
             if syndication_html:
                 notes_list_html += f'    {syndication_html}\n'
             notes_list_html += f'  </article>\n'
@@ -332,6 +419,7 @@ def generate_notes_pages(notes_data, notes_template, output_notes_dir, notes_per
         
         page_content = notes_template.replace('{{notes_list}}', notes_list_html)
         page_content = page_content.replace('{{pagination}}', pagination_html)
+        page_content = page_content.replace('{{notes_json}}', notes_json_str)
         page_content = page_content.replace('{{current_page}}', str(page))
         page_content = page_content.replace('{{total_pages}}', str(total_pages))
         page_content = page_content.replace('{{year}}', str(datetime.now().year))
@@ -403,22 +491,30 @@ def generate_rss_feed(items_data, output_dir, feed_filename="feed.xml", site_url
         'type': 'application/rss+xml'
     })
 
-    for title, link, date_val, description in sorted_items:
+    for item_data in sorted_items:
+        title = item_data[0]
+        link = item_data[1]
+        date_val = item_data[2]
+        description = item_data[3]
+        tags = item_data[4] if len(item_data) > 4 else []
+        
         clean_link = link.replace('\\', '/').lstrip('./')
         item_url = f"{clean_site_url}/{clean_link}"
         
         dt = parse_date(date_val)
         pub_date = formatdate(time.mktime(dt.timetuple()), usegmt=True)
 
-        item = ET.SubElement(channel, 'item')
-        ET.SubElement(item, 'title').text = title
-        ET.SubElement(item, 'link').text = item_url
+        rss_item = ET.SubElement(channel, 'item')
+        ET.SubElement(rss_item, 'title').text = title
+        ET.SubElement(rss_item, 'link').text = item_url
         
-        guid = ET.SubElement(item, 'guid', {'isPermaLink': 'true'})
+        guid = ET.SubElement(rss_item, 'guid', {'isPermaLink': 'true'})
         guid.text = item_url
         
-        ET.SubElement(item, 'pubDate').text = pub_date
-        ET.SubElement(item, 'description').text = description or ''
+        ET.SubElement(rss_item, 'pubDate').text = pub_date
+        ET.SubElement(rss_item, 'description').text = description or ''
+        for t in tags:
+            ET.SubElement(rss_item, 'category').text = t
 
     rough_string = ET.tostring(rss, encoding='utf-8')
     reparsed = minidom.parseString(rough_string)
@@ -492,6 +588,7 @@ def generate_site():
                 file_path = os.path.join(posts_dir, markdown_file)
                 post_url = f"{SITE_URL}/posts/{markdown_file.replace('.md', '.html')}"
                 html_content, front_matter = convert_markdown_to_html(file_path, post_template, permalink=post_url)
+                tags = extract_tags(front_matter)
                 output_file = os.path.join(output_posts_dir, markdown_file.replace('.md', '.html'))
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(html_content)
@@ -512,7 +609,8 @@ def generate_site():
                     front_matter.get('title', 'Untitled'), 
                     post_link, 
                     front_matter.get('date', 'Unknown Date'),
-                    excerpt
+                    excerpt,
+                    tags
                 ))
                 
     # Process notes
@@ -531,6 +629,8 @@ def generate_site():
                     front_matter = {}
                     body = markdown_raw
                     
+                tags = extract_tags(front_matter)
+                tags_html = format_tags_html(tags, base_url="/notes/")
                 note_html_body = markdown.markdown(body)
                 slug = markdown_file.replace('.md', '')
                 date_val = front_matter.get('date', datetime.now())
@@ -554,6 +654,7 @@ def generate_site():
                 note_meta = build_meta_tags(title, note_url, front_matter, note_html_body)
                 single_html = note_template.replace('{{meta_tags}}', note_meta)
                 single_html = single_html.replace('{{page_content}}', note_html_body)
+                single_html = single_html.replace('{{tags_html}}', tags_html)
                 single_html = single_html.replace('{{title}}', title)
                 single_html = single_html.replace('{{date}}', date_str)
                 single_html = single_html.replace('{{permalink}}', note_url)
@@ -572,6 +673,8 @@ def generate_site():
                     'title': title,
                     'html_content': note_html_body,
                     'syndication_html': syndication_html,
+                    'tags': tags,
+                    'tags_html': tags_html,
                     'link': note_link,
                     'body': body
                 })
@@ -579,7 +682,8 @@ def generate_site():
     # Generate index.html (show latest 5 posts)
     posts_list_html = ''
     sorted_posts = sorted(posts_data, key=lambda x: parse_date(x[2]), reverse=True)
-    for title, link, date_val, excerpt in sorted_posts[:5]:
+    for p in sorted_posts[:5]:
+        title, link, date_val, excerpt = p[0], p[1], p[2], p[3]
         date_display = format_display_date(date_val, include_time_if_present=False)
         posts_list_html += f'<li><a href="{link}">{title}</a> - {date_display}</li>\n'
    
@@ -615,7 +719,8 @@ def generate_site():
                 n['title'],
                 n['link'],
                 n['date_obj'],
-                n['html_content']
+                n['html_content'],
+                n.get('tags', [])
             ))
         generate_rss_feed(
             items_data=notes_rss_items,

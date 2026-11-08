@@ -3,7 +3,7 @@ layout: post
 title:  "Fixing Facebook"
 date:   2018-04-12
 comments: true
-categories: tech
+tags: social media
 ---
 
 When news of the Cambridge Analytics scandal broke I was all on board the #deletefacebook movement.  I deactivated my account and started thinking about what I would do to replace the features I currently use on Facebook.  What I discoverd is that it's not as simple as I might have thought. Facebook [is actually pretty useful](https://fivethirtyeight.com/features/the-trouble-with-leaving-facebook-is-that-we-like-facebook/).  I like using my Facebook account as a defacto identity on other sites.  I like connecting with friends that I may not see often or who may live far away from me.  I enjoy looking at photos of what my friends and family are up to.  I like the simplicity of sharing interesting things or small thoughts with my friends.  All of these features make Facebook a really compelling product.  All of this convienience comes at a high cost though.  You really are selling yourself to Facebook and it's advertisers by giving them a detailed account of your life.  Is it worth it?  I'm not so sure it is.  Can it be fixed? I think it can and here are some ways we can try:

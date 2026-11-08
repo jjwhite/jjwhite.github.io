@@ -2,7 +2,7 @@
 layout: post
 title:  "I Went from the Couch to a Half Marathon and Learned to Embrace the Process"
 date:   2019-05-14
-categories: running
+tags: running, life
 comments: true
 ---
 

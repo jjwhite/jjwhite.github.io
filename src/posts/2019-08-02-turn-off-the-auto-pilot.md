@@ -2,7 +2,7 @@
 layout: post
 title:  "Turn Off The Auto-Pilot"
 date:   2019-08-02
-categories: life
+tags: life
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: "My Thoughts on Social Media in 2023"
 date: 2023-07-20
-tags: 
+tags: social media
 comments: true
 category: 
 ---

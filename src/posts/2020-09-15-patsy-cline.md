@@ -2,7 +2,7 @@
 layout: post
 title:  "How A List of Albums and Patsy Cline Resurrected My Dad"
 date:   2020-09-14
-categories: music
+tags: music, life
 ---
 
 I've been working from home for almost 6 months now and as a programmer I spend a lot of time with headphones on listening to music. As such, lately I've really been itching for something new for my ears. Thankfully, as a subscriber to his [newsletter](https://austinkleon.com/newsletter/) I stumbled on [Austin Kleon's post about 31 perfect records](https://austinkleon.com/2020/08/31/perfect31/).  It seemed like as good a place as any to start.  

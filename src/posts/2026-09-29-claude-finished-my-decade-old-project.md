@@ -2,7 +2,7 @@
 layout: post
 title: "I Asked Claude To Finish A Decade-Old Project"
 date: 2026-09-29
-tags: 
+tags: ai
 comments: false
 category: 
 ---

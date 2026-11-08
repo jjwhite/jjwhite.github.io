@@ -2,7 +2,7 @@
 layout: post
 title: "I Vibe-Coded an RSS Reader - You Can Use It Too"
 date: 2026-09-27
-tags: tools
+tags: tools, ai
 comments: false
 category: Internet AI
 ---

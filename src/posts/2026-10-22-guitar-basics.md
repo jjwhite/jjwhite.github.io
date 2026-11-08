@@ -2,7 +2,7 @@
 layout: post
 title: "An Illustrated Guide to Music Theory Basics on Guitar"
 date: 2026-10-28
-tags: 
+tags: guitar, music
 comments: false
 category: 
 syndication: 

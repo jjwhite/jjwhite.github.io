@@ -27,6 +27,29 @@ Short notes live in `src/notes/*.md`. You can publish on your site and syndicate
    ```
    Once published, the social post URLs are automatically written to the note's frontmatter and displayed on the site.
 
+### Tags & Query String Filtering
+Posts (`src/posts/*.md`) and notes (`src/notes/*.md`) support tags via YAML front matter:
+
+```yaml
+---
+title: "Article Title"
+tags: [guitar, photography]
+---
+```
+or
+```yaml
+---
+tags:
+  - guitar
+  - photography
+---
+```
+
+- **Tag Display**: Tags render at the bottom of individual article and note pages as `#guitar #photography` and in the preview cards on listing pages.
+- **Tag Filtering via Query String**:
+  - Filter articles: `/posts/?tag=guitar`
+  - Filter notes: `/notes/?tag=guitar`
+  - Clicking any tag badge filters the listing in-place, reveals an active filter banner with post count, and provides a one-click option to clear the filter.
 
 ## Backlog
 - logo/wordmark for "Jon White"

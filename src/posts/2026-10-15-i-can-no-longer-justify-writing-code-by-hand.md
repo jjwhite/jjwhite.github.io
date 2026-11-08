@@ -2,7 +2,7 @@
 layout: post
 title: "I Can No Longer Justify Writing Code By Hand"
 date: 2026-10-15
-tags: 
+tags: ai, working
 comments: false
 category: 
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Guitar Progress"
 date: 2026-05-16
-tags: music
+tags: guitar
 comments: true
 category: Music
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "What I Learned This Week"
 date: 2026-10-11
-tags: 
+tags: guitar, WILTW
 comments: false
 category: 
 ---
