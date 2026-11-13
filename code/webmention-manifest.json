@@ -2,16 +2,17 @@
   "https://jonwhite.me/posts/2016-01-08-book-review-off-to-be-the-wizard.html": [
     "http://www.amazon.com/Off-Be-Wizard-Magic-2-0/dp/1491592192"
   ],
-  "https://jonwhite.me/posts/2017-08-07-Reading-Bucket-List-The-Swiss-Family-Robinson.html": [
-    "https://en.wikipedia.org/wiki/The_Swiss_Family_Robinson"
-  ],
-  "https://jonwhite.me/posts/2017-10-11-Samsung-GS8-Review.html": [
-    "https://www.theverge.com/2017/4/18/15328968/samsung-galaxy-s8-review-s8-plus"
-  ],
   "https://jonwhite.me/posts/2018-04-12-fixing-facebook.html": [
     "https://fivethirtyeight.com/features/the-trouble-with-leaving-facebook-is-that-we-like-facebook/",
     "https://joinmastodon.org/",
     "https://www.wired.com/story/rss-readers-feedly-inoreader-old-reader/"
+  ],
+  "https://jonwhite.me/posts/2026-10-22-guitar-basics.html": [
+    "https://en.wikipedia.org/wiki/Guitar_tunings#Standard",
+    "https://en.wikipedia.org/wiki/Semitone",
+    "https://en.wikipedia.org/wiki/Heptatonic_scale#Diatonic_scale",
+    "https://www.youtube.com/channel/UCmnlTWVJysjWPFiZhQ5uudg",
+    "https://ciechanow.ski/"
   ],
   "https://jonwhite.me/posts/2019-08-11-micro-adventures.html": [
     "https://www.artofmanliness.com/articles/podcast-120-microadventures-with-alastair-humphreys/",
@@ -22,26 +23,38 @@
     "https://www.artofmanliness.com/articles/my-8-week-microadventure-challenge/",
     "https://www.alastairhumphreys.com/introduction-microadventures-short-video/"
   ],
+  "https://jonwhite.me/posts/2026-11-12-indie-web-carnival-november-2026.html": [
+    "https://z1nz0l1n.com/26w44/",
+    "https://agacis.rcc-acis.org/?fips=42091",
+    "https://www.paeats.org/feature/foraging-in-pennsylvania/",
+    "https://www.thehuntbuddy.com/rut-calendar",
+    "https://animalscience.psu.edu/research/areas/deer/photos/fawns",
+    "https://www.naturalheritage.state.pa.us/SpeciesFeatures.aspx",
+    "https://www.fws.gov/species/american-burying-beetle-nicrophorus-americanus",
+    "https://explorer.natureserve.org/Taxon/ELEMENT_GLOBAL.2.103992/Apalone_mutica_mutica",
+    "https://explorer.natureserve.org/Taxon/ELEMENT_GLOBAL.2.102228/Contopus_cooperi",
+    "https://en.wikipedia.org/wiki/Companion_planting",
+    "https://en.wikipedia.org/wiki/Slash-and-burn_agriculture",
+    "https://en.wikipedia.org/wiki/Lenape",
+    "https://mastodon.social/@anthonynelzinsantos"
+  ],
   "https://jonwhite.me/posts/2019-08-16-get-to-work.html": [
     "https://www.amazon.com/dp/B00G3L1B8K/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1"
-  ],
-  "https://jonwhite.me/posts/2020-09-15-patsy-cline.html": [
-    "https://austinkleon.com/newsletter/",
-    "https://austinkleon.com/2020/08/31/perfect31/"
   ],
   "https://jonwhite.me/posts/2023-07-10-social-media.html": [
     "https://www.wired.com/story/tiktok-platforms-cory-doctorow/",
     "https://joinmastodon.org/"
   ],
-  "https://jonwhite.me/posts/2025-07-15-100-albums-into-2025.html": [
-    "https://www.instagram.com/caro_kelley/"
-  ],
-  "https://jonwhite.me/posts/2026-09-27-aura-rss-reader.html": [
-    "https://en.wikipedia.org/wiki/Enshittification"
+  "https://jonwhite.me/posts/2017-08-07-Reading-Bucket-List-The-Swiss-Family-Robinson.html": [
+    "https://en.wikipedia.org/wiki/The_Swiss_Family_Robinson"
   ],
   "https://jonwhite.me/posts/2026-09-29-claude-finished-my-decade-old-project.html": [
     "https://github.com/jjwhite/jjwhite.github.io/tree/master/fun/BubbleLetters/v2",
     "https://github.com/jjwhite/jjwhite.github.io/tree/master/fun/BubbleLetters"
+  ],
+  "https://jonwhite.me/posts/2020-09-15-patsy-cline.html": [
+    "https://austinkleon.com/newsletter/",
+    "https://austinkleon.com/2020/08/31/perfect31/"
   ],
   "https://jonwhite.me/posts/2026-10-04-what-i-learned-this-week.html": [
     "https://www.astralcodexten.com/p/does-georgism-work-five-years-later",
@@ -59,8 +72,8 @@
     "https://en.wikipedia.org/wiki/Theory_of_constraints",
     "https://www.imdb.com/title/tt3718778/"
   ],
-  "https://jonwhite.me/posts/2026-10-15-i-can-no-longer-justify-writing-code-by-hand.html": [
-    "https://www.autodidacts.io/vibecoding-isnt-as-fun-as-writing-code-by-hand/"
+  "https://jonwhite.me/posts/2025-07-15-100-albums-into-2025.html": [
+    "https://www.instagram.com/caro_kelley/"
   ],
   "https://jonwhite.me/posts/2026-10-18-what-i-learned-this-week.html": [
     "https://git-scm.com/docs/git-worktree",
@@ -69,12 +82,8 @@
     "https://weslang.com/",
     "https://www.not-ship.com/"
   ],
-  "https://jonwhite.me/posts/2026-10-22-guitar-basics.html": [
-    "https://en.wikipedia.org/wiki/Guitar_tunings#Standard",
-    "https://en.wikipedia.org/wiki/Semitone",
-    "https://en.wikipedia.org/wiki/Heptatonic_scale#Diatonic_scale",
-    "https://www.youtube.com/channel/UCmnlTWVJysjWPFiZhQ5uudg",
-    "https://ciechanow.ski/"
+  "https://jonwhite.me/posts/2026-10-15-i-can-no-longer-justify-writing-code-by-hand.html": [
+    "https://www.autodidacts.io/vibecoding-isnt-as-fun-as-writing-code-by-hand/"
   ],
   "https://jonwhite.me/posts/2026-11-01-what-i-learned-this-week.html": [
     "https://indieweb.org",
@@ -90,20 +99,11 @@
     "https://lennypane.substack.com/p/you-can-see-everything-knows-what",
     "https://arstechnica.com/science/2026/10/meet-the-2026-winner-of-nikons-small-world-photomicrography-contest"
   ],
-  "https://jonwhite.me/posts/2026-11-12-indie-web-carnival-november-2026.html": [
-    "https://z1nz0l1n.com/26w44/",
-    "https://agacis.rcc-acis.org/?fips=42091",
-    "https://www.paeats.org/feature/foraging-in-pennsylvania/",
-    "https://www.thehuntbuddy.com/rut-calendar",
-    "https://animalscience.psu.edu/research/areas/deer/photos/fawns",
-    "https://www.naturalheritage.state.pa.us/SpeciesFeatures.aspx",
-    "https://www.fws.gov/species/american-burying-beetle-nicrophorus-americanus",
-    "https://explorer.natureserve.org/Taxon/ELEMENT_GLOBAL.2.103992/Apalone_mutica_mutica",
-    "https://explorer.natureserve.org/Taxon/ELEMENT_GLOBAL.2.102228/Contopus_cooperi",
-    "https://en.wikipedia.org/wiki/Companion_planting",
-    "https://en.wikipedia.org/wiki/Slash-and-burn_agriculture",
-    "https://en.wikipedia.org/wiki/Lenape",
-    "https://mastodon.social/@anthonynelzinsantos"
+  "https://jonwhite.me/posts/2026-09-27-aura-rss-reader.html": [
+    "https://en.wikipedia.org/wiki/Enshittification"
+  ],
+  "https://jonwhite.me/posts/2017-10-11-Samsung-GS8-Review.html": [
+    "https://www.theverge.com/2017/4/18/15328968/samsung-galaxy-s8-review-s8-plus"
   ],
   "https://jonwhite.me/notes/2026-11-03-i-voted.html": [
     "https://www.vote.org/polling-place-locator/"
