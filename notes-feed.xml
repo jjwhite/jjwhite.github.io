@@ -5,8 +5,17 @@
     <link>https://jonwhite.me</link>
     <description>Micro-notes and updates from Jon White</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Nov 2026 19:20:15 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 16:12:02 GMT</lastBuildDate>
     <ns0:link href="https://jonwhite.me/notes-feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Note - November 13, 2026 at 11:03 AM</title>
+      <link>https://jonwhite.me/notes/2026-11-13-ai-design.html</link>
+      <guid isPermaLink="true">https://jonwhite.me/notes/2026-11-13-ai-design.html</guid>
+      <pubDate>Fri, 13 Nov 2026 16:03:00 GMT</pubDate>
+      <description>&lt;p&gt;At least vibe-coded browser games are consistent with their design language? 
+&lt;img alt=&quot;AI Game Design&quot; src=&quot;/images/notes/ai_design.png&quot; /&gt;&lt;/p&gt;</description>
+      <category>ai</category>
+    </item>
     <item>
       <title>Note - November 04, 2026 at 1:33 PM</title>
       <link>https://jonwhite.me/notes/2026-11-04-us-midterms.html</link>
