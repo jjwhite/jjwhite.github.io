@@ -33,3 +33,6 @@ Other blogs and sites across the internet that I find interesting. I try to stic
 - [Maurycy's blog](https://maurycyz.com/)
 - [DYNOMIGHT](https://dynomight.net/)
 - [NOT-SHIP](https://www.not-ship.com)
+- [Icamtuf](https://lcamtuf.coredump.cx/)
+- [Azhdarchid](https://azhdarchid.com/)
+- [Laura Michet](https://blog.lauramichet.com/)
