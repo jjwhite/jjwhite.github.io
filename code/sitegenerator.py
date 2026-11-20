@@ -454,8 +454,9 @@ def extract_excerpt(markdown_content, max_words=50):
     
     content = re.sub(r'<img[^>]*/?>', '', content, flags=re.IGNORECASE)
     content = re.sub(r'<img[^>]*>.*?</img>', '', content, flags=re.IGNORECASE)
-    
-    content = re.sub(r'[#*`\[\]()_~]', '', content)
+
+    # content = re.sub(r'[#*`\[\]()_~]', '', content)
+    content = re.sub(r'\(https?://[^)]*\)|[#*`\[\]()_~]', '', content)
     content = re.sub(r'\n+', ' ', content)
     content = content.strip()
     
