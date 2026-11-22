@@ -83,6 +83,7 @@
     "https://indieweb.org/backfeed",
     "https://indieweb.org/silo",
     "https://indiewebify.me/",
+    "https://lennypane.substack.com/p/you-can-see-everything-knows-what",
     "https://webmention.io/",
     "https://www.w3.org/TR/webmention/",
     "https://xkcd.com/1150/"
@@ -107,5 +108,10 @@
   ],
   "https://jonwhite.me/posts/2026-11-18-re-we-need-smart-people-who-give-a-shit.html": [
     "https://violetpixel.com/blog/2026-11-17-we-need-smart-people-who-give-a-shit/"
+  ],
+  "https://jonwhite.me/posts/2026-11-21-concert-review-fruition.html": [
+    "https://milkboyphilly.com/",
+    "https://www.fruitionband.com/",
+    "https://www.handmademomentsmusic.net/"
   ]
 }
